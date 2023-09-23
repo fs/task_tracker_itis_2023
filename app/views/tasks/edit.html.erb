@@ -1,0 +1,5 @@
+<h1>Редактировать Задачу</h1>
+
+<%= render 'form', project: @project, task: @task %>
+
+<%= link_to 'Назад к задачам', project_tasks_path(@project) %>

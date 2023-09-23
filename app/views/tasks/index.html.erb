@@ -1,8 +1,6 @@
-<h1><%= @project.name %></h1>
+<!-- app/views/tasks/index.html.erb -->
 
-<p><%= @project.description %></p>
-
-<h2>Задачи</h2>
+<h1>Список задач</h1>
 
 <% @tasks.each do |task| %>
   <div class="record">
@@ -10,10 +8,10 @@
     <p><%= task.description %></p>
     <p><strong>Состояние:</strong> <%= task.state ? 'Выполнено' : 'Не выполнено' %></p>
     <p><strong>Дедлайн:</strong> <%= task.deadline %></p>
-    <%= link_to "Edit", edit_project_task_path(@project, task) %>
-    <%= button_to "Destroy", project_task_path(@project, task), method: :delete, data: { confirm: 'Вы уверены?' } %>
+    <%= link_to 'Редактировать', edit_project_task_path(task.project, task) %>
+    <%= link_to 'Удалить', [task.project, task], method: :delete, data: { confirm: 'Вы уверены?' } %>
   </div>
 <% end %>
 
 <%= link_to 'Новая задача', new_project_task_path(@project) %>
-<%= link_to 'Назад к списку', projects_path %>
+<%= link_to 'Назад к проекту', project_path(@project) %>

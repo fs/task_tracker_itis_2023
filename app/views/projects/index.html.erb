@@ -1,12 +1,14 @@
-<h1>Hello world<h1>
+<!-- app/views/projects/index.html.erb -->
 
-<h2><%= link_to "New Project", new_project_path %><h2>
+<h1>Список проектов</h1>
 
 <% @projects.each do |project| %>
   <div class="record">
-    <p><%= project.id %>. <%= link_to project.name, project_path(project) %></p>
-    <p><%= project.description %> </p>
-    <p><%= link_to "Edit", edit_project_path(project) %></p>
-    <p><%= button_to "Destroy", project, method: :delete %></p>
+    <h2><%= link_to project.name, project %></h2>
+    <p><%= project.description %></p>
+    <%= link_to 'Редактировать', edit_project_path(project) %>
+    <%= link_to 'Удалить', project, method: :delete, data: { confirm: 'Вы уверены?' } %>
   </div>
 <% end %>
+
+<%= link_to 'Новый проект', new_project_path %>

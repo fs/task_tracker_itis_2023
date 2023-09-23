@@ -1,0 +1,7 @@
+<!-- app/views/tasks/new.html.erb -->
+
+<h1>Создать новую задачу</h1>
+
+<%= render 'form', project: @project, task: @task %>
+
+<%= link_to 'Назад к списку', project_tasks_path(@project) %>
