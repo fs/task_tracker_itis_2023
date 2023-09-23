@@ -3,7 +3,4 @@ Rails.application.routes.draw do
   resources :projects do
     resources :tasks
   end
-
-  # resources :projects
-  # resources :tasks
 end
