@@ -21,4 +21,5 @@ ActiveRecord::Schema.define(version: 2023_09_19_141119) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
+
 end
