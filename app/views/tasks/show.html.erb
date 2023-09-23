@@ -1,0 +1,8 @@
+<h1>Task Details</h1>
+
+<p><strong>Name:</strong> <%= @task.name %></p>
+<p><strong>Description:</strong> <%= @task.description %></p>
+<p><strong>Status:</strong> <%= @task.status ? "Completed" : "Not Completed" %></p>
+<p><strong>Deadline:</strong> <%= @task.deadline %></p>
+
+<%= link_to "Back to Tasks", project_tasks_path(@project) %>
