@@ -52,7 +52,7 @@ module.exports = function(api) {
         {
           useBuiltIns: true
         }
-      ],
+      ]
       [
         '@babel/plugin-proposal-private-methods',
         {
