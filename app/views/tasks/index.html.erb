@@ -18,7 +18,16 @@
       <tr>
         <td><%= task.name %></td>
         <td><%= task.description %></td>
-        <td><%= task.status ? "Completed" : "Not Completed" %></td>
+        <td>
+          <% case task.status %>
+            <% when 'unstarted' %>
+              <td>Not Started</td>
+            <% when 'started' %>
+              <td>In Progress</td>
+            <% when 'done' %>
+              <td>Completed</td>
+          <% end %>
+        </td>
         <td><%= task.deadline %></td>
         <td><%= link_to "Show", project_task_path(@project, task) %></td>
         <td><%= link_to "Edit", edit_project_task_path(@project, task) %></td>

@@ -15,6 +15,8 @@ class TasksController < ApplicationController
 
   def create
     @task = @project.tasks.build(task_params)
+    puts "Status value: #{params[:task][:status]}"
+    puts "Status data type: #{params[:task][:status].class}"
 
     if @task.save
       redirect_to project_tasks_path(@project), notice: "Task created successfully"
