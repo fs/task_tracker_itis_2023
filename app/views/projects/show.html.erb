@@ -1,19 +1,19 @@
 <h1><%= @project.name %></h1>
 
-<p><%= @project.description %></p>
+<p><strong>Description:</strong> <%= @project.description %></p>
 
-<h2>Задачи</h2>
+<%= link_to "Back", projects_path %>
 
-<% @tasks.each do |task| %>
+<h2>Tasks for <%= @project.name %></h2>
+<%= link_to "New Task", new_project_task_path(@project), class: "btn btn-primary" %>
+
+<% @project.tasks.each do |task| %>
   <div class="record">
     <h3><%= link_to task.title, project_task_path(@project, task) %></h3>
     <p><%= task.description %></p>
-    <p><strong>Состояние:</strong> <%= task.state ? 'Выполнено' : 'Не выполнено' %></p>
+    <p><strong>Состояние:</strong> <%= task.state ? 'Done' : 'Not done' %></p>
     <p><strong>Дедлайн:</strong> <%= task.deadline %></p>
     <%= link_to "Edit", edit_project_task_path(@project, task) %>
     <%= button_to "Destroy", project_task_path(@project, task), method: :delete, data: { confirm: 'Вы уверены?' } %>
   </div>
 <% end %>
-
-<%= link_to 'Новая задача', new_project_task_path(@project) %>
-<%= link_to 'Назад к списку', projects_path %>

@@ -6,21 +6,17 @@ class TasksController < ApplicationController
     @tasks = @project.tasks.all
   end
 
-  def show
-    @task = @project.tasks.find(params[:id])
-  end
+  def show; end
 
   def new
-    @task = Task.new
+    @task = @project.tasks.build
   end
 
   def create
     @task = @project.tasks.build(task_params)
-    @task.deadline = params[:task][:deadline] # Добавьте эту строку, чтобы установить deadline
-    @task.state = params[:task][:state] # Добавьте эту строку, чтобы установить deadline
 
     if @task.save
-      redirect_to project_tasks_path(@project), notice: 'Задача создана успешно.'
+      redirect_to project_tasks_path(@project), notice: 'Task created successfully'
     else
       render :new, status: :unprocessable_entity
     end

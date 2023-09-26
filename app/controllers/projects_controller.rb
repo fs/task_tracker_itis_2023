@@ -5,10 +5,7 @@ class ProjectsController < ApplicationController
     @projects = Project.all.order(:id)
   end
 
-  def show
-    @project = Project.find(params[:id])
-    @tasks = @project.tasks
-  end
+  def show; end
 
 
   def edit; end

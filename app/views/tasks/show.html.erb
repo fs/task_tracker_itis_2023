@@ -1,9 +1,8 @@
-<div class="record">
-  <h1><%= @task.title %></h1>
+<h1>Task Details</h1>
 
-  <p><%= @task.description %></p>
-  <p><strong>Состояние:</strong> <%= @task.state ? 'Выполнено' : 'Не выполнено' %></p>
-  <p><strong>Дедлайн:</strong> <%= @task.deadline %></p>
+<p><strong>Title:</strong> <%= @task.title %></p>
+<p><strong>Description:</strong> <%= @task.description %></p>
+<p><strong>State:</strong> <%= @task.state ? 'Done' : 'Not done' %></p>
+<p><strong>Deadline:</strong> <%= @task.deadline %></p>
 
-  <%= link_to 'Назад к списку', project_path(@task.project) %>
-</div>
+<%= link_to "Back to Tasks", project_tasks_path(@project) %>
