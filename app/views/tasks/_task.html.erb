@@ -1,0 +1,9 @@
+
+<p>
+  <strong>Title</strong>
+  <%# link_to task.task_title, project_task_path(@project, task) %>
+  <%= link_to task.task_title, project_task_show_url(project_id: @project.id,id: task)%>
+  <%= task.id %>
+</p>
+
+<hr />

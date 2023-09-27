@@ -11,19 +11,44 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+
+
+  <div class="form-container">
+    <div class="field">
+      <%= form.label :name , class: "form-label"%>
+      <%= form.text_field :name,  class: "form-control",  placeholder: "Example : building a crypto platform"%>
+    </div>
+
+    <div class="field">
+      <%= form.label :description,  class: "form-label" %>
+      <%= form.text_area :description,  class: "form-control", placeholder: "Something about the project"%>
+    </div>
+
+    <div class="actions" style="margin-top: 1.5em">
+      <%= form.submit class: "btn btn-primary"%>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
 <% end %>
 
 <%= link_to "Back", projects_path %>
+
+
+
+<style>
+
+    .form-container {
+        width: 25em;
+        height: 10em;
+        margin: 1em 0 1em 0;
+        background: rgba(255, 255, 255, 0.06);
+        border-radius: 16px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(2.7px);
+        -webkit-backdrop-filter: blur(2.7px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        padding: 1em;
+    }
+
+
+</style>

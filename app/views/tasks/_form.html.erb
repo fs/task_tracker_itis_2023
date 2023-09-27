@@ -1,0 +1,21 @@
+<form action="<%= project_tasks_path(project) %>" method="post">
+
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+
+  <div class="task-content">
+    <input type="text" name="task[task_title]" class="title-input">
+    <textarea name="task[task_description]" class="textarea-space"></textarea>
+    <<!--input type="text" name="task[state]" class="state-input">-->
+    
+    <!--<select name="task[state]" class="state-input">
+      <option value="just started">Just Started</option>
+      <option value="in progress">In Progress</option>
+      <option value="done">Done</option>
+    </select>-->
+
+
+    <input type="date" name="task[deadline]" class="date-input">
+    <button type="submit" value="Submit" class="submit-btn">Post</button>
+  </div>
+
+</form>
