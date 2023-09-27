@@ -7,8 +7,10 @@
     <p><%= project.id %>. <%= link_to project.name, project_path(project) %></p>
     <p><%= project.description %> </p>
     <p><%= link_to "Edit", edit_project_path(project) %></p>
-    <p><%= link_to "Destroy", project, method: :delete %></p>
+    <p><%= button_to "Destroy", project, method: :delete %></p>
     <!--<p><%= button_to "Destroy", project, method: :delete %></p>-->
+
+    <p><%= link_to "All Tasks", project_tasks_path(project) %></p>
   </div>
 
   

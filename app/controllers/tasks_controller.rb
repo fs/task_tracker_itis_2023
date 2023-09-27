@@ -1,15 +1,15 @@
-class TaskController < ApplicationController
+class TasksController < ApplicationController
   before_action :set_project, only: %i[index new create]
   before_action :set_task, only: %i[show]
 
   def index
-      @tasks = Task.includes(:project) 
+    @tasks = Task.includes(:project) 
   end
 
   def show; end
 
   def new 
-      @task = @project.tasks.new
+    @task = @project.tasks.new
   end
 
   def create
@@ -24,11 +24,11 @@ class TaskController < ApplicationController
   private
 
   def set_project
-    @project = Project.find(params[:progect_id])
+    @project = Project.find(params[:project_id])
   end
 
   def set_task
-      @task = Task.find(params[id])
+    @task = Task.find(params[id])
   end
 
   def task_params
