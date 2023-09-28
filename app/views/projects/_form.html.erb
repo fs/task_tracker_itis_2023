@@ -16,26 +16,70 @@
   <div class="form-container">
     <div class="field">
       <%= form.label :name , class: "form-label"%>
-      <%= form.text_field :name,  class: "form-control",  placeholder: "Example : building a crypto platform"%>
+      <%= form.text_field :name,  class: "form-control-input",  placeholder: "Example : building a crypto platform"%>
     </div>
 
     <div class="field">
       <%= form.label :description,  class: "form-label" %>
-      <%= form.text_area :description,  class: "form-control", placeholder: "Something about the project"%>
+      <%= form.text_area :description,  class: "form-control-input", placeholder: "Something about the project"%>
     </div>
 
     <div class="actions" style="margin-top: 1.5em">
-      <%= form.submit class: "btn btn-primary"%>
+      <%= form.submit class: "btn"%>
     </div>
   </div>
 
 <% end %>
 
-<%= link_to "Back", projects_path %>
+<div class="back-btn-container">
+  <%= link_to "Back", projects_path, class: "back-btn" %>
+</div>
+
 
 
 
 <style>
+
+  .btn {
+      color: #EFEFEF;
+      font-size: 0.5em;
+      transition: 1s color;
+  }
+
+  .btn:hover {
+      color: #fde20d;
+  }
+
+  .field {
+      margin-bottom: 0.5em;
+  }
+
+  .form-label {
+      color: #DF59AA;
+  }
+
+  .form-control-input {
+      background: transparent;
+      border-width: thin;
+
+      display: block;
+      width: 100%;
+      padding: .375rem .75rem;
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.5;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      background-clip: padding-box;
+
+  }
+
+  .form-control-input::placeholder{
+      text-align: center;
+      color: #F7F7F7;
+  }
+
 
     .form-container {
         width: 25em;
@@ -50,5 +94,17 @@
         padding: 1em;
     }
 
+
+    .back-btn {
+        margin: 1em;
+        text-decoration: none;
+        font-size: 0.7em;
+        color: #F7F7F7;
+        transition: 3s color;
+    }
+
+    .back-btn:hover {
+        color: #fde20d;
+    }
 
 </style>
