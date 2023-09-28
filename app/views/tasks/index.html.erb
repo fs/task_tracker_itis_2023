@@ -1,0 +1,12 @@
+<h2><%= link_to "New Task", new_project_task_path %></h2>
+<% if @tasks.any? %>
+<% @tasks.each do |task| %>
+  <div class="record">
+    <p><%= link_to task.title, project_tasks_path(@project) %></p>
+    <p><%= task.description %> <%= task.deadline %> </p>
+    <p><%= link_to "Edit", edit_project_task_path(@project, task) %></p>
+    <p><%= button_to "Destroy", @task, method: :delete %></p>
+  </div>
+<% end %>
+<% end %>
+<%= link_to "Back to Projects", projects_path %>
