@@ -1,0 +1,39 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <h1>Tasks for <%= @project.name %></h1>
+
+      <div class="card shadow">
+        <div class="card-body">
+          <table class="table table-striped">
+            <thead>
+            <tr>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Deadline</th>
+              <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% @tasks.each do |task| %>
+              <tr>
+                <td><%= task.name %></td>
+                <td><%= task.description %></td>
+                <td><%= task.deadline %></td>
+                <td>
+                  <%= link_to "View", project_task_path(@project, task), class: "btn btn-info btn-sm mr-1" %>
+                  <%= link_to "Edit", edit_project_task_path(@project, task), class: "btn btn-warning btn-sm mr-1" %>
+                  <%= button_to "Destroy", project_task_path(@project, task), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger btn-sm" %>
+                </td>
+              </tr>
+            <% end %>
+            </tbody>
+          </table>
+
+          <%= link_to "New Task", new_project_task_path(@project), class: "btn btn-outline-success" %>
+          <%= link_to "Back to Project", project_path(@project), class: "btn btn-outline-secondary" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

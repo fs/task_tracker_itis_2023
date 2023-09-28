@@ -32,9 +32,11 @@ class ProjectsController < ApplicationController
   end
 
   def destroy
+    @project.tasks.destroy_all # Delete associated tasks
     @project.destroy
-    redirect_to projects_path, notice: "Project destroyed"
+    redirect_to projects_path, notice: "Project and associated tasks destroyed"
   end
+
 
   private
 
@@ -43,6 +45,7 @@ class ProjectsController < ApplicationController
   end
 
   def project_params
-    params.require(:project).permit(:name, :description)
+    params.require(:project).permit(:name, :description, tasks_attributes: [:name, :description, :deadline])
   end
+
 end

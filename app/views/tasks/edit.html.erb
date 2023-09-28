@@ -1,0 +1,11 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <h1>Edit Task: <%= @task.name %></h1>
+
+      <%= render 'form' %>
+
+      <%= link_to "Back to Task List", project_tasks_path(@project), class: "btn btn-secondary mt-3" %>
+    </div>
+  </div>
+</div>
