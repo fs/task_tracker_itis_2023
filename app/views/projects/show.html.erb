@@ -25,11 +25,11 @@
         <td><%= task.name %></td>
         <td><%= task.description %></td>
         <td><%= task.status ? "Completed" : "Not Completed" %></td>
-        <td><%= task.deadline %></td>
+        <td><%= task.deadline_at %></td>
         <td>
           <%= link_to "Show", project_task_path(@project, task), class: "btn btn-primary btn-sm" %>
           <%= link_to "Edit", edit_project_task_path(@project, task), class: "btn btn-warning btn-sm" %>
-          <%= button_to "Destroy", project_task_path(@project, task), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-sm" %>
+          <%= link_to "Destroy", project_task_path(@project, task), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-sm" %>
         </td>
       </tr>
     <% end %>

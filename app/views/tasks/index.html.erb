@@ -28,10 +28,10 @@
               <td>Completed</td>
           <% end %>
         </td>
-        <td><%= task.deadline %></td>
-        <td><%= link_to "Show", project_task_path(@project, task) %></td>
+        <td><%= task.deadline_at %></td>
+        <td><%= link_to "Show", url_for([@project, task]) %></td>
         <td><%= link_to "Edit", edit_project_task_path(@project, task) %></td>
-        <td><%= link_to "Destroy", [@project, task], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to "Destroy", url_for([@project, task]), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

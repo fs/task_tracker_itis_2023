@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 2023_09_23_135510) do
     t.string "name", null: false
     t.text "description"
     t.string "status", null: false
-    t.datetime "deadline"
+    t.datetime "deadline_at"
     t.bigint "project_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
