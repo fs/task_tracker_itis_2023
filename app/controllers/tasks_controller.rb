@@ -10,6 +10,7 @@ class TasksController < ApplicationController
 
   def new
     @task = @project.tasks.build
+    @task.deadline_at ||= 1.week.from_now
   end
 
   def create
@@ -27,9 +28,9 @@ class TasksController < ApplicationController
 
   def update
     if @task.update(task_params)
-      redirect_to project_task_path(@project, @task), notice: 'Задача обновлена успешно.'
+      redirect_to project_tasks_path(@project), notice: "Task updated successfully"
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 
@@ -49,6 +50,6 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:title, :description, :deadline, :state)
+    params.require(:task).permit(:name, :description, :deadline_at, :status)
   end
 end

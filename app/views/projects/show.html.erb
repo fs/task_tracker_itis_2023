@@ -9,11 +9,22 @@
 
 <% @project.tasks.each do |task| %>
   <div class="record">
-    <h3><%= link_to task.title, project_task_path(@project, task) %></h3>
+    <h3><%= link_to task.name, project_task_path(@project, task) %></h3>
     <p><%= task.description %></p>
-    <p><strong>Состояние:</strong> <%= task.state ? 'Done' : 'Not done' %></p>
-    <p><strong>Дедлайн:</strong> <%= task.deadline %></p>
-    <%= link_to "Edit", edit_project_task_path(@project, task) %>
-    <%= button_to "Destroy", project_task_path(@project, task), method: :delete, data: { confirm: 'Вы уверены?' } %>
+    <p>
+      <strong>Status:</strong>
+      <% case task.status %>
+        <% when 'unstarted' %>
+        Not Started
+        <% when 'started' %>
+        In Progress
+        <% when 'done' %>
+        Completed
+      <% end %>
+    </p>
+    <p><strong>Дедлайн:</strong> <%= task.deadline_at %></p>
+    <%= link_to "Show", project_task_path(@project, task), class: "btn btn-primary btn-sm" %>
+    <%= link_to "Edit", edit_project_task_path(@project, task), class: "btn btn-warning btn-sm" %>
+    <%= link_to "Destroy", project_task_path(@project, task), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-sm" %>
   </div>
 <% end %>

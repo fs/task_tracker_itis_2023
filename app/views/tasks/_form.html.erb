@@ -12,8 +12,8 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
+    <%= form.label :name %>
+    <%= form.text_field :name %>
   </div>
 
   <div class="field">
@@ -22,13 +22,13 @@
   </div>
 
   <div class="field">
-    <%= form.label :state %>
-    <%= form.check_box :state %>
+    <%= form.label :status %>
+    <%= form.select :status, ["unstarted", "started", "done"] %>
   </div>
 
   <div class="field">
-    <%= form.label :deadline %>
-    <%= form.datetime_field :deadline %>
+    <%= form.label :deadline_at %>
+    <%= form.datetime_field :deadline_at %>
   </div>
 
   <div class="actions">
