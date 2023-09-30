@@ -1,0 +1,16 @@
+<div style="text-align: center; margin-top: 20px;">
+  <h1>Task Details</h1>
+
+  <div class="task-details" style="border: 1px solid #ccc; padding: 10px; background-color: #f9f9f9;">
+    <p><strong>Name:</strong> <%= @task.name %></p>
+    <p><strong>Description:</strong> <%= @task.description %></p>
+    <p><strong>Deadline:</strong> <%= @task.deadline %></p>
+
+    <div class="actions" style="margin-top: 10px;">
+      <%= link_to "Edit", edit_project_task_path(@project, @task), class: "button" %> |
+      <%= button_to "Delete", project_task_path(@project, @task), method: :delete, data: { confirm: 'Are you sure?' }, class: "button" %>
+    </div>
+  </div>
+
+  <%= link_to "Back to Tasks", project_tasks_path(@project), class: "button" %>
+</div>

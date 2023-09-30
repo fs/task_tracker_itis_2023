@@ -1,29 +1,33 @@
-<%= form_with(model: project) do |form| %>
-  <% if project.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(project.errors.count, "error") %> prohibited this project from being saved:</h2>
+<div style="text-align: center; margin-top: 20px;">
+  <%= form_with(model: project) do |form| %>
+    <% if project.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(project.errors.count, "error") %> Stopped this project from being saved:</h2>
 
-      <ul>
-        <% project.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+        <ul>
+          <% project.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div style="margin-bottom: 10px;">
+      <%= form.label :name %><br>
+      <%= form.text_field :name %>
+    </div>
+
+    <div style="margin-bottom: 10px;">
+      <%= form.label :description %><br>
+      <%= form.text_area :description %>
+    </div>
+
+    <div style="margin-top: 10px;">
+      <%= form.submit %>
     </div>
   <% end %>
+</div>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-  </div>
-
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
-
-<%= link_to "Back", projects_path %>
+<div style="text-align: center; margin-top: 20px;">
+  <%= link_to "Back", projects_path %>
+</div>

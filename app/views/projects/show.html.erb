@@ -1,4 +1,23 @@
-<p><%= @project.name %> </p>
-<p><%= @project.description %> </p>
+<div style="text-align: center; margin-top: 20px;">
+  <h1><%= @project.name %> Details</h1>
+  <p><strong>Description:</strong> <%= @project.description %></p>
 
-<%= link_to "Back", projects_path %>
+  <h2>Tasks</h2>
+  <ul style="list-style-type: none; padding: 0;">
+    <% @project.tasks.each do |task| %>
+      <li style="margin-bottom: 20px; border: 1px solid #ccc; padding: 10px; background-color: #f9f9f9;">
+        <strong>Name:</strong> <%= task.name %><br>
+        <strong>Description:</strong> <%= task.description %><br>
+        <strong>Deadline:</strong> <%= task.deadline %><br>
+        <%= link_to "Edit Task", edit_project_task_path(@project, task) %> |
+        <%= button_to "Delete Task", project_task_path(@project, task), method: :delete, data: { confirm: 'Are you sure?' } %>
+      </li>
+    <% end %>
+  </ul>
+
+  <h2 style="margin-top: 20px;">
+    <%= link_to "New Task", new_project_task_path(@project) %>
+  </h2>
+
+  <%= link_to "Back to Projects", projects_path %>
+</div>

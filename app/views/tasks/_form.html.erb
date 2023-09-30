@@ -1,0 +1,34 @@
+<div style="text-align: center; margin-top: 20px;">
+  <%= form_with(model: [ @project, task]) do |form| %>
+    <% if task.errors.any? %>
+      <div id="error_explanation" style="background-color: #FFEBE6; padding: 10px; border: 1px solid #FF7F7F; margin-bottom: 20px;">
+        <h2 style="color: #FF4040;"><%= pluralize(task.errors.count, "error") %> Stopped this task from being saved:</h2>
+
+        <ul style="list-style-type: none; padding: 0;">
+          <% task.errors.full_messages.each do |msg| %>
+            <li style="color: #FF4040;"><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field" style="margin-bottom: 20px;">
+      <%= form.label :name %><br>
+      <%= form.text_field :name %>
+    </div>
+
+    <div class="field" style="margin-bottom: 20px;">
+      <%= form.label :description %><br>
+      <%= form.text_area :description %>
+    </div>
+
+    <div class="field" style="margin-bottom: 20px;">
+      <%= form.label :deadline %><br>
+      <%= form.datetime_local_field :deadline %>
+    </div>
+
+    <div class="actions">
+      <%= form.submit %>
+    </div>
+  <% end %>
+</div>

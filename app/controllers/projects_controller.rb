@@ -32,6 +32,7 @@ class ProjectsController < ApplicationController
   end
 
   def destroy
+    @project.tasks.destroy_all
     @project.destroy
     redirect_to projects_path, notice: "Project destroyed"
   end
