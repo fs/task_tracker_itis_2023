@@ -1,0 +1,11 @@
+<h1>Tasks list for project <%= @project.name %></h1>
+
+<h2><%= link_to "New Task", new_project_task_path(project_id: @project.id) %></h2>
+
+<% @tasks.each do |task| %>
+  <div class="record">
+    <p><%= task.id %>. <%= link_to task.name, project_task_path(@project, task) %></p>
+  </div>
+<% end %>
+
+<%= link_to 'Back to project', project_path(@project) %>
