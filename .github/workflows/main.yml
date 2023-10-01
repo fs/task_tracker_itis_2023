@@ -10,21 +10,16 @@ jobs:
     runs-on: ubuntu-latest
     services:
       postgres:
-        image: postgres
-        ports: ['5432:5432']
+        image: postgres:11-alpine
+        ports:
+          - "5432:5432"
         env:
           POSTGRES_DB: rails_test
           POSTGRES_USER: rails
-          POSTGRES_PASSWORD: postgres
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
+          POSTGRES_PASSWORD: password
     env:
       DATABASE_URL: "postgres://rails:password@localhost:5432/rails_test"
       RAILS_ENV: test
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
