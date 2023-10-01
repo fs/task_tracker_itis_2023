@@ -1,6 +1,7 @@
 class TasksController < ApplicationController
 
   before_action :set_project, only: [:update, :show, :delete]
+  before_action :set_task, only: [:show, :edit, :update]
 
   def index
     @tasks = Task.all.order("created_at DESC")
@@ -11,11 +12,9 @@ class TasksController < ApplicationController
   end
 
   def show
-    @task = set_task
   end
 
   def edit
-    @task = set_task
   end
 
   def create
@@ -24,7 +23,7 @@ class TasksController < ApplicationController
     @task.state = "Just started"
     @project = @task.project
 
-    if @task.deadline.nil? == false and @task.deadline >= Date.today
+    if deadline_correct?(@task)
       if @task.save
         redirect_to project_path(@project), notice: "Task has been added!"
       else
@@ -34,12 +33,10 @@ class TasksController < ApplicationController
       redirect_to project_path(@project)
       flash[:notice] = "Deadline can't be empty or before the creation date!"
     end
-
   end
 
-  def update
-    @task = set_task
 
+  def update
     if @task.update(task_params)
       redirect_to project_task_path(@task), notice: "Task has been updated!"
     else
@@ -48,9 +45,7 @@ class TasksController < ApplicationController
   end
 
   def destroy
-    #@task = Task.find_by(params[:id]) FOR button_to
-    @task = set_task
-
+    @task = Task.find_by!(params[:id])
     if @task.destroy
       redirect_to project_path(@task.project), notice: "Task has been deleted!"
     else
@@ -60,9 +55,13 @@ class TasksController < ApplicationController
 
   private
 
+  def deadline_correct?(task)
+    !task.deadline.nil? and task.deadline >= Date.today
+  end
+
   def set_task
     #@project = set_project
-    @task = Task.find_by(id: params[:id])
+    @task = Task.find_by!(id: params[:id])
   end
 
   def set_project
