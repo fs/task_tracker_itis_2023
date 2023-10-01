@@ -1,12 +1,22 @@
 class TasksController < ApplicationController
-  before_action :set_project, only: %i[index new create]
-  before_action :set_task, only: %i[show]
+  before_action :set_project, only: %i[index new create edit]
+  before_action :set_task, only: %i[show, edit]
 
   def index
     @project.tasks = Task.includes(:project)
   end
 
   def show; end
+
+  def edit; end
+
+  def update
+    if @project.task.update(task_params)
+      redirect_to project_tasks_path, notice: "Update Successful"
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
 
   def new 
     @task = @project.tasks.new
@@ -28,7 +38,7 @@ class TasksController < ApplicationController
   end
 
   def set_task
-    @task = Task.find(params[id])
+    @task = Task.find(params[:id])
   end
 
   def task_params
