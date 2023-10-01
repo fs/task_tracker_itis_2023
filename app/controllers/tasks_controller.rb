@@ -1,18 +1,19 @@
 class TasksController < ApplicationController
   before_action :set_project
-  before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :set_task, only: %i[show edit update destroy]
 
   def index
     @tasks = @project.tasks
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @task = @project.tasks.build
     @task.deadline_at ||= 1.week.from_now
   end
+
+  def edit; end
 
   def create
     @task = @project.tasks.build(task_params)
@@ -22,9 +23,6 @@ class TasksController < ApplicationController
     else
       render :new, status: :unprocessable_entity
     end
-  end
-
-  def edit
   end
 
   def update
@@ -47,7 +45,7 @@ class TasksController < ApplicationController
   end
 
   def set_task
-    @task = @project.tasks.find_by!(id: params[:id])
+    @task = @project.tasks.find(params[:id])
   end
 
   def task_params
