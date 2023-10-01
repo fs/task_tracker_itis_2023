@@ -3,7 +3,7 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   def index
-    @tasks = @project.tasks.all
+    @tasks = @project.tasks
   end
 
   def show
@@ -43,7 +43,7 @@ class TasksController < ApplicationController
   private
 
   def set_project
-    @project = Project.find(params[:project_id])
+    @project = Project.find_by(id: params[:project_id])
   end
 
   def set_task
