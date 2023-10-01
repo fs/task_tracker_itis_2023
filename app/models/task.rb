@@ -1,7 +1,7 @@
 class Task < ApplicationRecord
   belongs_to :project
 
-  validates :name, :description, presence: true
+  validates :name, presence: true
   validates :status, inclusion: { in: ["unstarted", "started", "done"]}
   validate :deadline_correct
 
