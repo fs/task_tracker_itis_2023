@@ -3,7 +3,7 @@ class TasksController < ApplicationController
   before_action :set_task, only: %i[show]
 
   def index
-    @tasks = Task.includes(:project) 
+    @project.tasks = Task.includes(:project)
   end
 
   def show; end
@@ -13,9 +13,9 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = @progect.tasks.new(task_params)
+    @task = @project.tasks.new(task_params)
     if @task.save
-      redirect_to task_path(@task), notice: 'Task successfully created.'
+      redirect_to project_tasks_path(params[:project_id]), notice: 'Task successfully created.'
     else
       render :new
     end
