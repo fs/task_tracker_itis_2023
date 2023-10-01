@@ -6,10 +6,11 @@
   <% @tasks.each do |task| %>
     <div class="record" style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px; background-color: #f9f9f9;">
       <p><strong>ID:</strong> <%= task.id %></p>
-      <p><strong>Name:</strong> <%= link_to task.name, project_task_path(@project, task) %></p>
+      <p><strong>Name:</strong> <%= link_to task.name, url_for(controller: 'tasks', action: 'show', project_id: @project, id: task)%>
+      </p>
       <p><strong>Description:</strong> <%= task.description %> </p>
       <p><%= link_to "Edit", edit_project_task_path(@project, task) %></p>
-      <p><%= button_to "Destroy", project_task_path(@project, task), method: :delete, data: { confirm: 'Are you sure?' } %></p>
+      <%= button_to "Destroy", url_for(controller: 'tasks', action: 'destroy', project_id: @project, id: task), method: :delete, data: { confirm: 'Are you sure?' }%>
     </div>
   <% end %>
 

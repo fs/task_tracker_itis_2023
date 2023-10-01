@@ -36,7 +36,7 @@ class TasksController < ApplicationController
 
   def destroy
     @task.destroy
-    redirect_to project_tasks_path(@project)
+    redirect_to project_path(@project)
   end
 
   private
@@ -46,7 +46,10 @@ class TasksController < ApplicationController
   end
 
   def set_task
-    @task = @project.tasks.find(params[:id])
+    @task = @project.tasks.find_by(id: params[:id])
+    if @task.nil?
+      redirect_to project_tasks_path(@project), alert: "The task isn't found"
+    end
   end
 
   def task_params

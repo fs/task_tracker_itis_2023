@@ -10,7 +10,7 @@
         <strong>Description:</strong> <%= task.description %><br>
         <strong>Deadline:</strong> <%= task.deadline %><br>
         <%= link_to "Edit Task", edit_project_task_path(@project, task) %> |
-        <%= button_to "Delete Task", project_task_path(@project, task), method: :delete, data: { confirm: 'Are you sure?' } %>
+        <%= button_to "Delete Task", url_for(controller: 'tasks', action: 'destroy', project_id: @project, id: task), method: :delete, data: { confirm: 'Are you sure?' }%>
       </li>
     <% end %>
   </ul>

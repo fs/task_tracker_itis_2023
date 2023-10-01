@@ -11,7 +11,7 @@
       <p><strong>Name:</strong> <%= link_to project.name, project_path(project) %></p>
       <p><strong>Description:</strong> <%= project.description %> </p>
       <p><%= link_to "Edit", edit_project_path(project) %></p>
-      <%= link_to "Destroy", project_path(project), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+      <%= link_to "Delete Task", project_path(project), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
 
     </div>
   <% end %>
