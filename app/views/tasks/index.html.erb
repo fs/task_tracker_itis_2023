@@ -18,8 +18,8 @@
       <% end %>
     </p>
     <p><strong>Deadline:</strong> <%= task.deadline_at %></p>
-    <%= link_to "Edit", edit_project_task_path(@project, task) %>
-    <%= button_to "Destroy", project_task_path(@project, task), method: :delete, data: { confirm: 'Are you sure?' } %>
+    <%= link_to "Show", url_for(task) %>
+    <%= link_to "Destroy", url_for(task), method: :delete, data: { confirm: "Are you sure?" } %>
   </div>
 <% end %>
 

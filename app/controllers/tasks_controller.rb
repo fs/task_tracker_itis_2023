@@ -30,6 +30,7 @@ class TasksController < ApplicationController
     if @task.update(task_params)
       redirect_to project_tasks_path(@project), notice: "Task updated successfully"
     else
+      flash.now[:alert] = 'Something went wrong. Try again.'
       render :edit, status: :unprocessable_entity
     end
   end
@@ -42,11 +43,11 @@ class TasksController < ApplicationController
   private
 
   def set_project
-    @project = Project.find(params[:project_id])
+    @project = Project.find_by(params[:project_id])
   end
 
   def set_task
-    @task = @project.tasks.find(params[:id])
+    @task = @project.tasks.find_by(params[:id])
   end
 
   def task_params
