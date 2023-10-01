@@ -45,7 +45,8 @@ class TasksController < ApplicationController
   end
 
   def destroy
-    @task = Task.find_by!(params[:id])
+    #@task = Task.find_by!(params[:id]) For Deletion using project_task_delete_url(@task.project, @task)
+    @task = set_task
     if @task.destroy
       redirect_to project_path(@task.project), notice: "Task has been deleted!"
     else
