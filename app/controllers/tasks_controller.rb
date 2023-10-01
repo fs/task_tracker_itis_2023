@@ -46,8 +46,12 @@ class TasksController < ApplicationController
   end
 
   def set_task
-    @task = @project.tasks.find(params[:id])
+    @task = @project.tasks.find_by(id: params[:id])
+    if @task.nil?
+      redirect_to project_tasks_path(@project), alert: "Task not found"
+    end
   end
+
 
   def task_params
     params.require(:task).permit(:name, :description, :deadline)

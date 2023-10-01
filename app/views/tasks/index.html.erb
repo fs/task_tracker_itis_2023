@@ -21,9 +21,9 @@
                 <td><%= task.description %></td>
                 <td><%= task.deadline %></td>
                 <td>
-                  <%= link_to "View", project_task_path(@project, task), class: "btn btn-info btn-sm mr-1" %>
+                  <%= link_to "View", url_for(controller: 'tasks', action: 'show', project_id: @project, id: task), class: "btn btn-info btn-sm mr-1" %>
                   <%= link_to "Edit", edit_project_task_path(@project, task), class: "btn btn-warning btn-sm mr-1" %>
-                  <%= button_to "Destroy", project_task_path(@project, task), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger btn-sm" %>
+                  <%= link_to "Destroy", url_for(controller: 'tasks', action: 'destroy', project_id: @project, id: task), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-sm" %>
                 </td>
               </tr>
             <% end %>

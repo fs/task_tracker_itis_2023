@@ -20,7 +20,7 @@
                 <p><strong>Deadline:</strong> <%= task.deadline %></p>
                 <div class="btn-group" role="group">
                   <%= link_to "Edit Task", edit_project_task_path(@project, task), class: "btn btn-warning" %>
-                  <%= button_to "Destroy", project_task_path(@project, task), method: :delete, class: "btn btn-danger" %>
+                  <%= link_to "Destroy", url_for(controller: 'tasks', action: 'destroy', project_id: @project, id: task), class: "btn btn-danger" %>
                 </div>
               </div>
             </div>
@@ -30,6 +30,7 @@
       <br>
       <%= link_to "Back to Project List", projects_path, class: "btn btn-outline-secondary" %> |
       <%= link_to "Edit Project", edit_project_path(@project), class: "btn btn-outline-primary" %> |
+      <%= link_to "Tasks List", project_tasks_path(@project), class: "btn btn-outline-secondary" %> |
       <%= link_to "Add Task", new_project_task_path(@project), class: "btn btn-outline-success" %>
     </div>
   </div>
