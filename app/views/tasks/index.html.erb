@@ -20,7 +20,7 @@
         <td><%= task.project.name %></td>
 
         <td><%= link_to "Edit", edit_project_task_path(@project, task) %></td>
-        <td><%= button_to "Delete",project_tasks_path, method: :delete %>
+        <td><%= button_to "Delete",project_task_path(@project, task), method: :delete %>
       </tr>
     <%end%>
   </tbody>

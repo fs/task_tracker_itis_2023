@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
-  before_action :set_project, only: %i[index new create edit update]
-  before_action :set_task, only: %i[show edit update]
+  before_action :set_project, only: %i[index new create edit update destroy]
+  before_action :set_task, only: %i[show edit update destroy]
 
   def index
     @project.tasks = Task.includes(:project)
@@ -32,7 +32,7 @@ class TasksController < ApplicationController
   end
 
   def destroy
-    @project.tasks.destroy
+    @project.tasks.find(params[:id]).destroy
     redirect_to projects_tasks_path, notice: "Task destroyed"
   end 
   private
