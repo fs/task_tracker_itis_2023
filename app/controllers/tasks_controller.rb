@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
-  before_action :set_project, only: %i[index new create]
-  before_action :set_task, only: %i[show edit update create]
+  before_action :set_project, only: %i[index new create edit update]
+  before_action :set_task, only: %i[show edit update]
 
   def index
     @project.tasks = Task.includes(:project)
@@ -12,7 +12,7 @@ class TasksController < ApplicationController
 
   def update
     if @project.task.update(task_params)
-      redirect_to projects_tasks_path, notice: "Update Successful"
+      redirect_to project_tasks_path, notice: "Update Successful"
     else
       render :edit, status: :unprocessable_entity
     end
