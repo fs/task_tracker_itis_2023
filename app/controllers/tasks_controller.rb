@@ -31,6 +31,10 @@ class TasksController < ApplicationController
     end
   end
 
+  def destroy
+    @project.tasks.destroy
+    redirect_to projects_tasks_path, notice: "Task destroyed"
+  end 
   private
 
   def set_project
