@@ -11,7 +11,7 @@ class TasksController < ApplicationController
   def edit; end
 
   def update
-    if @project.task.update(task_params)
+    if @task.update(task_params)
       redirect_to project_tasks_path(@project), notice: "Update Successful"
     else
       render :edit, status: :unprocessable_entity
@@ -32,9 +32,10 @@ class TasksController < ApplicationController
   end
 
   def destroy
-    @project.task.destroy
+    @task.destroy
     redirect_to project_tasks_path(@project), notice: "Task destroyed"
-  end
+  end 
+  
   private
 
   def set_project
@@ -42,7 +43,7 @@ class TasksController < ApplicationController
   end
 
   def set_task
-    @task = Task.find(params[:id])
+    @task = @project.tasks.find(params[:id])
   end
 
   def task_params
