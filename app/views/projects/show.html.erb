@@ -1,4 +1,17 @@
 <p><%= @project.name %> </p>
 <p><%= @project.description %> </p>
 
+<%= link_to "Create Task", new_project_task_path(@project) %>
+
+<% @project.tasks.each do |task| %>
+  <div class="record">
+    <p><%= task.id %>. <%= task.name %><p>
+    <p><%= task.description %><p>
+    <p><%= task.state %><p>
+    <p><%= task.deadline %><p>
+    <p><%= link_to "Edit",  edit_project_task_path(task) %><p>
+    <p><%= button_to "Destroy", project_task_path(@project, task), method: :delete %><p>
+  </div>
+<% end %>
+
 <%= link_to "Back", projects_path %>

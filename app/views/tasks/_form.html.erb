@@ -1,0 +1,28 @@
+<%= form_with model: task, url:[project, task] do |form| %>
+  
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_field :description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :state %>
+    <%= form.text_field :state %>
+  </div>
+
+  <div class="field">
+    <%= form.label :deadline %>
+    <%= form.text_field :deadline %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Create"%>
+  </div>
+<% end %>
+
+<%= link_to "Back to tasks",  project_tasks_path(@proj) %> 
