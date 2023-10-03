@@ -1,12 +1,15 @@
-<h1>Hello world<h1>
+<div class = "header-block">
+    <h1>Твои Проекты</h1>
+    <%=link_to "Создать", new_project_path, class: "create-project-button"%>
+</div>
 
-<h2><%= link_to "New Project", new_project_path %><h2>
+<div class="body-block">
+<%@projects.each do |project|%>
+<div class = "project-container">
 
-<% @projects.each do |project| %>
-  <div class="record">
-    <p><%= project.id %>. <%= link_to project.name, project_path(project) %></p>
-    <p><%= project.description %> </p>
-    <p><%= link_to "Edit", edit_project_path(project) %></p>
-    <p><%= button_to "Destroy", project, method: :delete %></p>
-  </div>
-<% end %>
+    <h3 class="container-element"><%=project.name%></h3>
+    <p class="container-element"> <%=project.description%></p>
+    <p class="container-element look-at-button"><%=link_to "Посмотреть поближе", project_path(project)%></p>
+    <p class="container-element"><%=link_to "Удалить", project, method: :delete%></p>
+</div>
+<%end%>

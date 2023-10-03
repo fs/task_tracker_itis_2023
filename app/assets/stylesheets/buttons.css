@@ -1,0 +1,12 @@
+.create-project-button{
+    padding:15px 20px 15px 20px;
+    background: var(--create-button-or-main-style, linear-gradient(97deg, #818DFF 0%, #8178E9 100%));
+    border-radius: 12px;
+    color: #ffffff;
+    
+    font-style:normal;
+}
+
+.look-at-button{
+
+}

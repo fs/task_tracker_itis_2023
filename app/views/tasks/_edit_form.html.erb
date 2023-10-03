@@ -1,0 +1,7 @@
+<%=form_with model: task, url:[project, task] do |edit| %>
+    <p> <%=edit.text_field :name%> </p>
+    <p>  <%=edit.text_area :description, rows: 5%> </p>
+    <p>  <%=edit.text_area :state, rows: 5%> </p>
+    <p>  <%=edit.text_area :deadline, rows: 5%> </p>
+    <p><%=edit.submit "redact"%></p>
+<%end%>

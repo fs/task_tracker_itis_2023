@@ -1,0 +1,7 @@
+<%=form_with model: task, url:[project, task] do |form| %>
+    <p> <%=form.text_field :name%> </p>
+    <p>  <%=form.text_area :description, rows: 5%> </p>
+    <p>  <%=form.text_area :state, rows: 5%> </p>
+    <p>  <%=form.date_field :deadline%> </p>
+    <p><%=form.submit "Создать"%></p>
+<%end%>

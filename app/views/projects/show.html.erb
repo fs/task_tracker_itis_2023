@@ -1,4 +1,18 @@
-<p><%= @project.name %> </p>
-<p><%= @project.description %> </p>
+<h1><%=@project.name%></h1>
 
-<%= link_to "Back", projects_path %>
+<p> <%=button_to "Создать таск", new_project_task_path(@project), method: :new%> </p>
+
+<h2>Твои таски</h2>
+
+<%ttasks = @project.tasks%>
+<%ttasks.each do |task|%>
+    <p><%=task.name%></p>
+    <p><%=task.description%></p>
+    <p><%=task.state%></p>
+    <p><%=task.deadline%></p>
+    <p><%= link_to "Редактировать таск", edit_project_task_path(@project)%><p>
+    <p><%= button_to "Удалить таск", project_task_path(@project, task), method: :delete%><p>
+
+<%end%>
+
+<%= link_to "На главную", projects_path%>
