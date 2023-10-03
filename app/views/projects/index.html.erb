@@ -8,7 +8,7 @@
 <%= link_to "Description reverse", :sort => "description desc" %>
 <% @projects.each do |project| %>
   <div class="record">
-    <p><%= project.id %>. <%= link_to project.name, project_path(project) %></p>
+    <p><%= project.id %>. <%= link_to project.name, project_tasks_path(project) %></p>
     <p><%= project.description %> </p>
     <p><%= link_to "Edit", edit_project_path(project) %></p>
     <p><%= button_to "Destroy", project, method: :delete %></p>
