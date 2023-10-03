@@ -16,6 +16,7 @@ class TasksController < ApplicationController
   def edit; end
 
   def create
+    binding.pry
     @task = @project.tasks.build(task_params)
 
     if @task.save
