@@ -1,5 +1,16 @@
-<%= form_with model: task, url:[project, task] do |form| %>
-  
+<%= form_with(model: [@proj, @task]) do |form| %>
+  <% if @task.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@task.errors.count, "error") %> prohibited this task from being saved:</h2>
+
+      <ul>
+        <% @task.errors.full_messages.each do |error| %>
+          <li><%= error %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
   <div class="field">
     <%= form.label :name %>
     <%= form.text_field :name %>
@@ -12,12 +23,12 @@
 
   <div class="field">
     <%= form.label :state %>
-    <%= form.text_field :state %>
+    <%= form.select :state, ["InPlan", "InProcess", "Complete"] %>
   </div>
 
   <div class="field">
     <%= form.label :deadline %>
-    <%= form.text_field :deadline %>
+    <%= form.datetime_field :deadline %>
   </div>
 
   <div class="actions">

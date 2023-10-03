@@ -1,14 +1,10 @@
 class TasksController < ApplicationController
-  before_action :get_proj, only: %i[new create show index edit update destroy]
-
-
-  def get_proj
-    @proj = Project.find(params[:project_id]) 
-  end
+  before_action :get_proj
+  before_action :get_task, only: %i[show update edit destroy]
 
 
   def index
-    @tasks = @proj.tasks.all
+    @tasks = @proj.tasks
   end
 
   def show; end
@@ -16,7 +12,7 @@ class TasksController < ApplicationController
   def edit; end
 
   def new
-    @task = @proj.tasks.new
+    @task = @proj.tasks.build
   end
 
   def update
@@ -28,9 +24,9 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = @proj.tasks.new(task_params)
+    @task = @proj.tasks.build(task_params)
 
-    if (@task.save)
+    if @task.save
       redirect_to "/", notice: "Task created"
     else
       render :new, status: :unprocessable_entity
@@ -38,12 +34,19 @@ class TasksController < ApplicationController
   end
 
   def destroy
-    @task = @proj.tasks.find(params[:id])
     @task.destroy
     redirect_to "/"
   end
 
   private
+
+  def get_proj
+    @proj = Project.find_by(id: params[:project_id])
+  end
+
+  def get_task
+    @task = @proj.tasks.find(params[:id])
+  end
 
   def task_params
     params.require(:task).permit(:name, :description, :state, :deadline)
