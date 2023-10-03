@@ -5,7 +5,10 @@ class ProjectsController < ApplicationController
     @projects = Project.all.order(:id)
   end
 
-  def show; end
+  def show
+    @project = Project.find(params[:id])
+    redirect_to controller: "tasks", action: "index", project_id: @project.id
+  end
 
   def edit; end
 

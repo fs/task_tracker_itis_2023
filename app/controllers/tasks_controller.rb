@@ -19,12 +19,13 @@ class TasksController < ApplicationController
     if @task.update(task_params)
       redirect_to project_tasks_path, notice: "Update Successful"
     else
-      render :edit, status: :unprocessable_entity
+      redirect_to project_tasks_path, notice: "Something went wrong. Try again."
     end
   end
 
   def new
     @task = @project.tasks.build
+    @task.deadline_at ||= 1.week.from_now
   end
 
   def create
@@ -39,7 +40,7 @@ class TasksController < ApplicationController
 
   def destroy
     @task.destroy
-    redirect_to project_tasks_path, notice: "Project destroyed"
+    redirect_to project_tasks_path, notice: "Task destroyed"
   end
 
   private
@@ -53,6 +54,6 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:title, :description, :state, :deadline)
+    params.require(:task).permit(:title, :description, :state, :deadline_at)
   end
 end

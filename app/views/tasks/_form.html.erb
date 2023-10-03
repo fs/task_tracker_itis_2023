@@ -23,12 +23,12 @@
 
   <div class="field">
     <%= form.label :state %>
-    <%= form.text_field :state %>
+    <%= form.select :state, %w[unstarted started done] %>
   </div>
 
   <div class="field">
-    <%= form.label :deadline %>
-    <%= form.datetime_field :deadline %>
+    <%= form.label :deadline_at %>
+    <%= form.datetime_field :deadline_at %>
   </div>
 
   <div class="actions">
