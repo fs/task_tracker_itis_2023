@@ -1,4 +1,4 @@
-<%= form_with(model: @task, url: project_tasks_path(@project)) do |form| %>
+<%= form_with(model: [@project, @task]) do |form| %>
   
 
   <div class="field">

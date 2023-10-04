@@ -11,12 +11,15 @@ class TasksController < ApplicationController
   def edit; end
 
   def update
+  
     if @task.update(task_params)
-      redirect_to project_tasks_path(@project), notice: "Update Successful"
+     redirect_to project_tasks_path(@project), notice: "Update Successful"
     else
       render :edit, status: :unprocessable_entity
     end
+    
   end
+  
 
   def new 
     @task = @project.tasks.new
