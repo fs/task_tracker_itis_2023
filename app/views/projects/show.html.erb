@@ -9,7 +9,7 @@
     <p><%= task.description %><p>
     <p><%= task.state %><p>
     <p><%= task.deadline %><p>
-    <p><%= link_to "Edit",  edit_project_task_path(task) %><p>
+    <p><%= link_to "Edit",  edit_project_task_path(@project, task) %><p>
     <p><%= button_to "Destroy", project_task_path(@project, task), method: :delete %><p>
   </div>
 <% end %>
