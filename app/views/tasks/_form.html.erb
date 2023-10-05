@@ -1,37 +1,59 @@
-<%= form_with(model: [@project, @task]) do |form| %>
-  <% if @task.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@task.errors.count, "error") %> prohibited this task from being saved:</h2>
 
-      <ul>
-        <% @task.errors.full_messages.each do |error| %>
-          <li><%= error %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+<form action="<%= project_tasks_path(@project) %>" method="post">
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+
+  <div class="task-content">
+    <input type="text" name="task[task_title]" class="title-input">
+    <textarea name="task[task_description]" class="textarea-space"></textarea>
+    <!--input type="text" name="task[state]" class="state-input">-->
+
+    <!--    <select name="task[state]" class="state-input">-->
+    <!--      <option value="just started">Just Started</option>-->
+    <!--      <option value="in progress">In Progress</option>-->
+    <!--      <option value="done">Done</option>-->
+    <!--    </select>-->
+
+    <input type="date" name="task[deadline]" class="date-input">
+    <button type="submit" value="Submit" class="submit-btn">Post</button>
   </div>
 
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description %>
-  </div>
+</form>
 
-  <div class="field">
-    <%= form.label :status %>
-    <%= form.select :status, ["unstarted", "started", "done"] %>
-  </div>
+<%#= form_with(model: [@project, @task])  do |form| %>
+<%# if @task.errors.any? %>
+<!--    <div id="error_explanation">-->
+<!--      <h2><%#= pluralize(@task.errors.count, "error") %> prohibited this task from being saved:</h2>-->
 
-  <div class="field">
-    <%= form.label :deadline_at %>
-    <%= form.datetime_field :deadline_at %>
-  </div>
+<!--      <ul>-->
+<%# @task.errors.full_messages.each do |error| %>
+<!--          <li><%#= error %></li>-->
+<%# end %>
+<!--      </ul>-->
+<!--    </div>-->
+<%# end %>
 
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+<!--  <div class="field">-->
+<%#= form.label :task_title %>
+<%#= form.text_field :task_title %>
+<!--  </div>-->
+
+<!--  <div class="field">-->
+<%#= form.label :task_description %>
+<%#= form.text_area :task_description %>
+<!--  </div>-->
+
+<!--  <div class="field">-->
+<%#= form.label :state %>
+<%#= form.select :state, ["Just started", "In progress", "Done"] %>
+<!--  </div>-->
+
+<!--  <div class="field">-->
+<%#= form.label :deadline %>
+<%#= form.datetime_field :deadline %>
+<!--  </div>-->
+
+<!--  <div class="actions">-->
+<%#= form.submit %>
+<!--  </div>-->
+<%# end %>

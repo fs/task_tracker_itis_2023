@@ -1,5 +1,40 @@
+
+
+<%= form_with(model: @task, url: [@task.project, @task]) do |form| %>
+  <div class="field">
+    <%= form.label :task_title %>
+    <%= form.text_field :task_title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :task_description %>
+    <%= form.text_area :task_description %>
+  </div>
+
+  <!--<div class="field">
+    <%# form.label :state %>
+  <%# form.text_area :state %>
+  </div>-->
+
+  <div class="field">
+    <%= form.label :state %>
+    <%= form.select :state, ['Just started', 'In progress', 'Done'] %>
+  </div>
+
+  <div class="field">
+    <%= form.label :deadline %>
+    <%= form.date_select :deadline %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+
+<%= link_to 'Back', project_task_path(@task) %>
+
 <h1>Edit Task</h1>
 
-<%= render 'form' %>
+<%#= render 'form' %>
 
-<%= link_to "Back to Tasks", project_path(@project) %>
+<%#= link_to "Back to Tasks", project_path(@project) %>

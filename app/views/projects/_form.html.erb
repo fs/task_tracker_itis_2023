@@ -1,3 +1,4 @@
+
 <%= form_with(model: project) do |form| %>
   <% if project.errors.any? %>
     <div id="error_explanation">
@@ -11,19 +12,105 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+
+
+  <div class="form-container">
+    <div class="field">
+      <%= form.label :name , class: "form-label"%>
+      <%= form.text_field :name,  class: "form-control-input",  placeholder: "Example : building a crypto platform"%>
+    </div>
+
+    <div class="field">
+      <%= form.label :description,  class: "form-label" %>
+      <%= form.text_area :description,  class: "form-control-input", placeholder: "Something about the project"%>
+    </div>
+
+    <div class="actions" style="margin-top: 1.5em">
+      <%= form.submit class: "btn"%>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
 <% end %>
 
-<%= link_to "Back", projects_path %>
+<div class="back-btn-container">
+  <%= link_to "Back", projects_path, class: "back-btn" %>
+</div>
+
+
+
+
+<style>
+
+    .btn {
+        color: rgba(224, 131, 255, 0.93);
+        font-size: 1em;
+        font-weight: bold;
+        transition: 1s color;
+    }
+
+    .btn:hover {
+        color: #fde20d;
+    }
+
+    .field {
+        margin-bottom: 0.5em;
+    }
+
+    .form-label {
+        color: #DF59AA;
+    }
+
+    .form-control-input {
+        background: transparent;
+        border-width: thin;
+        display: block;
+        width: 100%;
+        padding: .375rem .75rem;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        background-clip: padding-box;
+        color: #F7F7F7;
+
+    }
+
+    .form-control-input::placeholder{
+        text-align: center;
+        color: #F7F7F7;
+    }
+
+    .form-control-input:focus {
+        color: #F7F7F7;
+    }
+
+
+    .form-container {
+        width: 25em;
+        height: 15em;
+        margin: 1em 0 1em 0;
+        background: rgba(255, 255, 255, 0.06);
+        border-radius: 16px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(2.7px);
+        -webkit-backdrop-filter: blur(2.7px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        padding: 1em;
+    }
+
+
+    .back-btn {
+        margin: 1em;
+        text-decoration: none;
+        font-size: 1em;
+        color: #F7F7F7;
+        transition: 3s color;
+    }
+
+    .back-btn:hover {
+        color: #fde20d;
+    }
+
+</style>
