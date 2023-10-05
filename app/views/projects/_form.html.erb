@@ -41,8 +41,9 @@
 <style>
 
   .btn {
-      color: #EFEFEF;
-      font-size: 0.5em;
+      color: rgba(224, 131, 255, 0.93);
+      font-size: 1em;
+      font-weight: bold;
       transition: 1s color;
   }
 
@@ -61,7 +62,6 @@
   .form-control-input {
       background: transparent;
       border-width: thin;
-
       display: block;
       width: 100%;
       padding: .375rem .75rem;
@@ -72,6 +72,7 @@
       -moz-appearance: none;
       appearance: none;
       background-clip: padding-box;
+      color: #F7F7F7;
 
   }
 
@@ -80,10 +81,14 @@
       color: #F7F7F7;
   }
 
+  .form-control-input:focus {
+      color: #F7F7F7;
+  }
+
 
     .form-container {
         width: 25em;
-        height: 10em;
+        height: 15em;
         margin: 1em 0 1em 0;
         background: rgba(255, 255, 255, 0.06);
         border-radius: 16px;
@@ -98,7 +103,7 @@
     .back-btn {
         margin: 1em;
         text-decoration: none;
-        font-size: 0.7em;
+        font-size: 1em;
         color: #F7F7F7;
         transition: 3s color;
     }

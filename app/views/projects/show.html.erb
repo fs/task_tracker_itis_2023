@@ -18,15 +18,18 @@
     <section class="done-tasks-display">
       <h2>Done</h2>
 
-      <%= render @project.tasks.select { |task| task.state == 'Done'} %>
+      <%= render @project.tasks.select { |task| task.state == 'Done'}.take(3) %>
     </section>
 
+    <hr />
     <section class="to-do-tasks-display">
       <h2>To Do</h2>
-      <%= render @project.tasks.select { |task| task.state != 'Done'} %>
+      <%= render @project.tasks.select { |task| task.state != 'Done'}.take(3) %>
     </section>
   </section>
 
+<hr />
+  <%= link_to "Show All Tasks", project_tasks_path(@project)%>
 
   <section class="new-task">
     <h2>Add a new task</h2>
@@ -35,3 +38,6 @@
     </div>
   </section>
 </div>
+
+
+

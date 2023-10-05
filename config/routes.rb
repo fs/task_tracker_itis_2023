@@ -5,6 +5,5 @@ Rails.application.routes.draw do
     get '/task_show', to: 'tasks#show'
   end
 
-
-  root 'projects#index'
+  root "projects#index"
 end

@@ -2,6 +2,13 @@
   <a class="header" href="#">Projects</a>
 </h1>
 
+<div class="sorting-btns">
+  <%= link_to "Name", :sort => "name asc", class: "sorting-btn"%>
+  <%= link_to "Name reverse", :sort => "name desc", class: "sorting-btn"%>
+  <%= link_to "Description", :sort => "description asc", class: "sorting-btn"%>
+  <%= link_to "Description reverse", :sort => "description desc", class: "sorting-btn"%>
+</div>
+
 <% @projects.each do |project| %>
   <div class="form-container">
     <div class="project-title-div">
@@ -17,6 +24,8 @@
     </div>
   </div>
 <% end %>
+
+<%= paginate @projects%>
 
 <style>
 
@@ -82,6 +91,7 @@
     }
 
 
-
 </style>
+
+<%#= paginate @projects %>
 

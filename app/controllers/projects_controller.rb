@@ -1,6 +1,8 @@
 class ProjectsController < ApplicationController
   def index
-    @projects = Project.all.order("created_at DESC")
+  #   @projects = Project.all.order("created_at DESC")
+  # end
+    @projects = Project.order(params[:sort]).page(params[:page]).per(4)
   end
 
   def new
@@ -33,6 +35,7 @@ class ProjectsController < ApplicationController
       render :edit, status: :unprocessable_entity
     end
   end
+
 
   def destroy
     @project = set_project
