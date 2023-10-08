@@ -2,10 +2,13 @@
 
 <h2><%= link_to "New Project", new_project_path %><h2>
 
-<%= link_to "Name", :sort => "name asc"%>
-<%= link_to "Name reverse", :sort => "name desc"%>
-<%= link_to "Description", :sort => "description asc" %>
-<%= link_to "Description reverse", :sort => "description desc" %>
+<div class="sort_links">
+  <p class="link" > <%= link_to "Name", :sort => "name asc"%> <p>
+  <p class="link" > <%= link_to "Name reverse", :sort => "name desc"%> <p>
+  <p class="link" > <%= link_to "Description", :sort => "description asc" %> <p>
+  <p class="link" > <%= link_to "Description reverse", :sort => "description desc" %> <p>
+</div>
+
 <% @projects.each do |project| %>
   <div class="record">
     <p><%= project.id %>. <%= link_to project.name, project_path(project) %></p>
