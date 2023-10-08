@@ -1,4 +1,18 @@
-<p><%= @project.name %> </p>
+<h1><p><%= @project.name %> </p></h1>
 <p><%= @project.description %> </p>
 
 <%= link_to "Back", projects_path %>
+
+<h2><%= link_to "New Task", new_project_task_path(@project) %><h2>
+<% @tasks.each do |task| %>
+  <div class="record">
+    <p><%= task.id %>. <%= task.title%></p>
+    <p><%= task.description %> </p>
+    <p>Deadline: <%= task.deadline %></p>
+    <p>Completed: <%= task.condition ? "Yes" : "No" %></p>
+    <p><%= link_to "Edit", edit_project_task_path(@project, task) %></p>
+    <p><%= button_to "Destroy", project_task_path(@project, task), method: :delete %></p>
+
+  </div>
+
+<% end %>
