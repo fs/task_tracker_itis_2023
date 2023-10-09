@@ -1,0 +1,2 @@
+module Authentication
+end
