@@ -3,7 +3,7 @@ class TasksController < ApplicationController
   before_action :set_task, only: %i[show edit update destroy]
   def index
     if params[:project_id]
-      @tasks = Task.where(project_id: params[:project_id])
+      @tasks = Task.where(project_id: params[:project_id]).order(params[:sort]).page(params[:page]).per(3)
     end
   end
 

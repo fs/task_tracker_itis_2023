@@ -1,4 +1,9 @@
 <h2><%= link_to "New Task", new_project_task_path %></h2>
+
+<%= link_to "Name", :sort => "title asc"%>
+<%= link_to "Created", :sort => "created_at asc" %>
+<%= link_to "Deadline", :sort => "deadline_at asc" %>
+
 <% if @tasks.any? %>
 <% @tasks.each do |task| %>
   <div class="record">
