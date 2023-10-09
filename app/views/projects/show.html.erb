@@ -1,52 +1,7 @@
-<h1><%= @project.name %></h1>
+<h1>Project: <%= @project.name %></h1>
 
 <p><strong>Description:</strong> <%= @project.description %></p>
 
+<p class="link"><%= link_to "Show all Tasks",  project_tasks_path(@project)%></p>
+
 <%= link_to "Back", projects_path %>
-
-<h2>Tasks for <%= @project.name %></h2>
-
-<%= link_to "New Task", new_project_task_path(@project), class: "btn btn-primary" %>
-
-<% @project.tasks.each do |task| %>
-  <div class="record">
-    <p><%= task.id %>. <%= task.name %></p>
-    <p><%= task.description %></p>
-    <p><%= task.status %></p>
-    <p><%= task.deadline_at %></p>
-    <%= link_to "Show", url_for([@project, task]) %>
-    <%= link_to "Edit", edit_project_task_path(@project, task) %>
-    <%= link_to "Destroy", url_for([@project, task]), method: :delete, data: { confirm: 'Are you sure?' } %>
-  </div>
-<% end %>
-
-
-<!--
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Status</th>
-        <th>Deadline</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @project.tasks.each do |task| %>
-        <tr>
-          <td><%= task.name %></td>
-          <td><%= task.description %></td>
-          <td><%= task.status ? "Completed" : "Not Completed" %></td>
-          <td><%= task.deadline_at %></td>
-          <td>
-            <%= link_to "Show", project_task_path(@project, task), class: "btn btn-primary btn-sm" %>
-            <%= link_to "Edit", edit_project_task_path(@project, task), class: "btn btn-warning btn-sm" %>
-            <%= link_to "Destroy", project_task_path(@project, task), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-sm" %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
--->
