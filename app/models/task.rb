@@ -1,7 +1,5 @@
 class Task < ApplicationRecord
 
-  attr_accessor :name, :description, :status, :deadline_at
-
   belongs_to :project
 
   validates :name, presence: true
