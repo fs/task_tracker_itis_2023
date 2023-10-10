@@ -10,7 +10,7 @@ class TasksController < ApplicationController
 
   def new
     @task = @project.tasks.build
-    @task.deadline_at ||= 1.week.from_now
+    # @task.deadline_at ||= 1.week.from_now
   end
 
   def edit; end

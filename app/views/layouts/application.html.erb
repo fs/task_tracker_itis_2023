@@ -16,6 +16,8 @@
         <p><%= msg %></p>
       </div>
     <% end %>
+    <%= link_to 'Sign-Up', new_user_path %>
+    <%= link_to 'Sign-in', new_sessions_path %>
     <%= yield %>
   </body>
 </html>
