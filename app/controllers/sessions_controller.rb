@@ -1,6 +1,7 @@
 class SessionsController < ApplicationController
-  def show
-  end
+  before_action :authenticate_current_user!, only: %i[show]
+
+  def show; end
 
   def new
     @user = User.new
