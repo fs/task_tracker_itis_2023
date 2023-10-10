@@ -46,7 +46,7 @@ class TasksController < ApplicationController
   private
 
   def set_task
-    @task = Task.find_by(id: params[:id])
+    @task = Task.find_by!(id: params[:id])
   end
 
   def set_project
