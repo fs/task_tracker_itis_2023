@@ -3,10 +3,12 @@ class TasksController < ApplicationController
   before_action :set_task, only: %i[show edit update destroy]
 
   def index
-    @tasks = @project.tasks
+    redirect_to project_path(@project)
   end
 
-  def show; end
+  def show
+    @tasks = @project.tasks.order(params[:sort]).page(params[:page]).per(3)  
+  end
 
   def new
     @task = @project.tasks.build
@@ -19,7 +21,7 @@ class TasksController < ApplicationController
     @task = @project.tasks.build(task_params)
 
     if @task.save
-      redirect_to project_tasks_path(@project), notice: "Task created successfully"
+      redirect_to project_path(@project), notice: "Task created successfully"
     else
       render :new, status: :unprocessable_entity
     end
