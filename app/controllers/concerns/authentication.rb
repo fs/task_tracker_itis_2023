@@ -16,7 +16,7 @@ module Authentication
   def authenticate_current_user!
     return if session[:current_user_id] && current_user.present?
 
-    raise UserNotAuthenticated, "No current_user_id in session"
+    raise UserNotAuthenticated, _("No current_user_id in session")
   end
 
   private
