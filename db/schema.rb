@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_10_09_213429) do
+ActiveRecord::Schema.define(version: 2023_10_10_182438) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -21,19 +21,18 @@ ActiveRecord::Schema.define(version: 2023_10_09_213429) do
     t.text "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["name"], name: "index_projects_on_name", unique: true
   end
 
   create_table "tasks", force: :cascade do |t|
-    t.string "name", null: false
-    t.text "description"
-    t.string "status", null: false
-    t.datetime "deadline_at"
-    t.bigint "project_id", null: false
+    t.string "task_title"
+    t.text "task_description"
+    t.string "state"
+    t.date "deadline"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["name", "project_id"], name: "index_tasks_on_name_and_project_id", unique: true
+    t.bigint "project_id", null: false
     t.index ["project_id"], name: "index_tasks_on_project_id"
+    t.index ["task_title", "project_id"], name: "index_tasks_on_task_title_and_project_id", unique: true
   end
 
   create_table "users", force: :cascade do |t|

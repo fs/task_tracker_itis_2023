@@ -1,0 +1,5 @@
+<p>
+  <strong>Title</strong>
+  <%= link_to task.task_title, url_for(controller: "tasks", action: "show", project_id: @project.id, id: task) %>
+  <%= task.id %>
+</p>

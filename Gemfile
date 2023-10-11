@@ -19,6 +19,19 @@ gem "turbolinks", "~> 5"
 gem "jbuilder", "~> 2.7"
 gem "kaminari"
 gem "pry"
+
+# Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
+gem "stimulus-rails"
+
+# Use Redis adapter to run Action Cable in production
+gem "redis", "~> 4.0"
+
+#Turbo rails
+gem 'turbo-rails', '~> 1.0'
+gem "sprockets-rails"
+gem "importmap-rails"
+
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 # Use Active Model has_secure_password
