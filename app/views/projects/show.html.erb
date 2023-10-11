@@ -1,7 +1,14 @@
+<<<<<<< HEAD
 <div class="container mt-5">
   <div class="row">
     <div class="col-md-8 offset-md-2">
       <h1><%= @project.name %></h1>
+      <%= link_to "Name", :sort => "name asc" %>
+      <%= link_to "Name reverse", project_path(@project, sort: "name desc") %>
+      <%= link_to "Created date", project_path(@project, sort: "created_at asc") %>
+      <%= link_to "Created date reverse", project_path(@project, sort: "created_at desc") %>
+      <%= link_to "Deadline", project_path(@project, sort: "deadline_at asc") %>
+      <%= link_to "Deadline reverse", project_path(@project, sort: "deadline_at desc") %>
 
       <div class="card mb-3 shadow">
         <div class="card-body">
@@ -35,3 +42,5 @@
     </div>
   </div>
 </div>
+
+<%= paginate @tasks %>

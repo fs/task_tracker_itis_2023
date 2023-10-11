@@ -3,15 +3,17 @@ class TasksController < ApplicationController
   before_action :set_task, only: %i[show edit update destroy]
 
   def index
-    @tasks = @project.tasks.order(:id)
+    @tasks = @project.tasks.order(params[:sort]).page(params[:page]).per(3)
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @task = @project.tasks.build
+    @task.deadline ||= 1.week.from_now
   end
+
+  def edit; end
 
   def create
     @task = @project.tasks.build(task_params)
@@ -21,9 +23,6 @@ class TasksController < ApplicationController
     else
       render :new, status: :unprocessable_entity
     end
-  end
-
-  def edit
   end
 
   def update
@@ -36,24 +35,20 @@ class TasksController < ApplicationController
 
   def destroy
     @task.destroy
-    redirect_to project_path(@project), notice: "Task deleted successfully"
+    redirect_to project_tasks_path(@project), notice: "Task destroyed"
   end
 
   private
 
   def set_project
-    @project = Project.find(params[:project_id])
+    @project = Project.find_by(id: params[:project_id])
   end
 
   def set_task
-    @task = @project.tasks.find_by(id: params[:id])
-    if @task.nil?
-      redirect_to project_tasks_path(@project), alert: "Task not found"
-    end
+    @task = @project.tasks.find(params[:id])
   end
 
-
   def task_params
-    params.require(:task).permit(:name, :description, :deadline)
+    params.require(:task).permit(:name, :description, :status, :deadline_at)
   end
 end

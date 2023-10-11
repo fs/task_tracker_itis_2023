@@ -1,11 +1,15 @@
 class Task < ApplicationRecord
   belongs_to :project
-  validates :name, :description, :deadline, :project_id, presence: true
-  validate :deadline_check
+  validates :name, presence: true
+  validates :name, uniqueness: { scope: :project_id }
+  validates :status, inclusion: { in: %w[unstarted started done] }
+  validate :deadline_correct
 
-  def deadline_check
-    if deadline.present? && deadline < Time.current.to_date
-      errors.add(:deadline, "can't be earlier than the current date")
-    end
+  private
+
+  def deadline_correct
+    return if (created_at || Time.current) < deadline
+
+    errors.add(:deadline, "must be after creation time")
   end
 end
