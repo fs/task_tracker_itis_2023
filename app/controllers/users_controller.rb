@@ -9,7 +9,8 @@ class UsersController < ApplicationController
     if @user.save
       redirect_to root_path, notice: "You've successfully signed up!"
     else
-      render :new
+      redirect_to new_user_path
+      flash[:notice] = @user.errors.full_messages.to_sentence
     end
   end
 
