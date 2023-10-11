@@ -8,19 +8,10 @@
 
 <%= render 'form', assignment: @assignment %>
 
-<%= form_for @task do |form| %>
-  <!-- Other task fields -->
-  <div class="field">
-    <%= form.label :project_id %>
-    <%= form.collection_select(:project_id, Project.all, :id, :name, prompt: "Select a project") %>
-  </div>
-  <!-- Submit button and form -->
-<% end %>
-
 
 <br>
 <%= link_to 'Show', @assignment, class:"btn btn-outline-dark"%> |
-<%= link_to 'Back', assignments_path, class: "btn btn-outline-dark"%> |
+<%= link_to 'Back', projects_path, class: "btn btn-outline-dark"%> |
 <%= link_to 'Delete', @assignment, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger"%>
 
 <style>

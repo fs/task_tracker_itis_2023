@@ -1,7 +1,9 @@
-<div class="jumbotron jumbotron-fluid">
-  <div class="container">
+
 
 <%= form_with(model: project) do |form| %>
+
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
 
   <% if project.errors.any? %>
     <div id="error_explanation">
