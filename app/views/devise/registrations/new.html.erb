@@ -1,0 +1,49 @@
+<head> 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@600&family=Roboto+Slab&display=swap" rel="stylesheet">
+</head>
+
+<h2>Sign up</h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+
+  <div class="field form-group">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"form-control", placeholder:"mary@gmail.com"%>
+  </div>
+
+  <div class="field form-group">
+    <%= f.label :password %>
+    <% if @minimum_password_length %>
+    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <% end %><br />
+    <%= f.password_field :password, autocomplete: "new-password", class:"form-control", placeholder:"New Password"%>
+  </div>
+
+  <div class="field form-group">
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", class:"form-control", placeholder:"Confirm New Password"%>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Sign up", class: "btn btn-dark"%>
+  </div>
+<% end %>
+
+<%= render "devise/shared/links" %>
+
+<style>
+  h1 {
+  font-family: 'Pixelify Sans', sans-serif;
+  
+  }
+
+  p{
+    font-family: 'Roboto Slab', serif;
+  }
+</style>

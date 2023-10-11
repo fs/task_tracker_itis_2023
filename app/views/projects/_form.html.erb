@@ -1,4 +1,8 @@
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+
 <%= form_with(model: project) do |form| %>
+
   <% if project.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(project.errors.count, "error") %> prohibited this project from being saved:</h2>
@@ -11,19 +15,22 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="field form-group">
     <%= form.label :name %>
-    <%= form.text_field :name %>
+    <%= form.text_field :name, class:"form-control", placeholder:"Servlet Project"%>
   </div>
 
-  <div class="field">
+  <div class="field form-group">
     <%= form.label :description %>
-    <%= form.text_area :description %>
+    <%= form.text_area :description, class:"form-control", placeholder:"Connections within connectors" %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit  class:'btn btn-dark'%>
   </div>
 <% end %>
 
-<%= link_to "Back", projects_path %>
+ </div>
+</div>
+
+<%# <%= link_to "Back", projects_path %> 

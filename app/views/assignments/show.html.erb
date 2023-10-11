@@ -1,0 +1,43 @@
+<head> 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@600&family=Roboto+Slab&display=swap" rel="stylesheet">
+</head>
+
+<div class="jumbotron">
+  <h1 class="display-4" >
+    <%= @assignment.assignment_name %>
+  </h1>
+  <p>
+    <strong>Description:</strong>
+    <%= @assignment.description %>
+  </p>
+
+  <p>
+    <strong>Deadline:</strong>
+    <%= @assignment.deadline %>
+  </p>
+  <hr class="my-4">
+ <p>
+  <strong>Completion status:</strong>
+  <%= @assignment.completion_status %>
+</p>
+<br>
+<br>
+  <%= link_to 'Edit', edit_assignment_path(@assignment) , class:"btn btn-dark"%> |
+  <%= link_to 'Back', assignments_path , class: "btn btn-dark"%>
+  <%= link_to 'Delete', @assignment, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger"%>
+</div>
+
+<style>
+  h1 {
+  font-family: 'Pixelify Sans', sans-serif;
+  
+  }
+
+  p{
+    font-family: 'Roboto Slab', serif;
+  }
+  </style>
+
+

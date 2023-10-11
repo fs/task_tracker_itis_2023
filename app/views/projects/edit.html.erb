@@ -1,3 +1,7 @@
 <h1>Edit project<h1>
 
 <%= render 'form', project: @project %>
+
+<%= link_to 'Show', @project, class:"btn btn-outline-dark"%> |
+<%= link_to 'Back', assignments_path, class: "btn btn-outline-dark"%> |
+<%= link_to 'Delete', @project, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger"%>

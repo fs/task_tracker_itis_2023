@@ -1,15 +1,15 @@
 <h1><%= @project.name %></h1>
 
 <p><strong>Description:</strong> <%= @project.description %></p>
-
-<%= link_to "Back", projects_path %>
-
-<h2>Tasks for <%= @project.name %></h2>
-
-<%= link_to "New Task", new_project_task_path(@project), class: "btn btn-primary" %>
-
-<table class="table">
-  <thead>
+<%# I need to change my main page so that I can shsow a list of projects instead of list of assignments %>
+<%= link_to "Back", projects_path , class: "btn btn-dark"%>
+<br>
+<br>
+<%# <h2>Assignments for <%= @project.name %>
+<br>
+<br>
+<table class="table table-striped table-hover">
+  <thead class="thead-dark">
     <tr>
       <th>Name</th>
       <th>Description</th>
@@ -20,18 +20,21 @@
   </thead>
 
   <tbody>
-    <% @project.tasks.each do |task| %>
+    <% @project.assignments.each do |assignment| %>
+    <%if assignment.user == current_user%>
       <tr>
-        <td><%= task.name %></td>
-        <td><%= task.description %></td>
-        <td><%= task.status ? "Completed" : "Not Completed" %></td>
-        <td><%= task.deadline_at %></td>
+        <td><%= assignment.assignment_name %></td>
+        <td><%= assignment.description %></td>
+        <td><%= assignment.completion_status ? "Completed" : "Not Completed"%>
+        <td><%= assignment.deadline %></td>
         <td>
-          <%= link_to "Show", project_task_path(@project, task), class: "btn btn-primary btn-sm" %>
-          <%= link_to "Edit", edit_project_task_path(@project, task), class: "btn btn-warning btn-sm" %>
-          <%= link_to "Destroy", project_task_path(@project, task), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-sm" %>
+          <%= link_to "Show", project_assignment_path(@project, assignment), class:"btn btn-dark" %>
+          <%= link_to "Destroy", project_assignment_path(@project, assignment), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger" %>
         </td>
       </tr>
+      <%end%>
     <% end %>
   </tbody>
 </table>
+
+<%= link_to "New Assignment", new_project_assignment_path(@project), class: "btn btn-outline-dark" %>

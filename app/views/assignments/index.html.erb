@@ -1,0 +1,84 @@
+  <head> 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@600&family=Roboto+Slab&display=swap" rel="stylesheet">
+</head>
+
+
+<%if user_signed_in?%>
+
+<h1>Assignment's List</h1>
+
+<table class = "table table-bordered table-hover">
+  <thead class="thead-dark">
+    <tr>
+      <th>Project</th>
+      <th>Assignment name</th>
+      <th>Description</th>
+      <th>Deadline</th>
+      <th>Completion status</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @assignments.each do |assignment| %>
+      <%if assignment.user == current_user%>
+      <tr>
+        <td><%= assignment.project_id%></td>
+        <td>
+          <%= link_to assignment.assignment_name , assignment %>
+          </td>
+        <td><%= assignment.description %></td>
+        <td><%= assignment.deadline %></td>
+        <td><%= assignment.completion_status %></td>
+      
+        <td><%= link_to 'Delete', assignment, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger btn-sm"%></td>
+      </tr>
+      <%end%>
+     
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Assignment', new_assignment_path, class:"btn btn-light"%>
+<%= link_to 'New Project', projects_path, class:"btn btn-light"%>
+
+<%= link_to 'List of Projects', projects_path, class:"btn btn-light"%>
+
+<%else%>
+<div id="content-container">
+ 
+    <h1>ITIS TaskTracker</h1>
+    <br>
+    <p>"Step into the world of seamless project management with our Ruby on Rails-powered task tracker web application.</p>
+    <p>Unleash your productivity and conquer your goals like never before!"</p>
+    <br>
+    <p style = "text-align: center;">From a Rubynist to you!</p>
+  </div>
+
+<video autoplay muted loop id="video-bg">
+  <source src="/videos/abstractBlue.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+<%end%>
+
+
+
+<style>
+  h1 {
+  font-family: 'Pixelify Sans', sans-serif;
+  
+  }
+
+  p{
+    font-family: 'Roboto Slab', serif;
+  }
+</style>
+
+

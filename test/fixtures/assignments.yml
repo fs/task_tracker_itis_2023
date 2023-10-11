@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  assignment_name: MyString
+  description: MyString
+  deadline: 2023-10-05
+  completion_status: false
+
+two:
+  assignment_name: MyString
+  description: MyString
+  deadline: 2023-10-05
+  completion_status: false

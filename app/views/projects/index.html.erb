@@ -1,18 +1,47 @@
-<h1>Hello world<h1>
+ <head> 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@600&family=Roboto+Slab&display=swap" rel="stylesheet">
+</head>
 
-<h2><%= link_to "New Project", new_project_path %><h2>
+<h1>Project's list<h1>
 
-<%= link_to "Name", :sort => "name asc"%>
-<%= link_to "Name reverse", :sort => "name desc"%>
-<%= link_to "Description", :sort => "description asc" %>
-<%= link_to "Description reverse", :sort => "description desc" %>
-<% @projects.each do |project| %>
-  <div class="record">
-    <p><%= project.id %>. <%= link_to project.name, project_path(project) %></p>
-    <p><%= project.description %> </p>
-    <p><%= link_to "Edit", edit_project_path(project) %></p>
-    <p><%= button_to "Destroy", project, method: :delete %></p>
-  </div>
+<%# <h2><%= link_to "New Project", new_project_path %><h2>
+
+  <table class = "table table-bordered table-hover">
+     <thead class="thead-dark">
+      <tr>
+      <th>ID</th>
+      <th>Project Name</th>
+      <th>Description</th>
+      <th></th>
+    </tr>
+  </thead>
+
+ <tbody>
+  <% @projects.each do |project| %>
+  <%# <div class="record"> %>
+    <tr>
+    <td><%= project.id %></td>
+    <td><%= link_to project.name, project_path(project) %></td>
+    <td><%= project.description %> </td>
+
+
+    <%# <p><%= link_to "Edit", edit_project_path(project) %>
+    <td><%= button_to "Delete", project, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger"%></td>
+    </tr>
+  <%# </div> %>
 <% end %>
 
 <%= paginate @projects %>
+ </tbody>
+</table>
+
+
+<%# <%= link_to "Name", :sort => "name asc"%>
+<%# <%= link_to "Name reverse", :sort => "name desc"%> 
+<%# <%= link_to "Description", :sort => "description asc" %>
+<%# <%= link_to "Description reverse", :sort => "description desc"  %>

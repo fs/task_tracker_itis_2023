@@ -1,3 +1,3 @@
 Task tracker for learn ruby on rails!
 
-First trial commit
+First commit after hw3 is done

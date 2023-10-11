@@ -1,0 +1,24 @@
+<head> 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@600&family=Roboto+Slab&display=swap" rel="stylesheet">
+</head>
+<h1 >Add New Assignment</h1>
+<br>
+
+<%= render 'form', assignment: @assignment %>
+
+<br>
+<%= link_to 'Back', assignments_path, class: "btn btn-outline-dark"%>
+
+
+<style>
+  h1 {
+  font-family: 'Pixelify Sans', sans-serif;
+  
+  }
+
+  p{
+    font-family: 'Roboto Slab', serif;
+  }
+  </style>

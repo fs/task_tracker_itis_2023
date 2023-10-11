@@ -1,0 +1,65 @@
+<%= form_with(model: assignment) do |form| %>
+
+
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+
+    <%= form_for @assignment do |form| %>
+  <!-- Other task fields -->
+  <div class="field">
+    <%= form.label :project_id %>
+    <%= form.collection_select(:project_id, Project.all, :id, :name, prompt: "Select a project") %>
+  </div>
+  <!-- Submit button and form  -->
+<% end %>
+
+<br>
+    
+<% if assignment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(assignment.errors.count, "error") %> prohibited this assignment from being saved:</h2>
+
+      <ul>
+        <% assignment.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field form-group">
+    <%= form.label :assignment_name %>
+    <%= form.text_field :assignment_name, class:"form-control", placeholder:"Create PostgreSQL DataBase"%>
+  </div>
+
+ 
+
+  <div class="field form-group">
+    <%= form.label :description %>
+    <%= form.text_field :description, class:"form-control", placeholder:"The tools to be used are in the file sent on week 3"%>
+  </div>
+
+  <div class="field form-group">
+    <%= form.label :deadline %>
+    <%= form.date_select :deadline %>
+  </div>
+
+  <div class="field form-group">
+    <%= form.label :completion_status %>
+    <%= form.check_box :completion_status %>
+  </div>
+
+ <div class="field form-group">
+    <%= form.number_field :user_id, id: :assignment_user_id,class:"form-control", value:current_user.id, type: :hidden %>
+  </div>
+
+  <br>
+
+  <div class="actions">
+    <%= form.submit class:'btn btn-dark'%>
+  </div>
+<% end %>
+
+  </div>
+</div>
+
+  

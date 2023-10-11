@@ -1,0 +1,51 @@
+#video-bg {
+  position: fixed; /* Fixed position to cover the entire viewport */
+  top: 0;
+  left: 0;
+  min-width: 100%; /* Minimum width to cover the entire viewport */
+  min-height: 100%; /* Minimum height to cover the entire viewport */
+  z-index: -1; /* Ensure the video is behind other elements */
+}
+
+ #content-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(255, 255, 255, 0.5); /* Transparent white background */
+      padding: 20px;
+      border-radius: 10px; /* Rounded corners for the border */
+      z-index: 1;
+    }
+
+    /* Add these styles to your CSS file or within a <style> tag in your HTML file */
+
+/* Navbar background color */
+.navbar {
+  background-color: rgba(0, 0, 0, 0.9); /* Dark background color */
+  border: 1px solid #fff; /* Thin white border */
+}
+
+/* Navbar text color */
+.navbar a.nav-link {
+  color: #fff !important; 
+}
+
+/* Navbar brand text color */
+.navbar-brand {
+  color: #fff !important; /
+}
+
+/* Navbar toggle button icon color */
+.navbar-toggler-icon {
+  background-color: #fff; 
+}
+
+h1 {
+  font-family: 'Pixelify Sans', sans-serif;
+  text-align: center;
+}
+
+p{
+  font-family: 'Roboto Slab', serif;
+}

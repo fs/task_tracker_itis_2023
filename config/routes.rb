@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
-  root "projects#index"
+  devise_for :users
+  resources :assignments
+  #get 'home/index'
+  get 'home/about'
+  # root 'home#index'
+  root 'assignments#index'
 
   resources :projects do
-    resources :tasks
+    resources :assignments
   end
 end

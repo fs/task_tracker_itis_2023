@@ -5,7 +5,10 @@ class ProjectsController < ApplicationController
     @projects = Project.order(params[:sort]).page(params[:page]).per(3)
   end
 
-  def show; end
+  def show
+    @project = Project.find(params[:id])
+  end
+
 
   def new
     @project = Project.new
@@ -17,7 +20,7 @@ class ProjectsController < ApplicationController
     @project = Project.new(project_params)
 
     if @project.save
-      redirect_to projects_path, notice: "Created Successful"
+      redirect_to projects_path, notice: "Gracefully Created"
     else
       render :new, status: :unprocessable_entity
     end
@@ -25,7 +28,7 @@ class ProjectsController < ApplicationController
 
   def update
     if @project.update(project_params)
-      redirect_to projects_path, notice: "Update Successful"
+      redirect_to projects_path, notice: "Gracefully Updated"
     else
       render :edit, status: :unprocessable_entity
     end
@@ -33,7 +36,7 @@ class ProjectsController < ApplicationController
 
   def destroy
     @project.destroy
-    redirect_to projects_path, notice: "Project destroyed"
+    redirect_to projects_path, notice: "Gracefully Deleted"
   end
 
   private
