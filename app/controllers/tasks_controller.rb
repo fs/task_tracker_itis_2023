@@ -1,21 +1,42 @@
 class TasksController < ApplicationController
-  before_action :set_project, only: %i[index show create]
+  before_action :set_project
+  before_action :set_task, only: %i[show edit update destroy]
 
   def index
     @tasks = @project.tasks if @project
   end
 
   def show
+    @task
+  end
+
+    def new
+    @project = Project.find(params[:project_id])
+    @task = @project.tasks.build
+    @task.created_at = Time.now
+    @task.deadline = 1.week.from_now
+  end
+
+  def edit
+    @project = Project.find(params[:project_id])
     @task = @project.tasks.find(params[:id])
   end
 
-  def new
-    @project = Project.find(params[:project_id])
-    @task = @project.tasks.build
+  def update
+    if @task.update(task_params)
+      redirect_to project_tasks_path(@project, @task), notice: 'Updated Successful'
+    else
+      flash.now[:alert] = 'Something went wrong. Try again.'
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   def create
     @task = @project.tasks.build(task_params)
+
+    if @task.deadline.nil?
+      @task.deadline = @task.created_at + 1.week
+    end
 
     if @task.save
       redirect_to project_tasks_path(@project, @task), notice: 'Created Successful'
@@ -24,10 +45,19 @@ class TasksController < ApplicationController
     end
   end
 
+  def destroy
+    @task.destroy
+    redirect_to project_tasks_path(@project), notice: 'Task destroyed'
+  end
+
   private
 
   def set_project
     @project = Project.find_by(id: params[:project_id])
+  end
+
+  def set_task
+    @task = @project.tasks.find_by!(id: params[:id])
   end
 
   def task_params
