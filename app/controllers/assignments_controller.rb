@@ -7,7 +7,17 @@ class AssignmentsController < ApplicationController
 
   # GET /assignments or /assignments.json
   def index
-    @assignments = Assignment.all
+    # @assignments = Assignment.all
+    @assignments = Assignment.page(params[:page]).per(10)
+    # @assignments = Assignment.order(assignment_name: :asc)
+    case params[:sort_by]
+    when 'name'
+      @assignments = @assignments.order(assignment_name: :asc)
+    when 'created_at'
+      @assignments = @assignments.order(created_at: :asc)
+    when 'deadline'
+      @assignments = @assignments.order(deadline: :asc)
+    end
   end
 
   # GET /assignments/1 or /assignments/1.json

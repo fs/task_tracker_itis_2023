@@ -1,4 +1,4 @@
- <head> 
+  <head> 
   <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@600&display=swap" rel="stylesheet">
@@ -8,7 +8,7 @@
 </head>
 
 <%if user_signed_in?%>
-<h1>Project's list<h1>
+<h1>Project's list</h1>
 
 <%# <h2><%= link_to "New Project", new_project_path %>
 
@@ -46,7 +46,6 @@
 
 <%= link_to 'List of Assignments', assignments_path, class:"btn btn-light"%>
 
-
 <%else%>
 
 <div id="content-container">
@@ -65,8 +64,6 @@
 </video>
 <%end%>
 
-
-
 <style>
   h1 {
   font-family: 'Pixelify Sans', sans-serif;
@@ -77,6 +74,10 @@
     font-family: 'Roboto Slab', serif;
   }
 </style>
+
+
+
+
 
 
 <%# <%= link_to "Name", :sort => "name asc"%>

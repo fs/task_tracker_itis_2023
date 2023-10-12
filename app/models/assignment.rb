@@ -10,4 +10,6 @@ class Assignment < ApplicationRecord
       errors.add(:deadline, "Can't be earlier than the asssignment's creation date")
     end
   end
+
+  validates_uniqueness_of :assignment_name, scope: :project_id, message: ":This nomination for assignment already exists in this project."
 end

@@ -1,3 +1,12 @@
+<head> 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@600&family=Roboto+Slab&display=swap" rel="stylesheet">
+</head>
+
 <h2>Log in</h2>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
@@ -25,3 +34,14 @@
 <br>
 
 <%= render "devise/shared/links" %>
+
+<style>
+  h2 {
+  font-family: 'Pixelify Sans', sans-serif;
+  
+  }
+
+  p{
+    font-family: 'Roboto Slab', serif;
+  }
+</style>

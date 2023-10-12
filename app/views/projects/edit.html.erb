@@ -1,7 +1,24 @@
-<h1>Edit project<h1>
+<head> 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@600&family=Roboto+Slab&display=swap" rel="stylesheet">
+</head>
+
+<h1>Edit project</h1>
 
 <%= render 'form', project: @project %>
 
 <%= link_to 'Show', @project, class:"btn btn-outline-dark"%> |
 <%= link_to 'Back', projects_path, class: "btn btn-outline-dark"%> |
 <%= link_to 'Delete', @project, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger"%>
+
+<style>
+  h1 {
+  font-family: 'Pixelify Sans', sans-serif;
+  
+  }
+
+  p{
+    font-family: 'Roboto Slab', serif;
+  }
+  </style>

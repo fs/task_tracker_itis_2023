@@ -12,6 +12,15 @@
 
 <h1>Assignment's List</h1>
 
+<div class="form-group">
+  <%= form_tag assignments_path, method: :get do %>
+    <%= select_tag :sort_by, options_for_select(['name', 'created_at', 'deadline'], params[:sort_by]), class: 'form-control' %>
+    <%= submit_tag 'Sort', class: 'btn btn-dark' %>
+  <% end %>
+</div>
+<br>
+
+
 <table class = "table table-bordered table-hover">
   <thead class="thead-dark">
     <tr>
@@ -43,6 +52,10 @@
     <% end %>
   </tbody>
 </table>
+<br>
+
+<%# <%= paginate @assignments %>
+<%# On the first page it shows no assignments and they can only start to be seen after pressing on 2 and on... %>
 
 <br>
 
