@@ -13,14 +13,14 @@ class SessionsController < ApplicationController
 
     if @user
       session[:current_user_id] = @user.id
-      redirect_to sessions_path, notice: "You've successfully logged in!"
+      redirect_to root_path, notice: "You've successfully logged in!"
     else
       @user = User.new
       @user.errors.add :base, "Wrong email or password"
       render :new
     end
   end
-
+  
   def destroy
     session[:current_user_id] = nil
     redirect_to root_path, notice: "You've successfully logged out!"
