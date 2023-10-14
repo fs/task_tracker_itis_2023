@@ -5,7 +5,10 @@ class ProjectsController < ApplicationController
     @projects = Project.order(params[:sort]).page(params[:page]).per(3)
   end
 
-  def show; end
+  def show
+    @is_project_page = true
+    @tasks = @project.tasks.order(params[:sort]).page(params[:page]).per(3)
+  end
 
   def new
     @project = Project.new
@@ -32,6 +35,7 @@ class ProjectsController < ApplicationController
   end
 
   def destroy
+    @project.tasks.destroy_all
     @project.destroy
     redirect_to projects_path, notice: "Project destroyed"
   end

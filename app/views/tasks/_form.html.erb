@@ -1,37 +1,52 @@
-<%= form_with(model: [@project, @task]) do |form| %>
-  <% if @task.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@task.errors.count, "error") %> prohibited this task from being saved:</h2>
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <h1><%= @task.new_record? ? "New Task" : "Edit Task" %></h1>
 
-      <ul>
-        <% @task.errors.full_messages.each do |error| %>
-          <li><%= error %></li>
-        <% end %>
-      </ul>
+      <div class="card shadow">
+        <div class="card-body">
+          <%= form_with(model: [@project, @task], local: true) do |form| %>
+            <% if @task.errors.any? %>
+              <div class="alert alert-danger" role="alert">
+                <h5><%= pluralize(@task.errors.count, "error") %> prohibited this task from being saved:</h5>
+
+                <ul>
+                  <% @task.errors.each do |error| %>
+                    <li><%= error.full_message %></li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
+
+            <div class="form-group">
+              <%= form.label :name %>
+              <%= form.text_field :name, class: "form-control", placeholder: "Enter task name" %>
+            </div>
+
+            <div class="form-group">
+              <%= form.label :description %>
+              <%= form.text_area :description, class: "form-control", placeholder: "Enter task description" %>
+            </div>
+
+            <div class="form-group">
+              <%= form.label :status %>
+              <%= form.select :status, %w[unstarted started done], {}, { class: "form-control" } %>
+            </div>
+
+
+            <div class="form-group">
+              <%= form.label :deadline %>
+              <%= form.date_field :deadline, class: "form-control" %>
+            </div>
+
+            <div class="text-center">
+              <%= form.submit "Save", class: "btn btn-outline-primary" %>
+            </div>
+          <% end %>
+
+          <%= link_to "Back to Project", project_path(@project), class: "btn btn-outline-secondary" %>
+        </div>
+      </div>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
   </div>
-
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description %>
-  </div>
-
-  <div class="field">
-    <%= form.label :status %>
-    <%= form.select :status, ["unstarted", "started", "done"] %>
-  </div>
-
-  <div class="field">
-    <%= form.label :deadline_at %>
-    <%= form.datetime_field :deadline_at %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>

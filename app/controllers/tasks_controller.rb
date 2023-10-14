@@ -3,14 +3,15 @@ class TasksController < ApplicationController
   before_action :set_task, only: %i[show edit update destroy]
 
   def index
-    @tasks = @project.tasks
+    @is_task_page = true
+    @tasks = @project.tasks.order(params[:sort]).page(params[:page]).per(3)
   end
 
   def show; end
 
   def new
     @task = @project.tasks.build
-    @task.deadline_at ||= 1.week.from_now
+    @task.deadline ||= 1.week.from_now
   end
 
   def edit; end
@@ -49,6 +50,6 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:name, :description, :status, :deadline_at)
+    params.require(:task).permit(:name, :description, :status, :deadline)
   end
 end

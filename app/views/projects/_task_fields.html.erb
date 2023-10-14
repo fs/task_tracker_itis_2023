@@ -1,0 +1,7 @@
+<div class="task">
+  <%= form.fields_for :tasks, Task.new do |task_form| %>
+    <%= task_form.text_field :name, placeholder: 'Task Name' %>
+    <%= task_form.text_area :description, placeholder: 'Task Description' %>
+    <%= task_form.date_field :deadline %>
+  <% end %>
+</div>

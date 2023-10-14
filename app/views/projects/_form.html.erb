@@ -1,29 +1,41 @@
-<%= form_with(model: project) do |form| %>
-  <% if project.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(project.errors.count, "error") %> prohibited this project from being saved:</h2>
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <h1><%= project.new_record? ? "New Project" : "Edit Project" %></h1>
 
-      <ul>
-        <% project.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+      <div class="card shadow">
+        <div class="card-body">
+          <%= form_with(model: project, local: true) do |form| %>
+            <% if project.errors.any? %>
+              <div class="alert alert-danger" role="alert">
+                <h5><%= pluralize(project.errors.count, "error") %> prohibited this project from being saved:</h5>
+
+                <ul>
+                  <% project.errors.each do |error| %>
+                    <li><%= error.full_message %></li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
+
+            <div class="form-group">
+              <%= form.label :name %>
+              <%= form.text_field :name, class: "form-control", placeholder: "Enter project name" %>
+            </div>
+
+            <div class="form-group">
+              <%= form.label :description %>
+              <%= form.text_area :description, class: "form-control", placeholder: "Enter project description" %>
+            </div>
+            <br>
+            <div class="text-center">
+              <%= form.submit "Save", class: "btn btn-outline-primary" %>
+            </div>
+          <% end %>
+
+          <%= link_to "Back", projects_path, class: "btn btn-outline-secondary" %>
+        </div>
+      </div>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
   </div>
-
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
-
-<%= link_to "Back", projects_path %>
+</div>

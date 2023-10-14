@@ -1,40 +1,43 @@
-<h1>Tasks for <%= @project.name %></h1>
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <h1>Tasks for <%= @project.name %></h1>
 
-<%= link_to "New Task", new_project_task_path(@project) %>
+      <div class="card shadow">
+        <div class="card-body">
+          <table class="table table-striped">
+            <thead>
+            <tr>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Status</th>
+              <th>Deadline</th>
+              <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% @tasks.each do |task| %>
+              <tr>
+                <td><%= task.name %></td>
+                <td><%= task.description %></td>
+                <td><%= task.status %></td>
+                <td><%= task.deadline %></td>
+                <td>
+                  <%= link_to "View", url_for(controller: 'tasks', action: 'show', project_id: @project, id: task), class: "btn btn-info btn-sm mr-1" %>
+                  <%= link_to "Edit", edit_project_task_path(@project, task), class: "btn btn-warning btn-sm mr-1" %>
+                  <%= link_to "Destroy", url_for(controller: 'tasks', action: 'destroy', project_id: @project, id: task), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-sm" %>
+                </td>
+              </tr>
+            <% end %>
+            </tbody>
+          </table>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Status</th>
-      <th>Deadline</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+          <%= link_to "New Task", new_project_task_path(@project), class: "btn btn-outline-success" %>
+          <%= link_to "Back to Project", project_path(@project), class: "btn btn-outline-secondary" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-  <tbody>
-    <% @tasks.each do |task| %>
-      <tr>
-        <td><%= task.name %></td>
-        <td><%= task.description %></td>
-        <td>
-          <% case task.status %>
-            <% when 'unstarted' %>
-              <td>Not Started</td>
-            <% when 'started' %>
-              <td>In Progress</td>
-            <% when 'done' %>
-              <td>Completed</td>
-          <% end %>
-        </td>
-        <td><%= task.deadline_at %></td>
-        <td><%= link_to "Show", url_for([@project, task]) %></td>
-        <td><%= link_to "Edit", edit_project_task_path(@project, task) %></td>
-        <td><%= link_to "Destroy", url_for([@project, task]), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<%= link_to "Back to Projects", projects_path %>
+<%= paginate @tasks %>

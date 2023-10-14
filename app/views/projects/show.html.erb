@@ -1,37 +1,39 @@
-<h1><%= @project.name %></h1>
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <h1><%= @project.name %></h1>
+      <div class="card mb-3 shadow">
+        <div class="card-body">
+          <p class="card-text"><strong>Description:</strong> <%= @project.description %></p>
+        </div>
+      </div>
 
-<p><strong>Description:</strong> <%= @project.description %></p>
+      <h2 class="mt-4">Tasks:</h2>
+      <ul class="list-group">
+        <% @project.tasks.each do |task| %>
+          <li class="list-group-item">
+            <div class="card mb-3 shadow">
+              <div class="card-body">
+                <h3><%= task.name %></h3>
+                <p><strong>Description:</strong> <%= task.description %></p>
+                <p><strong>Deadline:</strong> <%= task.deadline %></p>
+                <p><strong>Status:</strong> <%= task.status%></p>
+                <div class="btn-group" role="group">
+                  <%= link_to "Edit Task", edit_project_task_path(@project, task), class: "btn btn-warning" %>
+                  <%= link_to "Destroy", url_for(controller: 'tasks', action: 'destroy', project_id: @project, id: task), class: "btn btn-danger" %>
+                </div>
+              </div>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+      <br>
+      <%= link_to "Back to Project List", projects_path, class: "btn btn-outline-secondary" %> |
+      <%= link_to "Edit Project", edit_project_path(@project), class: "btn btn-outline-primary" %> |
+      <%= link_to "Tasks List", project_tasks_path(@project), class: "btn btn-outline-secondary" %> |
+      <%= link_to "Add Task", new_project_task_path(@project), class: "btn btn-outline-success" %>
+    </div>
+  </div>
+</div>
 
-<%= link_to "Back", projects_path %>
-
-<h2>Tasks for <%= @project.name %></h2>
-
-<%= link_to "New Task", new_project_task_path(@project), class: "btn btn-primary" %>
-
-<table class="table">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Status</th>
-      <th>Deadline</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @project.tasks.each do |task| %>
-      <tr>
-        <td><%= task.name %></td>
-        <td><%= task.description %></td>
-        <td><%= task.status ? "Completed" : "Not Completed" %></td>
-        <td><%= task.deadline_at %></td>
-        <td>
-          <%= link_to "Show", project_task_path(@project, task), class: "btn btn-primary btn-sm" %>
-          <%= link_to "Edit", edit_project_task_path(@project, task), class: "btn btn-warning btn-sm" %>
-          <%= link_to "Destroy", project_task_path(@project, task), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-sm" %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<%= paginate @tasks %>

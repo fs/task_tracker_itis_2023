@@ -1,20 +1,17 @@
-<h1>Task Details</h1>
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <h1><%= @task.name %></h1>
 
-<p><strong>Name:</strong> <%= @task.name %></p>
-<p><strong>Description:</strong> <%= @task.description %></p>
+      <div class="card shadow">
+        <div class="card-body">
+          <p class="card-text"><strong>Description:</strong> <%= @task.description %></p>
+          <p class="card-text"><strong>Status:</strong> <%= @task.status %></p>
+          <p class="card-text"><strong>Deadline:</strong> <%= @task.deadline %></p>
+        </div>
+      </div>
 
-<p>
-    <strong>Status:</strong> 
-    <% case @task.status %>
-    <% when 'unstarted' %>
-        <td>Not Started</td>
-    <% when 'started' %>
-        <td>In Progress</td>
-    <% when 'done' %>
-        <td>Completed</td>
-    <% end %>
-</p>
-
-<p><strong>Deadline:</strong> <%= @task.deadline_at %></p>
-
-<%= link_to "Back to Tasks", project_tasks_path(@project) %>
+      <%= link_to "Back to Task List", project_tasks_path(@project), class: "btn btn-outline-secondary" %>
+    </div>
+  </div>
+</div>
