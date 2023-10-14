@@ -29,6 +29,12 @@
             </div>
 
             <div class="form-group">
+              <%= form.label :status %>
+              <%= form.select :status, %w[unstarted started done], {}, { class: "form-control" } %>
+            </div>
+
+
+            <div class="form-group">
               <%= form.label :deadline %>
               <%= form.date_field :deadline, class: "form-control" %>
             </div>

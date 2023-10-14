@@ -1,15 +1,7 @@
-<<<<<<< HEAD
 <div class="container mt-5">
   <div class="row">
     <div class="col-md-8 offset-md-2">
       <h1><%= @project.name %></h1>
-      <%= link_to "Name", :sort => "name asc" %>
-      <%= link_to "Name reverse", project_path(@project, sort: "name desc") %>
-      <%= link_to "Created date", project_path(@project, sort: "created_at asc") %>
-      <%= link_to "Created date reverse", project_path(@project, sort: "created_at desc") %>
-      <%= link_to "Deadline", project_path(@project, sort: "deadline_at asc") %>
-      <%= link_to "Deadline reverse", project_path(@project, sort: "deadline_at desc") %>
-
       <div class="card mb-3 shadow">
         <div class="card-body">
           <p class="card-text"><strong>Description:</strong> <%= @project.description %></p>
@@ -17,6 +9,16 @@
       </div>
 
       <h2 class="mt-4">Tasks:</h2>
+      <div class="mt-2">
+        <%= link_to "Name (asc)", project_path(@project, sort: "name asc") %>
+        <%= link_to "Name (desc)", project_path(@project, sort: "name desc") %>
+        <%= link_to "Created date (asc)", project_path(@project, sort: "created_at asc") %>
+        <%= link_to "Created date (desc)", project_path(@project, sort: "created_at desc") %>
+        <%= link_to "Deadline (asc)", project_path(@project, sort: "deadline asc") %>
+        <%= link_to "Deadline (desc)", project_path(@project, sort: "deadline desc") %>
+
+      </div>
+
       <ul class="list-group">
         <% @project.tasks.each do |task| %>
           <li class="list-group-item">
@@ -25,6 +27,7 @@
                 <h3><%= task.name %></h3>
                 <p><strong>Description:</strong> <%= task.description %></p>
                 <p><strong>Deadline:</strong> <%= task.deadline %></p>
+                <p><strong>Status:</strong> <%= task.status%></p>
                 <div class="btn-group" role="group">
                   <%= link_to "Edit Task", edit_project_task_path(@project, task), class: "btn btn-warning" %>
                   <%= link_to "Destroy", url_for(controller: 'tasks', action: 'destroy', project_id: @project, id: task), class: "btn btn-danger" %>

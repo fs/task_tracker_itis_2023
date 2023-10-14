@@ -3,6 +3,7 @@ class TasksController < ApplicationController
   before_action :set_task, only: %i[show edit update destroy]
 
   def index
+    @is_task_page = true
     @tasks = @project.tasks.order(params[:sort]).page(params[:page]).per(3)
   end
 
@@ -49,6 +50,6 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:name, :description, :status, :deadline_at)
+    params.require(:task).permit(:name, :description, :status, :deadline)
   end
 end
