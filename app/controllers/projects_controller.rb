@@ -10,12 +10,9 @@ class ProjectsController < ApplicationController
   def edit; end
 
   def update
-    puts "Task Params: #{task_params.inspect}" # Debugging statement
-  
-    if @task.update(task_params)
-      redirect_to project_tasks_path(@project), notice: "Update Successful"
+    if @project.update(project_params)
+      redirect_to projects_path, notice: "Update Successful"
     else
-      puts "Errors: #{task.errors.full_messages.inspect}" # Debugging statement
       render :edit, status: :unprocessable_entity
     end
   end

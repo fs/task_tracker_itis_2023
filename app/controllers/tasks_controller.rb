@@ -27,7 +27,7 @@ class TasksController < ApplicationController
 
   def create
     @task = @project.tasks.new(task_params)
-    @task.deadline = 7.days.from_now
+    @task.deadline ||= 7.days.from_now
     if @task.save
       redirect_to project_tasks_path(params[:project_id]), notice: 'Task successfully created.'
     else

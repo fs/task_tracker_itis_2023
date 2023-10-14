@@ -19,7 +19,8 @@
         <td><%= task.deadline %></td>
         <td><%= task.project.name %></td>
 
-        <td><%= link_to "Edit", edit_project_task_path(@project, task) %></td>
+        <td><%= link_to "Show", url_for([@project, @task]) %></td>
+        <td><%= link_to "Edit", url_for([:edit, @project, task]) %></td>
         <td><%= link_to "Delete", project_task_path(@project, task), method: :delete %>
       </tr>
     <%end%>
