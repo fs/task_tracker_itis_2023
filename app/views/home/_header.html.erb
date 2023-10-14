@@ -39,8 +39,8 @@
               <li class="dropdown-item"><%= link_to "Name Reverse", project_path(@project, sort: "name desc") %></li>
               <li class="dropdown-item"><%= link_to "Created Date", project_path(@project, sort: "created_at asc") %></li>
               <li class="dropdown-item"><%= link_to "Created Date Reverse", project_path(@project, sort: "created_at desc") %></li>
-              <li class="dropdown-item"><%= link_to "Deadline", project_path(@project, sort: "deadline_at asc") %></li>
-              <li class="dropdown-item"><%= link_to "Deadline Reverse", project_path(@project, sort: "deadline_at desc") %></li>
+              <li class="dropdown-item"><%= link_to "Deadline", project_path(@project, sort: "deadline asc") %></li>
+              <li class="dropdown-item"><%= link_to "Deadline Reverse", project_path(@project, sort: "deadline desc") %></li>
             </ul>
           </li>
         <% end %>

@@ -9,16 +9,6 @@
       </div>
 
       <h2 class="mt-4">Tasks:</h2>
-      <div class="mt-2">
-        <%= link_to "Name (asc)", project_path(@project, sort: "name asc") %>
-        <%= link_to "Name (desc)", project_path(@project, sort: "name desc") %>
-        <%= link_to "Created date (asc)", project_path(@project, sort: "created_at asc") %>
-        <%= link_to "Created date (desc)", project_path(@project, sort: "created_at desc") %>
-        <%= link_to "Deadline (asc)", project_path(@project, sort: "deadline asc") %>
-        <%= link_to "Deadline (desc)", project_path(@project, sort: "deadline desc") %>
-
-      </div>
-
       <ul class="list-group">
         <% @project.tasks.each do |task| %>
           <li class="list-group-item">
