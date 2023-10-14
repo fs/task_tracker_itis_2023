@@ -1,6 +1,10 @@
 <h1>Hello world<h1>
 
 <h2><%= link_to "New Project", new_project_path %><h2>
+<%=link_to "Name", :sort => "name asc"%> 
+<%=link_to "Name reverse", :sort => "name desc"%> 
+<%=link_to "Description", :sort => "description asc"%> 
+<%=link_to "Description reverse", :sort => "description desc"%> 
 
 <% @projects.each do |project| %>
   <div class="record">
@@ -10,3 +14,5 @@
     <p><%= button_to "Destroy", project, method: :delete %></p>
   </div>
 <% end %>
+
+<%= paginate @projects%>

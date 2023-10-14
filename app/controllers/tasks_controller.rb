@@ -3,7 +3,7 @@ class TasksController < ApplicationController
   before_action :set_task, only: %i[show edit update destroy]
 
   def index
-    @tasks = @project.tasks
+    @tasks = @project.tasks.order(params[:sort]).page(params[:page]).per(5)
   end
 
   def show; end
@@ -16,7 +16,6 @@ class TasksController < ApplicationController
   def edit; end
 
   def create
-    binding.pry
     @task = @project.tasks.build(task_params)
 
     if @task.save
