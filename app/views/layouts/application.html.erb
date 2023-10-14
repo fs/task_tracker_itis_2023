@@ -11,6 +11,19 @@
   </head>
 
   <body class="center">
+  
+    <% if current_user %>
+      <%= link_to "Log out", logout_path, method: :delete %>
+      <% if current_user.first_name.present? && current_user.last_name.present? %>
+        <%= current_user.first_name %> <%= current_user.last_name %>
+      <% else %>
+        <%= current_user.email %>
+      <% end %>
+    <% else %>
+      <%= link_to "Log in", new_sessions_path %>
+      <%= link_to "Sign up", new_user_path %>
+    <% end %>
+
     <% flash.each do |type, msg| %>
       <div class="flash-<%= type %>">
         <p><%= msg %></p>
