@@ -1,4 +1,4 @@
-<h1>Hello world</h1>
+<h1><%= %> projects</h1>
 
 <h2><%= link_to "New Project", new_project_path %></h2>
 
@@ -9,9 +9,9 @@
 <br>
 <br>
 
-<% @projects.each do |project| %>
+<%  @projects.each_with_index do |project, index| %>
   <div class="record">
-    <p><%= project.id %>. <%= link_to project.name, project_tasks_path(project) %></p>
+    <p><%= index + 1 %>. <%= link_to project.name, project_tasks_path(project) %></p>
     <p><%= project.description %> </p>
     <p><%= link_to "Edit", edit_project_path(project) %></p>
     <p><%= button_to "Destroy", project, method: :delete %></p>
