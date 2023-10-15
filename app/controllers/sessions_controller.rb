@@ -26,7 +26,7 @@ class SessionsController < ApplicationController
       session.delete(:current_user_id)
       redirect_to root_path, notice: "You've successfully logged out!"
     else
-      redirect_to root_path, alert: "You are not logged in."
+      redirect_to root_path, alert: _("You are not logged in.")
     end
   end
 
