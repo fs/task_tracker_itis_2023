@@ -1,0 +1,27 @@
+<h1>Tasks for <%= @project.name %></h1>
+
+<%= link_to "New Task", new_project_task_path(@project) %>
+
+<% @project.tasks.each do |task| %>
+  <div class="record">
+    <h3><%= link_to task.name, project_task_path(@project, task) %></h3>
+    <p><%= task.description %></p>
+    <p>
+      <strong>Status:</strong>
+      <% case task.status %>
+      <% when 'unstarted' %>
+      <p>Not Started</p>
+    <% when 'started' %>
+      <p>In Progress</p>
+    <% when 'done' %>
+      <p>Completed</p>
+    <% end %>
+    </p>
+    <p><strong>Deadline:</strong> <%= task.deadline_at %></p>
+    <td><%= link_to "Show", url_for([@project, task]) %></td>
+    <td><%= link_to "Edit", edit_project_task_path(@project, task) %></td>
+    <td><%= link_to "Destroy", url_for([@project, task]), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </div>
+<% end %>
+
+<%= link_to "Back to Projects", projects_path %>

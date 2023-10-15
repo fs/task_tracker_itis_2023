@@ -1,4 +1,5 @@
 <p><%= @project.name %> </p>
 <p><%= @project.description %> </p>
+<p><%= link_to "Tasks", project_tasks_path(@project) %></p>
 
 <%= link_to "Back", projects_path %>
