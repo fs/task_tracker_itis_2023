@@ -1,0 +1,7 @@
+<h1>Task Information</h1>
+<h2><strong> <%=@task.title%></strong></h2>
+<p><%= @task.description %></p>
+<p>Deadline: <%= @task.deadline %></p>
+<p>Completed: <%= @task.condition ? "Yes" : "No" %></p>
+
+<%= link_to "Back to Tasks", project_path(@project) %>

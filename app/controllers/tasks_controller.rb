@@ -20,6 +20,7 @@ class TasksController < ApplicationController
 
   def new
     @task = @project.tasks.build
+    @task.deadline ||= 1.week.from_now
   end
 
   def create
@@ -47,7 +48,7 @@ class TasksController < ApplicationController
   end
 
   def set_task
-    @task = Task.find_by(id: params[:id])
+    @task = Task.find_by!(id: params[:id])
   end
 
   def task_params
