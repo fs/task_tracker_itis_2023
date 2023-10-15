@@ -4,6 +4,7 @@
 <p><strong>Description:</strong> <%= @task.description %></p>
 
 <p>
+
   <strong>Status:</strong>
   <% case @task.status %>
   <% when 'unstarted' %>
@@ -13,6 +14,7 @@
   <% when 'done' %>
     Completed
   <% end %>
+
 </p>
 
 <p><strong>Deadline:</strong> <%= @task.deadline_at %></p>
