@@ -2,7 +2,7 @@
 <p><strong>Description: </strong><%= @task.description %> </p>
 <p><strong>Status: </strong><%= @task.status %> </p>
 <p><strong>Deadline: </strong><%= @task.deadline_at %> </p>
-<p><%=link_to "Edit", edit_project_task_path(@project, @task) %></p>
-<p><%= button_to "Destroy", [@project, @task], method: :delete %></p>
+<p><%=link_to "Edit", url_for(controller: 'tasks', action: 'edit') %></p>
+<p><%= button_to "Destroy", url_for(controller: 'tasks', action: 'destroy'), method: :delete %></p>
 
 <p><%= link_to "Tasks", project_tasks_path(@project) %></p>
