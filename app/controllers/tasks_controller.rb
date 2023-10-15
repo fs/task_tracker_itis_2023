@@ -23,9 +23,7 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = @project.tasks.create(task_params)
-    time = Time.current.to_i + 604800
-    @task.deadline = Time.at(time)
+    @task = @project.tasks.new(task_params)
 
     if @task.save
       redirect_to project_tasks_path(@project), notice: "Created Successful"
@@ -41,15 +39,16 @@ class TasksController < ApplicationController
   end
 
   private
+
   def set_project
     @project = Project.find(params[:project_id])
   end
 
   def set_task
-    @task = Task.find(params[:id])
+    @task = @project.tasks.find_by!(id: params[:id])
   end
 
   def task_params
-    params.require(:task).permit(:name, :description, :status, :deadline)
+    params.require(:task).permit(:name, :description, :status, :deadline_at)
   end
 end

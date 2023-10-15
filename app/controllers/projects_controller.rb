@@ -5,8 +5,7 @@ class ProjectsController < ApplicationController
     @projects = Project.all.order(:id)
   end
 
-  def show
-  end
+  def show; end
 
   def edit; end
 

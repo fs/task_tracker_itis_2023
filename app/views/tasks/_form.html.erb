@@ -18,12 +18,17 @@
 
   <div class="field">
     <%= form.label :status %>
-    <%= form.text_area :status %>
+    <%= form.select :status, ['new', 'in progress', 'done'], selected: 'new' %>
   </div>
 
   <div class="field">
     <%= form.label :description %>
     <%= form.text_area :description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :deadline_at %>
+    <%= form.date_field :deadline_at, :value => Time.at(Time.now.to_i + 604800).strftime('%Y-%m-%d') %>
   </div>
 
   <div class="actions">
