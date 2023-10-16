@@ -5,7 +5,8 @@
 <% @tasks.each do |task| %>
   <div class="record">
     <p><%= task.id %>. <%= link_to task.name, project_task_path(@project, task) %></p>
-    <td><%= button_to "destroy", project_task_path(@project, task), method: :delete %>
+    <p><%= button_to "destroy", url_for([@project, task]), method: :delete %></p>
+    
   </div>
 <% end %>
 
