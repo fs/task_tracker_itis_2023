@@ -8,6 +8,39 @@
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <% if session[:current_user_id] != nil %>
+      <% if (User.find_by(id: session[:current_user_id]).first_name == nil) &&
+        (User.find_by(id: session[:current_user_id]).last_name == nil)%>
+        <div>
+          Email:
+          <%= User.find_by(id: session[:current_user_id]).email %>
+        </div>
+      <% end %>
+
+      <% if User.find_by(id: session[:current_user_id]).first_name != nil %>
+        <div>
+          First name:
+          <%= User.find_by(id: session[:current_user_id]).first_name %>
+        </div>
+      <% end %>
+
+      <% if User.find_by(id: session[:current_user_id]).first_name != nil %>
+        <div>
+          Last name:
+          <%= User.find_by(id: session[:current_user_id]).last_name %>
+        </div>
+      <% end %>
+
+      <%= link_to "Logout", sessions_path, method: :delete %>
+
+    <% end %>
+
+    <% if session[:current_user_id] == nil %>
+      <div>
+        <%= link_to "Sign up", new_user_path %>
+        <%= link_to "Log in", new_sessions_path %>
+      </div>
+    <% end %>
   </head>
 
   <body class="center">
