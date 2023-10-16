@@ -1,21 +1,31 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>TaskTrackerItis</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<head>
+  <title>TaskTrackerItis</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
 
-  <body class="center">
-    <% flash.each do |type, msg| %>
-      <div class="flash-<%= type %>">
-        <p><%= msg %></p>
-      </div>
-    <% end %>
-    <%= yield %>
-  </body>
+<body class="center">
+<% flash.each do |type, msg| %>
+  <div class="flash-<%= type %>">
+    <p><%= msg %></p>
+  </div>
+<% end %>
+
+<% if current_user %>
+  <%= "Welcome, #{current_user.first_name && current_user.last_name ? current_user.first_name + ' ' + current_user.last_name : current_user.email}" %>
+  <%= button_to "Log out", sessions_path, method: :delete, class: "logout-button" %>
+<% else %>
+  <%= link_to "Log in", new_sessions_path %>
+  <%= link_to "Sign up", new_user_path %>
+<% end %>
+
+
+<%= yield %>
+</body>
 </html>
