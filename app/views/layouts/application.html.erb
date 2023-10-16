@@ -1,16 +1,35 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>TaskTrackerItis</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<head>
+  <title>TaskTrackerItis</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
 
-  <body class="center">
+<body class="center">
+  <% flash.each do |type, msg| %>
+    <div class="flash-<%= type %>">
+      <p><%= msg %></p>
+    </div>
+  <% end %>
+  <% unless ["sessions","users"].include?(controller_name) %>
+    <% if current_user %>
+      <div class="top-right">
+        <p><%= current_user.first_name %></p>
+        <p><%= current_user.last_name %></p>
+        <p><%= button_to "Log out", sessions_path, method: :delete %></p>
+      </div>
+    <% else %>
+    <div class="top-right">
+        <p><%= button_to "Log in", new_sessions_path, method: :get %></p>
+        <p><%= button_to "Sign up", new_user_path, method: :get %></p>
+    </div>
+    <% end %>
+  <% end %>
     <%= yield %>
-  </body>
-</html>
+</body>
+  </html>
