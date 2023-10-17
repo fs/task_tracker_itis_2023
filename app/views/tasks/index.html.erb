@@ -1,10 +1,10 @@
 <h1>Tasks for <%= @project.name %></h1>
 
 <div class="sorting-btns">
-  <%= link_to "Title", :sort => "task_title asc", class: "sorting-btn"%>
-  <%= link_to "Description", :sort => "task_Description desc", class: "sorting-btn"%>
+  <%= link_to "Name", :sort => "name asc", class: "sorting-btn"%>
+  <%= link_to "Description", :sort => "description desc", class: "sorting-btn"%>
   <%= link_to "Creation Date", :sort => "created_at asc", class: "sorting-btn"%>
-  <%= link_to "Deadline", :sort => "deadline desc", class: "sorting-btn"%>
+  <%= link_to "Deadline", :sort => "deadline_at desc", class: "sorting-btn"%>
 </div>
 
 <table>
@@ -21,10 +21,10 @@
   <tbody>
   <% @tasks.each do |task| %>
     <tr>
-      <td><%= task.task_title %></td>
-      <td><%= task.task_description %></td>
+      <td><%= task.name %></td>
+      <td><%= task.description %></td>
       <td>
-        <% case task.state %>
+        <% case task.status %>
         <% when 'Just Started' %>
         <td>Just Started</td>
       <% when 'In progress' %>
@@ -33,7 +33,7 @@
         <td>Done</td>
       <% end %>
       </td>
-      <td><%= task.deadline %></td>
+      <td><%= task.deadline_at %></td>
       <td><%= link_to "Show", url_for([@project, task]) %></td>
       <td><%= link_to "Edit", edit_project_task_path(@project, task) %></td>
       <td><%= link_to "Destroy", url_for([@project, task]), method: :delete, data: { confirm: 'Are you sure?' } %></td>

@@ -1,13 +1,13 @@
 
 <%= form_with(model: @task, url: [@task.project, @task]) do |form| %>
   <div class="field">
-    <%= form.label :task_title %>
-    <%= form.text_field :task_title %>
+    <%= form.label :name %>
+    <%= form.text_field :name %>
   </div>
 
   <div class="field">
-    <%= form.label :task_description %>
-    <%= form.text_area :task_description %>
+    <%= form.label :description %>
+    <%= form.text_area :description %>
   </div>
 
   <!--<div class="field">
@@ -16,13 +16,13 @@
   </div>-->
 
   <div class="field">
-    <%= form.label :state %>
-    <%= form.select :state, ['Just started', 'In progress', 'Done'] %>
+    <%= form.label :status %>
+    <%= form.select :status, ['Just started', 'In progress', 'Done'] %>
   </div>
 
   <div class="field">
-    <%= form.label :deadline %>
-    <%= form.date_select :deadline %>
+    <%= form.label :deadline_at %>
+    <%= form.date_select :deadline_at %>
   </div>
 
   <div class="actions">

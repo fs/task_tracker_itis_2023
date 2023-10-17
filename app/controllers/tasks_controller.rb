@@ -10,14 +10,14 @@ class TasksController < ApplicationController
 
   def new
     @task = @project.tasks.build
-    @task.deadline ||= 1.week.from_now
+    @task.deadline_at ||= 1.week.from_now
   end
 
   def edit; end
 
   def create
     @task = @project.tasks.build(task_params)
-    @task.state = "Just Started"
+    @task.status = "Just Started"
 
     if deadline_correct?(@task)
       if @task.save
@@ -57,7 +57,7 @@ class TasksController < ApplicationController
   private
 
   def deadline_correct?(task)
-    !task.deadline.nil? and task.deadline >= Date.today
+    !task.deadline_at.nil? and task.deadline_at >= Date.today
   end
 
   def set_task
@@ -67,7 +67,7 @@ class TasksController < ApplicationController
 
 
   def task_params
-    params.require(:task).permit(:task_title, :task_description, :state, :deadline).merge(project_id: params[:project_id])
+    params.require(:task).permit(:name, :description, :status, :deadline_at).merge(project_id: params[:project_id])
 
   end
   def set_project
