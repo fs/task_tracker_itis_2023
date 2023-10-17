@@ -1,8 +1,8 @@
 
 
-<h1><%= @task.task_title %></h1>
+<h1><%= @task.name %></h1>
 <p>
-  <%= @task.task_description %>
+  <%= @task.description %>
 </p>
 
 <p>
@@ -12,11 +12,11 @@
 
 <p>
   <strong>State: </strong>
-  <%= @task.state %>
+  <%= @task.status %>
 </p>
 <p>
   <Strong>Deadline: </Strong>
-  <%= @task.deadline %>
+  <%= @task.deadline_at %>
 </p>
 
 
