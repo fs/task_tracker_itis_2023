@@ -10,12 +10,10 @@ AllCops:
   NewCops: enable
 
 I18n/GetText/DecorateString:
-  Enabled: false
   Exclude:
     - spec/**/*.rb
 
 I18n/RailsI18n/DecorateString:
-  Enabled: false
   Exclude:
     - spec/**/*.rb
 
