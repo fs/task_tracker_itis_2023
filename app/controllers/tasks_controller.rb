@@ -1,46 +1,4 @@
 class TasksController < ApplicationController
-  # before_action :set_project, only: [:update, :show, :delete]
-  # before_action :set_task, only: [:show, :edit, :update]
-  #
-  # def index
-  #   @tasks = Task.all.order("created_at DESC")
-  # end
-  # def new
-  #   #@project = set_project
-  #   @task = Task.new
-  # end
-  #
-  # def show
-  # end
-  #
-  # def edit
-  # end
-  #
-  # def create
-  #   #@project = set_project
-  #   @task = Task.new(task_params)
-  #   @task.state = "Just started"
-  #   @project = @task.project
-  #
-  #   if deadline_correct?(@task)
-  #     if @task.save
-  #       redirect_to project_path(@project), notice: "Task has been added!"
-  #     else
-  #       flash[:notice] = "Something went wrong! Don't leave empty sections"
-  #     end
-  #   else
-  #     redirect_to project_path(@project)
-  #     flash[:notice] = "Deadline can't be empty or before the creation date!"
-  #   end
-  # end
-  #
-  #
-  # def update
-  #   if @task.update(task_params)
-  #     redirect_to project_task_path(@task), notice: "Task has been updated!"
-  #   else
-  #     flash[:notice] = "Something went wrong!"
-
   before_action :set_project
   before_action :set_task, only: %i[show edit update destroy]
 
@@ -52,14 +10,14 @@ class TasksController < ApplicationController
 
   def new
     @task = @project.tasks.build
-    @task.deadline ||= 1.week.from_now
+    @task.deadline_at ||= 1.week.from_now
   end
 
   def edit; end
 
   def create
     @task = @project.tasks.build(task_params)
-    @task.state = "Just Started"
+    @task.status = "Just Started"
 
     if deadline_correct?(@task)
       if @task.save
@@ -99,7 +57,7 @@ class TasksController < ApplicationController
   private
 
   def deadline_correct?(task)
-    !task.deadline.nil? and task.deadline >= Date.today
+    !task.deadline_at.nil? and task.deadline_at >= Date.today
   end
 
   def set_task
@@ -113,7 +71,7 @@ class TasksController < ApplicationController
   # end
 
   def task_params
-    params.require(:task).permit(:task_title, :task_description, :state, :deadline).merge(project_id: params[:project_id])
+    params.require(:task).permit(:name, :description, :status, :deadline_at).merge(project_id: params[:project_id])
 
   end
   def set_project

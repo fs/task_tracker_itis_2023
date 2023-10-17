@@ -18,13 +18,13 @@
     <section class="done-tasks-display">
       <h2>Done</h2>
 
-      <%= render @project.tasks.select { |task| task.state == 'Done'}.take(3) %>
+      <%= render @project.tasks.select { |task| task.status == 'Done'}.take(3) %>
     </section>
 
     <hr />
     <section class="to-do-tasks-display">
       <h2>To Do</h2>
-      <%= render @project.tasks.select { |task| task.state != 'Done'}.take(3) %>
+      <%= render @project.tasks.select { |task| task.status != 'Done'}.take(3) %>
     </section>
   </section>
 

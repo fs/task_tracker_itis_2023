@@ -23,16 +23,15 @@ ActiveRecord::Schema.define(version: 2023_10_05_121041) do
   end
 
   create_table "tasks", force: :cascade do |t|
-    t.string "task_title"
-    t.text "task_description"
-    t.string "state"
-    t.date "deadline"
+    t.string "name", null: false
+    t.text "description"
+    t.string "status", null: false
+    t.datetime "deadline_at"
+    t.bigint "project_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "project_id", null: false
+    t.index ["name", "project_id"], name: "index_tasks_on_name_and_project_id", unique: true
     t.index ["project_id"], name: "index_tasks_on_project_id"
-    t.index ["task_title", "project_id"], name: "index_tasks_on_task_title_and_project_id", unique: true
   end
 
-  add_foreign_key "tasks", "projects"
 end
