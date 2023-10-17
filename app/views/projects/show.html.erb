@@ -5,6 +5,8 @@
 
 <h2><%= link_to "New Task", new_project_task_path(@project) %><h2>
 
+
+
 <p>sort by</p>
 <%= link_to "Title", :sort => "title asc" %>
 <%= link_to "Deadline", :sort => "deadline asc" %>
@@ -18,3 +20,5 @@
   </div>
 
 <% end %>
+
+<%= paginate @tasks%>

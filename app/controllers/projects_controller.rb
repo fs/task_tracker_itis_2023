@@ -6,7 +6,7 @@ class ProjectsController < ApplicationController
   end
 
   def show;
-    @tasks = @project.tasks.order(params[:sort])
+    @tasks = @project.tasks.order(params[:sort]).page(params[:page]).per(5)
   end
 
   def edit; end
