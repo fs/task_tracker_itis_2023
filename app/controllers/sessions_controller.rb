@@ -22,13 +22,11 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    if session[:current_user_id]
+    if current_user
       session.delete(:current_user_id)
       redirect_to root_path, notice: "You've successfully logged out!"
     else
-      # rubocop:disable I18n/RailsI18n/DecorateString
-      redirect_to root_path, alert: _("You are not logged in.")
-      # rubocop:enable I18n/RailsI18n/DecorateString
+      redirect_to root_path, alert: "You are not logged in."
     end
   end
 
