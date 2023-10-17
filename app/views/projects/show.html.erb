@@ -4,6 +4,11 @@
 <%= link_to "Back", projects_path %>
 
 <h2><%= link_to "New Task", new_project_task_path(@project) %><h2>
+
+<p>sort by</p>
+<%= link_to "Title", :sort => "title asc" %>
+<%= link_to "Deadline", :sort => "deadline asc" %>
+<%= link_to "Created at", :sort => "created_at asc" %>
 <% @tasks.each do |task| %>
   <div class="record">
     <p><%= link_to task.title, url_for([@project, task])%></p>
