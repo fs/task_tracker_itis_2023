@@ -1,33 +1,35 @@
-class ProjectPolicy < ApplicationPolicy
+class TaskPolicy < ApplicationPolicy
+
   authorize :user, allow_nil: true
 
+  def show?
+    project_membership.present?
+  end
+
   def index?
-    true
-  end
-
-  def new?
-    true
-  end
-
-  def create?
-    user.present?
-  end
-
-  def destroy?
-    owner?
+    project_membership.present?
   end
 
   def edit?
     project_membership.present?
   end
 
-  def show?
+  def new?
+    project_membership.present?
+  end
+
+  def create?
     project_membership.present?
   end
 
   def update?
     project_membership.present?
   end
+
+  def destroy?
+    owner?
+  end
+
 
   private
 
@@ -38,5 +40,4 @@ class ProjectPolicy < ApplicationPolicy
   def owner?
     project_membership&.owner?
   end
-
 end
