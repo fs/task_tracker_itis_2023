@@ -3,7 +3,7 @@ class UserPolicy < ApplicationPolicy
   authorize :user, allow_nil: true
 
   def new?
-    true
+    user.present? == false
   end
 
   def create?

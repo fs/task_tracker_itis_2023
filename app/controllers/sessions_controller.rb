@@ -13,14 +13,15 @@ class SessionsController < ApplicationController
   def create
     @user = User.find_by(email: user_params[:email])
                 &.authenticate(user_params[:password])
-    authorize! @user
 
     if @user
+      authorize! @user
       session[:current_user_id] = @user.id
       redirect_to root_path, notice: "You've successfully logged in!"
     else
       @user = User.new
       @user.errors.add :base, "Wrong email or password"
+      authorize! @user
       render :new
     end
   end

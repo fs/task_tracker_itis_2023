@@ -1,9 +1,13 @@
 class Task < ApplicationRecord
+  extend Enumerize
+
+  enumerize :status, in: [:unstarted, :started, :done], default: :unstarted
+
   belongs_to :project
 
   validates :name, presence: true
   validates :name, uniqueness: { scope: :project_id }
-  validates :status, inclusion: { in: %w[unstarted started done] }
+  # validates :status, inclusion: { in: %w[unstarted started done] }
   validate :deadline_correct
 
   private
