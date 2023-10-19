@@ -4,6 +4,7 @@ class Task < ApplicationRecord
   enumerize :status, in: [:unstarted, :started, :done], default: :unstarted
 
   belongs_to :project
+  has_many :comments, dependent: :destroy
 
   validates :name, presence: true
   validates :name, uniqueness: { scope: :project_id }

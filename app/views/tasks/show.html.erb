@@ -17,4 +17,34 @@
 
 <p><strong>Deadline:</strong> <%= @task.deadline_at %></p>
 
+<!-- COMMENT SECTION -->
+<br/>
+<div class="Comments-section">
+  <div class="comments-count"><h3><%= @task.comments.count %> <strong> Comments</strong></h3></div>
+
+  <br /><hr />
+
+  <tbody>
+  <% @task.comments.each do |comment| %>
+    <tr>
+      <td><p><strong><%= comment.user.first_name %></strong></p></td>
+      <td><%= comment.content %></td>
+      <td>
+        <p><%= link_to "Edit", edit_project_task_comment_path(@task.project,@task,comment)%></p>
+        <p><%= link_to "Delete", project_task_comment_path(@task.project, @task, comment), method: :delete, data: { confirm: "Are you sure?" } %></p>
+      </td>
+    </tr>
+  <hr />
+  <% end %>
+  </tbody>
+
+  <section class="comment-reply">
+    <h2>Leave A Reply</h2>
+    <div class="form">
+      <%= render partial: 'comments/form', locals: {project: @task.project, task: @task} %>
+    </div>
+  </section>
+</div>
+
+
 <%= link_to "Back to Tasks", project_tasks_path(@project) %>
