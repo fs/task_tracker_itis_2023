@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 2023_10_17_085257) do
     t.text "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_projects_on_name", unique: true
   end
 
   create_table "tasks", force: :cascade do |t|
@@ -30,6 +31,7 @@ ActiveRecord::Schema.define(version: 2023_10_17_085257) do
     t.bigint "project_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["name", "project_id"], name: "index_tasks_on_name_and_project_id", unique: true
     t.index ["project_id"], name: "index_tasks_on_project_id"
   end
 
