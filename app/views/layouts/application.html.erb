@@ -7,7 +7,24 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%# <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <% if session[:current_user_id] == nil %>
+      <%= link_to "log-in",  new_sessions_path%>
+      <%= link_to "sign-up", new_user_path%>
+    <%end%>
+
+    <% if session[:current_user_id] != nil%>
+      
+      <% if (current_user.first_name == "") && (current_user.last_name == "") %> 
+        <p><% current_user.email %><p>
+      <% else %>
+        <p><%=current_user.first_name%><p> <p><%= current_user.last_name %>
+      <%end%>
+      <%= button_to "logout", sessions_path, method: :delete %>
+    <%end%> 
+
+
   </head>
 
   <body class="center">
