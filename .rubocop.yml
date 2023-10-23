@@ -30,3 +30,10 @@ Style/FrozenStringLiteralComment:
 
 Rails/I18nLocaleTexts:
   Enabled: false
+
+Rails/HasManyOrHasOneDependent:
+  Enabled: false
+
+Rails/NotNullColumn:
+  Exclude:
+    - 'db/migrate/*' 

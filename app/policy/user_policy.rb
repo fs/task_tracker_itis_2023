@@ -8,5 +8,4 @@ class UserPolicy < ApplicationPolicy
   def create?
     user.blank?
   end
-
 end
