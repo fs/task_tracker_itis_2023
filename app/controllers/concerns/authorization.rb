@@ -10,6 +10,4 @@ module Authorization
   def deny_access!(error)
     redirect_to root_path, alert: error.message
   end
-
-
 end
