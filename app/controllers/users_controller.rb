@@ -1,14 +1,16 @@
 class UsersController < ApplicationController
-  before_action -> { authorize! @user }, only: %i[new create]
 
   def new
     @user = User.new
+    authorize! @user
   end
 
   def create
     @user = User.new(user_params)
+    authorize! @user
 
     if @user.save
+      session[:current_user_id] = @user.id
       redirect_to root_path, notice: "You've successfully signed up!"
     else
       render :new

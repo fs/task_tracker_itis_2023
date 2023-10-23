@@ -32,7 +32,7 @@ class ProjectPolicy < ApplicationPolicy
   private
 
   def project_membership
-    @project_membership ||= ProjectMembership.find_by(project: record.project, user: user)
+    @project_membership ||= ProjectMembership.find_by(project: record, user: user)
   end
 
   def owner?

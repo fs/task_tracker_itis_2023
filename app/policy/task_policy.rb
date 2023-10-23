@@ -6,7 +6,7 @@ class TaskPolicy < ApplicationPolicy
   end
 
   def index?
-    project_membership.present?
+    true
   end
 
   def edit?
