@@ -29,7 +29,69 @@
   <%= link_to 'Delete', @assignment, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger"%>
 </div>
 
+<div class="card">
+  <div class="card-body">
+    <h3>Tell me something </h3>
+<%= form_for [@assignment, Comment.new] do |f| %>
+<%= f.text_area :content, placeholder: "Add a comment..." , class:"form-control"%>
+<br>
+<%= f.submit "Post" , class:"btn btn-dark" %>
+<% end %>
+  </div>
+</div>
+
+<h2>Comments</h2>
+<div class="comment">
+  <div class="comment-content">
+    <% @assignment.comments.each do |comment| %>
+    <li>
+      <%= comment.content %>
+      <%= link_to 'Delete', [comment.assignment, comment], method: :delete, data: 
+      {confirm: 'Are you sure?'}, class: "btn btn-outline-danger btn-smaller"%> | <%= link_to 'Edit', edit_comment_path(comment) , class:"btn btn-dark btn-smaller"%> 
+      <br>
+     <div class="edit-form" style="display: none;">
+      <%= render "comments/edit_comment", comment: comment %>
+    </div>
+    </li>
+  <%end%>
+    </div> 
+</div>
+
+
+<script>
+  $(document).on('click', '.edit-form', function (e) {
+    e.preventDefault();
+    const commentContainer = $(this).closest('.comment');
+    const editForm = commentContainer.find('.edit-form');
+    const commentContent = commentContainer.find('.comment-content');
+
+    editForm.toggle();
+    commentContent.toggle();
+  });
+
+  $(document).on('submit', '.edit-form form', function(e) {
+    e.preventDefault();
+    const form = $(this);
+
+     $.ajax({
+  
+      url: form.attr('action'),
+      method: 'PATCH',
+      data: form.serialize(),
+      success: function (response) {
+        form.closest('.comment').find('.comment-content').html(response.content);
+        form.closest('.comment').find('.edit-comment').click();
+      },
+      error: function(error) {
+        console.log(error);
+      }
+    });
+  });
+  </script>
+
+
 <style>
+
   h1 {
   font-family: 'Pixelify Sans', sans-serif;
   
@@ -38,6 +100,11 @@
   p{
     font-family: 'Roboto Slab', serif;
   }
+
+  .btn-smaller {
+  padding: 0.25rem 0.5rem; /* Adjust padding as needed to make the button smaller */
+  font-size: 0.875rem; /* Reduce the font size as needed */
+}
   </style>
 
 

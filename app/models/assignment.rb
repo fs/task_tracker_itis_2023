@@ -2,6 +2,8 @@ class Assignment < ApplicationRecord
   belongs_to :user
   belongs_to :project
 
+  has_many :comments
+
   validate:deadline_not_earlier_than_created
 
 

@@ -14,8 +14,9 @@ class ProjectsController < ApplicationController
     @project = Project.new
   end
 
-  def edit; end
-
+  def edit
+  end
+# -----------------------CREATE-------------------------
   def create
     @project = Project.new(project_params)
 
@@ -26,6 +27,7 @@ class ProjectsController < ApplicationController
     end
   end
 
+# -----------------------UPDATE------------------
   def update
     if @project.update(project_params)
       redirect_to projects_path, notice: "Gracefully Updated"
@@ -34,6 +36,7 @@ class ProjectsController < ApplicationController
     end
   end
 
+# ----------------DELETE-----------------------
   def destroy
     @project.destroy
     redirect_to projects_path, notice: "Gracefully Deleted"

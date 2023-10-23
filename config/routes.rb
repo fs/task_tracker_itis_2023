@@ -9,4 +9,11 @@ Rails.application.routes.draw do
   resources :projects do
     resources :assignments
   end
+
+  resources :assignments do
+    resources :comments
+  end
+
+  resources :comments
+
 end

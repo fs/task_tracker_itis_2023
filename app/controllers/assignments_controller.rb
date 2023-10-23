@@ -22,6 +22,7 @@ class AssignmentsController < ApplicationController
 
   # GET /assignments/1 or /assignments/1.json
   def show
+
   end
 
   # GET /assignments/new
@@ -89,7 +90,7 @@ class AssignmentsController < ApplicationController
   def correct_user
     @assignment = current_user.assignments.find_by(id: params[:id])
 
-    redirect_to assignment_path, notice: "Not Authorized To Edit This Friend" if @assignment.nil?
+    redirect_to assignment_path, notice: "Not Authorized To Edit This Assignment" if @assignment.nil?
   end
 
 

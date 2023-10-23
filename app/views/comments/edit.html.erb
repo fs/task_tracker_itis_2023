@@ -1,0 +1,11 @@
+<%# <h1>Editing Comment</h1> %>
+
+<%# <%= render 'form', comment: @comment %> 
+
+<%= form_with(model: [@comment.assignment, @comment], local: true) do |form| %>
+<%= form.text_area :content %>
+<%= form.submit 'Update Comment'%>
+<%end%>
+
+<%= link_to 'Show', @comment %> |
+<%= link_to 'Back', comments_path %>
