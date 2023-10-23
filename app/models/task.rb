@@ -5,6 +5,7 @@ class Task < ApplicationRecord
   enumerize :status, in: STATUSES
 
   belongs_to :project
+  has_many :comments, dependent: :destroy
 
   validates :name, presence: true
   validates :name, uniqueness: { scope: :project_id }
