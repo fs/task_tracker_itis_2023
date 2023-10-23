@@ -1,8 +1,7 @@
 class CommentsController < ApplicationController
   before_action :find_task
   before_action :find_comment, only: [:update, :destroy]
-
-
+  before_action :authenticate_current_user!
   def create
     @comment = @task.comments.new(comment_params)
     @comment.user = current_user
@@ -14,13 +13,10 @@ class CommentsController < ApplicationController
       redirect_to project_task_path(@task.project, @task), alert: "Failed to create comment"
     end
   end
-
-
   def edit
     @comment = Comment.find(params[:id])
     authorize! @comment
   end
-
   def update
     authorize! @comment
     if @comment.update(comment_params)
@@ -40,7 +36,6 @@ class CommentsController < ApplicationController
   end
 
   private
-
   def find_task
     @task = Task.find(params[:task_id])
   end

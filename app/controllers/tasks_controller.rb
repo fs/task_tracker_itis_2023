@@ -1,7 +1,7 @@
 class TasksController < ApplicationController
   before_action :set_project
   before_action :set_task, only: %i[show edit update destroy]
-
+  before_action :authenticate_current_user!
   def index
     @tasks = @project.tasks.order(params[:sort]).page(params[:page]).per(3)
 
@@ -49,7 +49,6 @@ class TasksController < ApplicationController
   end
 
   private
-
   def set_project
     @project = Project.find_by(id: params[:project_id])
   end

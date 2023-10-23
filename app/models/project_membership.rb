@@ -1,6 +1,5 @@
 class ProjectMembership < ApplicationRecord
   extend Enumerize
-
   ROLES = %i[owner member].freeze
 
   belongs_to :user

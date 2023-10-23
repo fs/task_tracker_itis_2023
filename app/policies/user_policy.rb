@@ -1,7 +1,5 @@
 class UserPolicy < ApplicationPolicy
-
   authorize :user, allow_nil: true
-
   def new?
     user.present? == false
   end
@@ -17,6 +15,5 @@ class UserPolicy < ApplicationPolicy
   def destroy?
     user.present?
   end
-
 
 end

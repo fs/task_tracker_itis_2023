@@ -5,7 +5,6 @@ module Authentication
 
   included do
     rescue_from UserNotAuthenticated, with: :not_authenticated!
-
     helper_method :current_user
   end
 
@@ -20,7 +19,6 @@ module Authentication
   end
 
   private
-
   def not_authenticated!
     redirect_to new_login_path, alert: "You are not logged in"
   end

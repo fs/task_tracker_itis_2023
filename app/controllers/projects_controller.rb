@@ -3,7 +3,6 @@ class ProjectsController < ApplicationController
 
   def index
     @projects = Project.order(params[:sort]).page(params[:page]).per(3)
-
     authorize! @projects
   end
 
@@ -14,7 +13,6 @@ class ProjectsController < ApplicationController
 
   def new
     @project = Project.new
-
     authorize! @project
   end
 
@@ -26,7 +24,6 @@ class ProjectsController < ApplicationController
     @project = Project.new(project_params)
     @project_membership = ProjectMembership.new(project_membership_params)
     authorize! @project
-
     if @project.save && @project_membership.save
       redirect_to projects_path, notice: "Created Successful"
     else
