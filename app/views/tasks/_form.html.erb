@@ -23,7 +23,7 @@
 
   <div class="field">
     <%= form.label :status %>
-    <%= form.select :status, ["unstarted", "started", "done"] %>
+    <%= form.select :status, Task.status.values %>
   </div>
 
   <div class="field">

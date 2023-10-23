@@ -16,12 +16,12 @@ module Authentication
   def authenticate_current_user!
     return if session[:current_user_id] && current_user.present?
 
-    raise UserNotAuthenticated, _("No current_user_id in session")
+    raise UserNotAuthenticated, "No current_user_id in session"
   end
 
   private
 
   def not_authenticated!
-    redirect_to new_login_path, alert: "You are not logged in"
+    redirect_to login_path, alert: "You are not logged in"
   end
 end

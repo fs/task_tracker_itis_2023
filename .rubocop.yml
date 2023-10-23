@@ -30,3 +30,15 @@ Style/FrozenStringLiteralComment:
 
 Rails/I18nLocaleTexts:
   Enabled: false
+
+Rails/HasManyOrHasOneDependent:
+  Enabled: false
+
+Rails/NotNullColumn:
+  Exclude:
+    - 'db/migrate/*' 
+
+I18n/GetText/DecorateFunctionMessage:
+  Exclude:
+    - 'app/controllers/concerns/authentication.rb'
+  Enabled: false
