@@ -30,7 +30,7 @@
       <td><p><strong><%= comment.user.first_name %></strong></p></td>
       <td><%= comment.content %></td>
       <td>
-        <p><%= link_to "Edit", edit_project_task_comment_path(@task.project,@task,comment)%></p>
+        <p><%= link_to "Edit", edit_project_task_comment_path(@task.project, @task, comment)%></p>
         <p><%= link_to "Delete", project_task_comment_path(@task.project, @task, comment), method: :delete, data: { confirm: "Are you sure?" } %></p>
       </td>
     </tr>

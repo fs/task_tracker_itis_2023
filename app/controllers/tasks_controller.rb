@@ -4,8 +4,7 @@ class TasksController < ApplicationController
   before_action :authenticate_current_user!
   def index
     @tasks = @project.tasks.order(params[:sort]).page(params[:page]).per(3)
-
-    authorize! @tasks
+    authorize! @task
   end
 
   def show
