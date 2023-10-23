@@ -17,7 +17,6 @@ class CommentPolicy < ApplicationPolicy
     owner?
   end
 
-
   private
 
   def owner?
