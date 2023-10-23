@@ -21,6 +21,7 @@ class CommentsController < ApplicationController
 
   def update
     authorize! @comment
+
     if @comment.update(comment_params)
       redirect_to project_task_path(@task.project, @task), notice: "Comment updated successfully"
     else

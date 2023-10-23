@@ -18,7 +18,7 @@ class ProjectPolicy < ApplicationPolicy
   end
 
   def edit?
-    project_membership.present?
+    user_is_member?
   end
 
   def show?
@@ -26,16 +26,16 @@ class ProjectPolicy < ApplicationPolicy
   end
 
   def update?
-    user.present? && project_membership.present?
+    user.present? && user_is_member?
   end
 
   private
 
-  def project_membership
-    @project_membership ||= ProjectMembership.find_by(project: record, user: user)
+  def user_is_member?
+    ProjectMembership.find_by(project: record, user: user).present?
   end
 
   def owner?
-    project_membership&.owner?
+    ProjectMembership.find_by(project: record, user: user)&.owner?
   end
 end
