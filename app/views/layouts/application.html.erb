@@ -10,6 +10,19 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
+  <header>
+      <nav>
+        <% if current_user %>
+          <%=current_user.first_name%>
+          <%=current_user.last_name%>
+          <%= link_to "Log out", logout_path, method: :delete %>
+        <% else %>
+          <%= link_to "Sign up", new_user_path %>
+          <%= link_to "Log in", new_sessions_path %>
+        <% end %>
+      </nav>
+    </header>
+
   <body class="center">
     <% flash.each do |type, msg| %>
       <div class="flash-<%= type %>">

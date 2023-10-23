@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  before_action :authenticate_current_user!, only: %i[show]
+  before_action :authenticate_current_user!, only: %i[show destroy]
 
   def show; end
 
@@ -10,7 +10,6 @@ class SessionsController < ApplicationController
   def create
     @user = User.find_by(email: user_params[:email])
                 &.authenticate(user_params[:password])
-
     if @user
       session[:current_user_id] = @user.id
       redirect_to root_path, notice: "You've successfully logged in!"
@@ -20,6 +19,12 @@ class SessionsController < ApplicationController
       render :new
     end
   end
+
+  def destroy
+    session.delete(:current_user_id)
+    redirect_to root_path, notice: "You've successfully logged out!"
+  end
+  
 
   private
 
