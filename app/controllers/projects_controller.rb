@@ -18,10 +18,10 @@ class ProjectsController < ApplicationController
   def edit; end
 
   def create
-    @project = Project.new(project_params)
-    @project_membership = ProjectMembership.new(project_membership_params)
+    result = CreateProject.call(project_params: project_params,
+                                membership_params: project_membership_params)
 
-    if @project.save && @project_membership.save
+    if result.success?
       redirect_to projects_path, notice: "Created Successful"
     else
       render :new, status: :unprocessable_entity
