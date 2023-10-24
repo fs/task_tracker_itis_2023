@@ -23,7 +23,6 @@ class ProjectsController < ApplicationController
     if create_project.success?
       redirect_to @project, notice: "Created Successful"
     else
-      @project.destroy
       render :new, status: :unprocessable_entity
     end
   end
