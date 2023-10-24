@@ -18,8 +18,10 @@ class ProjectsController < ApplicationController
   def edit; end
 
   def create
-    result = CreateProject.call(project_params: project_params,
-                                project_membership_params: project_membership_params)
+    result = CreateProject.call(
+      project_params: project_params,
+      user: current_user
+    )
 
     @project = result.project
 
@@ -48,10 +50,6 @@ class ProjectsController < ApplicationController
 
   def set_project
     @project = Project.find_by(id: params[:id])
-  end
-
-  def project_membership_params
-    { project: @project, user: current_user, role: :owner }
   end
 
   def project_params
