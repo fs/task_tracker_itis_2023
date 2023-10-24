@@ -1,0 +1,27 @@
+<p>
+  <strong>Название:</strong>
+  <%= @task.name %>
+</p>
+
+<p>
+  <strong>Описание:</strong>
+  <%= @task.description %>
+</p>
+
+<p>
+  <strong>Состояние:</strong>
+  <%= @task.state %>
+</p>
+
+<p>
+  <strong>Дедлайн:</strong>
+  <%= @task.deadline %>
+</p>
+
+<p>
+  <strong>Проект:</strong>
+  <%= @task.project.name %>
+</p>
+
+<%= link_to 'Редактировать', edit_project_task_path(@project, @task) %> |
+<%= link_to 'Назад к списку', project_tasks_path %>
