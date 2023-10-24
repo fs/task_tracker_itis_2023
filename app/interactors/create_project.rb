@@ -1,7 +1,7 @@
 class CreateProject
   include Interactor
 
-  delegate :project_params, to: :context
+  delegate :project_params, :user, to: :context
 
   def call
     project = Project.new(project_params)
