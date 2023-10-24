@@ -23,7 +23,7 @@ class CreateProject
 
   def prepared_owner_membership_params
     {
-      project: project,
+      project: context.project,
       user: user,
       role: :owner
     }
