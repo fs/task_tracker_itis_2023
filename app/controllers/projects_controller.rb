@@ -19,7 +19,7 @@ class ProjectsController < ApplicationController
 
   def create
     result = CreateProject.call(project_params: project_params,
-                                membership_params: project_membership_params)
+                                project_membership_params: project_membership_params)
 
     if result.success?
       redirect_to result.project, notice: "Created Successful"
