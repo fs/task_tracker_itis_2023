@@ -18,14 +18,9 @@ class ProjectsController < ApplicationController
   def edit; end
 
   def create
-    result = CreateProject.call(
-      project_params: project_params,
-      user: current_user
-    )
+    @project = create_project.project
 
-    @project = result.project
-
-    if result.success?
+    if create_project.success?
       redirect_to @project, notice: "Created Successful"
     else
       @project.destroy
@@ -54,5 +49,10 @@ class ProjectsController < ApplicationController
 
   def project_params
     params.require(:project).permit(:name, :description)
+  end
+
+  def create_project
+    @create_project ||= ::Project::Create.call(project_params: project_params,
+                                               user: current_user)
   end
 end
