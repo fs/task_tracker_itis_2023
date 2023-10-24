@@ -5,6 +5,8 @@ class SessionsController < ApplicationController
 
   def new
     @user = User.new
+
+    authorize! @user
   end
 
   def create
@@ -19,6 +21,8 @@ class SessionsController < ApplicationController
       @user.errors.add :base, "Wrong email or password"
       render :new
     end
+
+    authorize! @user
   end
 
   def destroy
