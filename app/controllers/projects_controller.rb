@@ -18,11 +18,10 @@ class ProjectsController < ApplicationController
   def edit; end
 
   def create
-    @project = Project.new(project_params)
-    @project_membership = ProjectMembership.new(project_membership_params)
+    @project = create_project.project
 
-    if @project.save && @project_membership.save
-      redirect_to projects_path, notice: "Created Successful"
+    if create_project.success?
+      redirect_to @project, notice: "Created Successful"
     else
       render :new, status: :unprocessable_entity
     end
@@ -47,11 +46,12 @@ class ProjectsController < ApplicationController
     @project = Project.find_by(id: params[:id])
   end
 
-  def project_membership_params
-    { project: @project, user: current_user, role: :owner }
-  end
-
   def project_params
     params.require(:project).permit(:name, :description)
+  end
+
+  def create_project
+    @create_project ||= ::Projects::Create.call(project_params: project_params,
+                                                user: current_user)
   end
 end

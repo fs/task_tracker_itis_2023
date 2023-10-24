@@ -42,3 +42,6 @@ I18n/GetText/DecorateFunctionMessage:
   Exclude:
     - 'app/controllers/concerns/authentication.rb'
   Enabled: false
+
+Metrics/MethodLength:
+  Max: 20
