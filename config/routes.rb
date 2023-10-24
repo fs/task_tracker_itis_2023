@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
-  root "projects#index"
+  root 'projects#index'
 
   resources :projects do
-    resources :tasks, only: [:index, :create, :new, :show, :edit, :update, :destroy]
+    resources :tasks, only: %i[index create new show edit update destroy]
   end
 end
