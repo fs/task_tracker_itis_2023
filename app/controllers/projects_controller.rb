@@ -52,7 +52,7 @@ class ProjectsController < ApplicationController
   end
 
   def create_project
-    @create_project ||= ::Project::Create.call(project_params: project_params,
-                                               user: current_user)
+    @create_project ||= ::Projects::Create.call(project_params: project_params,
+                                                user: current_user)
   end
 end
