@@ -7,8 +7,8 @@ class CreateProject
     project = Project.new(project_params)
     project_membership = ProjectMembership.new(project_membership_params)
     context.project = project
+    context.fail! unless project.save
 
-    project.save
     project_membership.save
   end
 end

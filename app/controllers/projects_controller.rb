@@ -21,10 +21,12 @@ class ProjectsController < ApplicationController
     result = CreateProject.call(project_params: project_params,
                                 project_membership_params: project_membership_params)
 
+    @project = result.project
+
     if result.success?
-      redirect_to result.project, notice: "Created Successful"
+      redirect_to @project, notice: "Created Successful"
     else
-      result.project.destroy
+      @project.destroy
       render :new, status: :unprocessable_entity
     end
   end
