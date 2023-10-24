@@ -22,8 +22,9 @@ class ProjectsController < ApplicationController
                                 membership_params: project_membership_params)
 
     if result.success?
-      redirect_to projects_path, notice: "Created Successful"
+      redirect_to result.project, notice: "Created Successful"
     else
+      result.project.destroy
       render :new, status: :unprocessable_entity
     end
   end
