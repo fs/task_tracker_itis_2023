@@ -1,0 +1,14 @@
+<h1>Edit Comment</h1>
+
+<%= form_with model: [@project, @task, @comment], url: project_task_comment_path(@task.project, @task, @comment), method: :patch, local: true do |form| %>
+  <div class="field">
+    <%= form.label :content %>
+    <%= form.text_area :content %>
+  </div>
+  <div class="actions">
+    <%= form.submit "Update" %>
+  </div>
+<% end %>
+
+
+<%= link_to 'Back', project_task_path(@task.project, @task) %>

@@ -1,8 +1,8 @@
 class Task < ApplicationRecord
   extend Enumerize
 
-  enumerize :status, in: { not_started: 0, started: 1, finished: 2 }, default: :not_started, predicates: true
-
+  enumerize :status, in: { unstarted: 0, started: 1, finished: 2 }, default: :unstarted, predicates: true
+  has_many :comments, dependent: :destroy
   belongs_to :project
 
   validates :name, presence: true

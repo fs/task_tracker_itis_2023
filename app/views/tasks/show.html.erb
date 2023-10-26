@@ -1,20 +1,29 @@
 <h1>Task Details</h1>
-
 <p><strong>Name:</strong> <%= @task.name %></p>
 <p><strong>Description:</strong> <%= @task.description %></p>
-
 <p>
-    <strong>Status:</strong> 
-    <% case @task.status %>
-    <% when 'unstarted' %>
-        <td>Not Started</td>
-    <% when 'started' %>
-        <td>In Progress</td>
-    <% when 'done' %>
-        <td>Completed</td>
-    <% end %>
+  <strong>Status:</strong>
+  <% case @task.status %>
+  <% when 'unstarted' %>
+    <td>Not Started</td>
+  <% when 'started' %>
+    <td>In Progress</td>
+  <% when 'done' %>
+    <td>Completed</td>
+  <% end %>
 </p>
-
 <p><strong>Deadline:</strong> <%= @task.deadline_at %></p>
-
 <%= link_to "Back to Tasks", project_tasks_path(@project) %>
+
+<h2>Comments</h2>
+<% @task.comments.each do |comment| %>
+  <div>
+    <p><strong>User:</strong> <%= comment.user.email %></p>
+    <p><strong>Content:</strong> <%= comment.content %></p>
+    <%= link_to "Edit", edit_project_task_comment_path(@project, @task, comment) %>
+    <%= link_to "Delete", project_task_comment_path(@project, @task, comment), method: :delete, data: { confirm: "Are you sure?" } %>  </div>
+<% end %>
+
+<h3>New Comment</h3>
+<%= render partial: 'comments/form', locals: {project: @task.project, task: @task} %>
+

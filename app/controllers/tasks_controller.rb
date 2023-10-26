@@ -23,9 +23,9 @@ class TasksController < ApplicationController
 
   def create
     @task = @project.tasks.build(task_params)
+    authorize! @task
 
     if @task.save
-      authorize! @task
       redirect_to project_tasks_path(@project), notice: "Task created successfully"
     else
       render :new, status: :unprocessable_entity
