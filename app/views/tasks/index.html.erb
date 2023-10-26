@@ -17,8 +17,8 @@
       <tr>
         <td><%= task.name %></td>
         <td><%= task.description %></td>
-        <td><%= task.state %></td>
-        <td><%= task.deadline %></td>
+        <td><%= task.status %></td>
+        <td><%= task.deadline_at %></td>
         <td><%= task.project.name %></td>
         <td><%= link_to 'Подробнее', url_for([@project, task]) %></td>
         <td><%= link_to 'Редактировать', edit_project_task_path(@project, task) %></td>

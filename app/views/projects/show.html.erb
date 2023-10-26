@@ -1,4 +1,35 @@
 <p><%= @project.name %> </p>
 <p><%= @project.description %> </p>
 
+<%= link_to 'Новая задача', new_project_task_path(@project) %>
+<h1>Список задач</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Название</th>
+      <th>Описание</th>
+      <th>Состояние</th>
+      <th>Дедлайн</th>
+      <th>Проект</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tasks.each do |task| %>
+      <tr>
+        <td><%= task.name %></td>
+        <td><%= task.description %></td>
+        <td><%= task.status %></td>
+        <td><%= task.deadline_at %></td>
+        <td><%= task.project.name %></td>
+        <td><%= link_to 'Подробнее', url_for([@project, task]) %></td>
+        <td><%= link_to 'Редактировать', edit_project_task_path(@project, task) %></td>
+        <td><%= link_to "Удалить", url_for([@project, task]), method: :delete, data: { confirm: 'Вы согласны?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
 <%= link_to "Back", projects_path %>
