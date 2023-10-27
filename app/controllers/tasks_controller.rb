@@ -25,10 +25,10 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = @project.tasks.build(task_params)
+    @task = create_task.task
     authorize! @task
 
-    if @task.save
+    if create_task.success?
       redirect_to project_tasks_path(@project), notice: "Task created successfully"
     else
       render :new, status: :unprocessable_entity
@@ -60,5 +60,9 @@ class TasksController < ApplicationController
 
   def task_params
     params.require(:task).permit(:name, :description, :status, :deadline_at)
+  end
+
+  def create_task
+    @create_task ||= ::Tasks::Create.call(params: params, project: @project)
   end
 end
