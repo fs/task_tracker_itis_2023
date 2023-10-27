@@ -1,7 +1,7 @@
 class TasksController < ApplicationController
   before_action :set_project
   before_action :set_task, only: %i[show edit update destroy]
-  before_action -> { authorize! @task }, only: %i[update show destroy]
+  before_action -> { authorize! @task }, only: %i[edit update show destroy]
 
   def index
     @task = Task.new(project: @project)
@@ -19,10 +19,7 @@ class TasksController < ApplicationController
     authorize! @task
   end
 
-  def edit
-    @task = Task.new(project: @project)
-    authorize! @task
-  end
+  def edit; end
 
   def create
     @task = create_task.task
@@ -36,7 +33,7 @@ class TasksController < ApplicationController
   end
 
   def update
-    if update_project.success?
+    if update_task.success?
       redirect_to project_tasks_path(@project), notice: "Task updated successfully"
     else
       render :edit, status: :unprocessable_entity
@@ -58,17 +55,12 @@ class TasksController < ApplicationController
     @task = @project.tasks.find(params[:id])
   end
 
-  def task_params
-    params.require(:task).permit(:name, :description, :status, :deadline_at)
-  end
-
   def create_task
     @create_task ||= ::Tasks::Create.call(params: params, project: @project)
   end
 
   def update_task
-    ::Tasks::Update.call(task: @task,
-                        task_params: task_params)
+    ::Tasks::Update.call(params: params, task: @task)
   end
 
   def destroy_task

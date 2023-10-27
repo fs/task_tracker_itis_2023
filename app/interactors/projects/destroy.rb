@@ -6,7 +6,7 @@ module Projects
 
     def call
       context.project = project
-      
+
       context.fail!(error: "Project destruction failed") unless project.destroy
     end
   end

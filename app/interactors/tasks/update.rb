@@ -1,13 +1,8 @@
 module Tasks
   class Update
-    include Interactor
+    include Interactor::Organizer
 
-    delegate :task, :task_params, to: :context
-
-    def call
-      context.task = task
-
-      context.fail!(error: "Invalid data") unless task.update(task_params)
-    end
+    organize Tasks::Create::PrepareParams,
+             Tasks::UpdatingCheck
   end
 end
