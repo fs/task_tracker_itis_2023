@@ -36,11 +36,8 @@ class ProjectsController < ApplicationController
   end
 
   def destroy
-    if destroy_project.success?
-      redirect_to projects_path, notice: "Project destroyed"
-    else
-      redirect_to projects_path, alert: "Failed to destroy project"
-    end
+    destroy_project
+    redirect_to projects_path, notice: "Project destroyed"
   end
 
   private

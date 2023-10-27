@@ -5,11 +5,9 @@ module Projects
     delegate :project, to: :context
 
     def call
-      if project.destroy
-        context.success = true
-      else
-        context.fail!(error: "Project destruction failed")
-      end
+      context.project = project
+      
+      context.fail!(error: "Project destruction failed") unless project.destroy
     end
   end
 end
