@@ -20,16 +20,17 @@ class TasksController < ApplicationController
   end
 
   def edit
-    @task = Task.new(project: @project)
+    # @task = Task.new(project: @project)
     authorize! @task
   end
 
   def create
-    @task = @project.tasks.build(task_params)
+    @task = create_task.task
     authorize! @task
 
-    if @task.save
-      redirect_to project_tasks_path(@project), notice: "Task created successfully"
+    # @task.success? & create_task.success? r throwing undefined method error
+    if !@task.nil?
+      redirect_to project_tasks_path(@project), notice: "Task has been added!"
     else
       render :new, status: :unprocessable_entity
     end
@@ -60,5 +61,9 @@ class TasksController < ApplicationController
 
   def task_params
     params.require(:task).permit(:name, :description, :status, :deadline_at)
+  end
+
+  def create_task
+    @task ||= ::Tasks::Create.call(task_params: task_params, project: @project)
   end
 end
