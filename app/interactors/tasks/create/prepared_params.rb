@@ -6,7 +6,6 @@ module Tasks
       include Interactor
 
       delegate :task_params, :project, to: :context
-
       def call
         @task = project.tasks.build(task_params)
         context.task = @task

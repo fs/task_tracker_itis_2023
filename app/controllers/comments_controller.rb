@@ -1,18 +1,16 @@
 class CommentsController < ApplicationController
   before_action :set_task
   before_action :set_comment, only: %i[update destroy]
-
+  before_action -> { authorize! @comment }, only: %i[edit update destroy]
   def edit
     @comment = Comment.find(params[:id])
-    authorize! @comment
   end
 
   def create
-    @comment = @task.comments.new(comment_params)
-    @comment.user = current_user
+    @comment = create_comment.comment
 
     authorize! @comment
-    if @comment.save
+    if create_comment.success?
       redirect_to project_task_path(@task.project, @task), notice: "Comment created successfully"
     else
       redirect_to project_task_path(@task.project, @task), alert: "Failed to create comment"
@@ -20,21 +18,22 @@ class CommentsController < ApplicationController
   end
 
   def update
-    authorize! @comment
+    @comment = update_comment
 
-    if @comment.update(comment_params)
-      redirect_to project_task_path(@task.project, @task), notice: "Comment updated successfully"
+    if @comment.success?
+      redirect_to project_task_path(@task.project, @task), notice: @comment.notice
     else
-      redirect_to project_task_path(@task.project, @task), alert: "Failed to update comment"
+      redirect_to project_task_path(@task.project, @task), alert: @comment.alert
     end
   end
 
   def destroy
-    authorize! @comment
-    if @comment.destroy
-      redirect_to project_task_path(@task.project, @task), notice: "Comment deleted successfully"
+    @comment = destroy_comment
+
+    if @comment.success?
+      redirect_to project_task_path(@task.project, @task), notice: @comment.notice
     else
-      redirect_to project_task_path(@task.project, @task), alert: "Failed to delete comment"
+      redirect_to project_task_path(@task.project, @task), alert: @comment.alert
     end
   end
 
@@ -50,5 +49,17 @@ class CommentsController < ApplicationController
 
   def comment_params
     params.require(:comment).permit(:content)
+  end
+
+  def create_comment
+    @create_comment ||= ::Comments::Create.call(user: current_user, task: @task, comment_params: comment_params)
+  end
+
+  def destroy_comment
+    @destroy_comment ||= ::Comments::Destroy.call(comment: @comment)
+  end
+
+  def update_comment
+    @update_comment ||= ::Comments::Update.call(comment: @comment, comment_params: comment_params)
   end
 end
