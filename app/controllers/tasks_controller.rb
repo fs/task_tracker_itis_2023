@@ -37,16 +37,22 @@ class TasksController < ApplicationController
   end
 
   def update
-    if @task.update(task_params)
-      redirect_to project_tasks_path(@project), notice: "Task updated successfully"
+    @task = update_task
+    if @task.success?
+      redirect_to project_tasks_path(@project), notice: @task.notice
     else
       render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
-    @task.destroy
-    redirect_to project_tasks_path(@project), notice: "Task destroyed"
+    @task = destroy_task
+    if @task.success?
+      redirect_to project_tasks_path(@project), notice: @task.notice
+    else
+      redirect_to project_tasks_path(@project), notice: @task.alert
+    end
+
   end
 
   private
@@ -64,6 +70,14 @@ class TasksController < ApplicationController
   end
 
   def create_task
-    @task ||= ::Tasks::Create.call(task_params: task_params, project: @project)
+    @create_task ||= ::Tasks::Create.call(task_params: task_params, project: @project)
+  end
+
+  def update_task
+    @update_task ||= ::Tasks::Update.call(task_params: task_params, task: @task)
+  end
+
+  def destroy_task
+    @destroy_task ||= ::Tasks::Delete.call(task: @task)
   end
 end

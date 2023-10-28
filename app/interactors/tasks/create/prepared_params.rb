@@ -9,9 +9,9 @@ module Tasks
 
       def call
         @task = project.tasks.build(task_params)
+        context.task = @task
 
         context.fail!(error: "Invalid task details!") unless @task.valid?
-        context.task = @task
       end
     end
 
