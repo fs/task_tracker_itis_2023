@@ -49,14 +49,18 @@ class CommentsController < ApplicationController
   end
 
   def create_comment
-    @create_comment ||= ::Comments::Create.call(params: params, task: @task, current_user: current_user)
+    @create_comment ||= ::Comments::Create.call(comment_params: comment_params, task: @task, user: current_user)
   end
 
   def update_comment
-    ::Comments::Update.call(params: params, comment: @comment)
+    ::Comments::Update.call(comment_params: comment_params, comment: @comment)
   end
 
   def destroy_comment
     ::Comments::Destroy.call(comment: @comment)
+  end
+
+  def comment_params
+    params.require(:comment).permit(:content)
   end
 end

@@ -2,19 +2,14 @@ module Comments
   class Save
     include Interactor
 
-    delegate :task, :comment_params, :current_user, to: :context
+    delegate :comment, :comment_params, to: :context
 
-    def call
-      context.comment = comment
-      comment.user = current_user
-
-      context.fail!(error: "Invalid data") unless comment.save
+    before do
+      context.comment ||= Comment.new
     end
 
-    private
-
-    def comment
-      @comment ||= task.comments.new(comment_params)
+    def call
+      context.fail!(error: "Invalid data") unless comment.update(comment_params)
     end
   end
 end

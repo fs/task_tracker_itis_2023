@@ -3,16 +3,10 @@ module Tasks
     class PrepareParams
       include Interactor
 
-      delegate :params, to: :context
+      delegate :task_params, :project, to: :context
 
       def call
-        context.task_params = prepared_task_params
-      end
-
-      private
-
-      def prepared_task_params
-        @prepared_task_params ||= params.require(:task).permit(:name, :description, :status, :deadline_at)
+        task_params.merge!(project: project)
       end
     end
   end

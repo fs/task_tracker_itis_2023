@@ -56,14 +56,18 @@ class TasksController < ApplicationController
   end
 
   def create_task
-    @create_task ||= ::Tasks::Create.call(params: params, project: @project)
+    @create_task ||= ::Tasks::Create.call(task_params: task_params, project: @project)
   end
 
   def update_task
-    ::Tasks::Update.call(params: params, task: @task)
+    ::Tasks::Update.call(task_params: task_params, task: @task)
   end
 
   def destroy_task
     ::Tasks::Destroy.call(task: @task)
+  end
+
+  def task_params
+    params.require(:task).permit(:name, :description, :status, :deadline_at)
   end
 end

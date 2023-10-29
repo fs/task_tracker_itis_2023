@@ -2,18 +2,14 @@ module Tasks
   class Save
     include Interactor
 
-    delegate :project, :task_params, to: :context
+    delegate :task, :task_params, to: :context
 
-    def call
-      context.task = task
-
-      context.fail!(error: "Invalid data") unless task.save
+    before do
+      context.task ||= Task.new
     end
 
-    private
-
-    def task
-      @task ||= project.tasks.build(task_params)
+    def call
+      context.fail!(error: "Invalid data") unless task.update(task_params)
     end
   end
 end
