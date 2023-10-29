@@ -5,9 +5,7 @@ module Tasks
     delegate :task, to: :context
 
     def call
-      context.task = task
-
-      context.fail!(error: "Task destruction failed") unless task.destroy
+      task.destroy
     end
   end
 end
