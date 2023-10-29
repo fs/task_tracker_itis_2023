@@ -7,15 +7,20 @@ module Comments
       delegate :user, :task, :comment_params, to: :context
 
       def call
-        context.fail!(error: "Invalid comment data!") unless comment.valid?
-        context.comment = comment
+        @comment = comment
+        @comment.user = user
+
+        if !@comment.nil?
+          context.comment = @comment
+        else
+          context.fail!(error: "Invalid comment data!")
+        end
       end
 
       private
 
       def comment
         @comment = task.comments.new(comment_params)
-        @comment.user = user
       end
 
     end

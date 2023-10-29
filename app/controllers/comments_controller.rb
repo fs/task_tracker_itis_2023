@@ -10,7 +10,7 @@ class CommentsController < ApplicationController
     @comment = create_comment.comment
 
     authorize! @comment
-    if create_comment.success?
+    if !@comment.nil?
       redirect_to project_task_path(@task.project, @task), notice: "Comment created successfully"
     else
       redirect_to project_task_path(@task.project, @task), alert: "Failed to create comment"
