@@ -1,16 +1,17 @@
 class CommentsController < ApplicationController
   before_action :set_task
   before_action :set_comment, only: %i[update destroy]
-  before_action -> { authorize! @comment }, only: %i[edit update destroy]
+  before_action -> { authorize! @comment }, only: %i[update destroy]
   def edit
     @comment = Comment.find(params[:id])
+    authorize! @comment
   end
 
   def create
     @comment = create_comment.comment
 
     authorize! @comment
-    if !@comment.nil?
+    if create_comment.success?
       redirect_to project_task_path(@task.project, @task), notice: "Comment created successfully"
     else
       redirect_to project_task_path(@task.project, @task), alert: "Failed to create comment"

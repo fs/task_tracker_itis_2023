@@ -10,7 +10,7 @@ module Comments
         @comment = comment
         @comment.user = user
 
-        if !@comment.nil?
+        if @comment.save
           context.comment = @comment
         else
           context.fail!(error: "Invalid comment data!")
