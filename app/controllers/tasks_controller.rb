@@ -4,19 +4,26 @@ class TasksController < ApplicationController
 
   def index
     @tasks = @project.tasks.order(params[:sort]).page(params[:page]).per(3)
+    authorize! @tasks
   end
 
-  def show; end
+  def show
+    authorize! @task
+  end
 
   def new
     @task = @project.tasks.build
+    authorize! @task
     @task.deadline_at ||= 1.week.from_now
   end
 
-  def edit; end
+  def edit
+    authorize! @task
+  end
 
   def create
     @task = @project.tasks.build(task_params)
+    authorize! @task
 
     if @task.save
       redirect_to project_tasks_path(@project), notice: "Task created successfully"
@@ -26,6 +33,7 @@ class TasksController < ApplicationController
   end
 
   def update
+    authorize! @task
     if @task.update(task_params)
       redirect_to project_tasks_path(@project), notice: "Task updated successfully"
     else
@@ -34,6 +42,7 @@ class TasksController < ApplicationController
   end
 
   def destroy
+    authorize! @task
     @task.destroy
     redirect_to project_tasks_path(@project), notice: "Task destroyed"
   end

@@ -1,10 +1,14 @@
 class SessionsController < ApplicationController
   before_action :authenticate_current_user!, only: %i[show destroy]
+  before_action -> { authorize! User, with: SessionPolicy}
 
-  def show; end
+  def show
+    authorize! @user
+  end
 
   def new
     @user = User.new
+    authorize! @user
   end
 
   def create
@@ -12,6 +16,7 @@ class SessionsController < ApplicationController
                 &.authenticate(user_params[:password])
 
     if @user
+      authorize! @user
       session[:current_user_id] = @user.id
       redirect_to root_path, notice: "You've successfully logged in!"
     else
