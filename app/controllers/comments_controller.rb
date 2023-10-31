@@ -8,11 +8,10 @@ class CommentsController < ApplicationController
   end
 
   def create
-    @comment = @task.comments.new(comment_params)
-    @comment.user = current_user
+    @comment = create_comment.comment
 
     authorize! @comment
-    if @comment.save
+    if create_comment.success?
       redirect_to project_task_path(@task.project, @task), notice: "Comment created successfully"
     else
       redirect_to project_task_path(@task.project, @task), alert: "Failed to create comment"
@@ -21,8 +20,9 @@ class CommentsController < ApplicationController
 
   def update
     authorize! @comment
+    @comment = update_comment
 
-    if @comment.update(comment_params)
+    if @comment.success?
       redirect_to project_task_path(@task.project, @task), notice: "Comment updated successfully"
     else
       redirect_to project_task_path(@task.project, @task), alert: "Failed to update comment"
@@ -58,6 +58,13 @@ class CommentsController < ApplicationController
   end
 
   def create_comment
-    @create_comm ||= ::Comments::Create.call(task: @task, comment_params: comment_params)
+    @create_comment ||= ::Comments::Create.call(task: @task, 
+                                                comment_params: comment_params, 
+                                                user: current_user)
+  end
+
+  def update_comment
+    @update_comment ||= ::Comments::Update.call(comment: @comment,
+                                                comment_params: comment_params)
   end
 end
