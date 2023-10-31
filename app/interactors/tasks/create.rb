@@ -2,7 +2,7 @@ module Tasks
   class Create
     include Interactor::Organizer
 
-    organize Tasks::Create::PrepareParams,
+    organize Tasks::Creates::PrepareParams,
              Tasks::Save
   end
 end
