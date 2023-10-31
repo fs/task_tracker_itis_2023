@@ -7,8 +7,7 @@ module Tasks
     def call
       context.task = task
 
-      context.fail!(error: "Fail..") unless task.save
-      context.notice = "Task saved!"
+      context.fail!(error: "Invalid data") unless task.save
     end
 
     private

@@ -26,7 +26,7 @@ class TasksController < ApplicationController
     authorize! @task
 
     if create_task.success?
-      redirect_to project_tasks_path(@project), notice: "Task has been added!"    
+      redirect_to project_tasks_path(@project), notice: "Task successfully created!"    
     else
       render :new, status: :unprocessable_entity
     end
@@ -67,8 +67,7 @@ class TasksController < ApplicationController
   end
 
   def create_task
-    @create_task ||= ::Tasks::Create.call(project: @project,
-                                          task_params: task_params)
+    @create_task ||= ::Tasks::Create.call(params: params, project: @project)
   end
 
   def destroy_task
@@ -77,6 +76,6 @@ class TasksController < ApplicationController
 
   def update_task
     @update_task ||= ::Tasks::Update.call(task: @task,
-                                            task_params: task_params)
+                                          params: params)
   end
 end
