@@ -1,29 +1,5 @@
 <h1>Edit Task</h1>
 
-<%= form_with(model: @task, url: [@task.project, @task]) do |form| %>
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-  </div>
+<%= render 'form' %>
 
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description %>
-  </div>
-
-  <div class="field">
-    <%= form.label :status %>
-    <%= form.select :status, ['Just started', 'In progress', 'Done'] %>
-  </div>
-
-  <div class="field">
-    <%= form.label :deadline_at %>
-    <%= form.date_select :deadline_at %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
-
-<%= link_to 'Back', project_task_path(@task) %>
+<%= link_to "Back to Tasks", project_tasks_path(@project) %>

@@ -1,97 +1,21 @@
-<h1>
-  <a class="header" href="#">Projects</a>
-</h1>
+<h1>Hello world</h1>
 
-<div class="sorting-btns">
-  <%= link_to "Name", :sort => "name asc", class: "sorting-btn"%>
-  <%= link_to "Name reverse", :sort => "name desc", class: "sorting-btn"%>
-  <%= link_to "Description", :sort => "description asc", class: "sorting-btn"%>
-  <%= link_to "Description reverse", :sort => "description desc", class: "sorting-btn"%>
-</div>
+<h2><%= link_to "New Project", new_project_path %></h2>
+
+<%= link_to "Name", :sort => "name asc"%>
+<%= link_to "Name reverse", :sort => "name desc"%>
+<%= link_to "Description", :sort => "description asc" %>
+<%= link_to "Description reverse", :sort => "description desc" %>
+<br>
+<br>
 
 <% @projects.each do |project| %>
-  <div class="form-container">
-    <div class="project-title-div">
-      <%# project.id %><%= link_to project.name, project_path(project), class: "project-title" %>
-    </div>
-
-    <div class="project-description-div">
-      <%= truncate project.description, length: 150, class: "project-description" %>
-    </div>
-
-    <div class="project-show-div">
-      <%= link_to '< Show Project >', project_path(project), class: "project-show" %>
-    </div>
+  <div class="record">
+    <p><%= project.id %>. <%= link_to project.name, project_tasks_path(project) %></p>
+    <p><%= project.description %> </p>
+    <p><%= link_to "Edit", edit_project_path(project) %></p>
+    <p><%= button_to "Destroy", project, method: :delete, data: {confirm: "Are you sure?"} %></p>
   </div>
 <% end %>
 
-<%= paginate @projects%>
-
-<style>
-
-    h1 {
-        margin-bottom: 3em;
-    }
-    .header {
-        font-size: 3em;
-        font-weight: bold;
-        color: #EFEFEF;
-        text-decoration: none;
-        transition: 1s color;
-    }
-
-    .header:hover {
-        color: #DF59AA;
-    }
-
-    .form-container {
-        width: 25em;
-        height: 15em;
-        margin: 2em 0 2em 0;
-        background: rgba(8, 101, 178, 0.35);
-        border-radius: 16px;
-        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-        backdrop-filter: blur(5.9px);
-        -webkit-backdrop-filter: blur(5.9px);
-        border: 1px solid rgba(8, 101, 178, 0.2);
-        padding: 2em;
-        transition: 1s box-shadow, color;
-    }
-
-    .form-container:hover {
-        color: #E1F1FF;
-        box-shadow: 0 5px 15px #E1F1FF;
-    }
-
-    .project-title {
-        font-size: 2em;
-        text-decoration: none;
-        font-weight: bold;
-        color: #C25DB6;
-    }
-
-    .project-description {
-        font-weight: normal;
-        font-style: italic;
-    }
-
-    .project-show {
-        font-style: inherit;
-        font-weight: bold;
-        text-decoration: none;
-        color: #DF59AA;
-    }
-
-    .project-show-div {
-        margin-top: 2em;
-    }
-
-    .project-description-div {
-        margin: 0.7em 0 0.7em 0;
-    }
-
-
-</style>
-
-<%#= paginate @projects %>
-
+<%= paginate @projects %>

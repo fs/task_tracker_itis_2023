@@ -1,54 +1,49 @@
 <h1>Tasks for <%= @project.name %></h1>
 
-<div class="sorting-btns">
-  <%= link_to "Title", :sort => "name asc", class: "sorting-btn"%>
-  <%= link_to "Description", :sort => "description desc", class: "sorting-btn"%>
-  <%= link_to "Creation Date", :sort => "created_at asc", class: "sorting-btn"%>
-  <%= link_to "Deadline", :sort => "deadline_at desc", class: "sorting-btn"%>
-</div>
-
+<%= link_to "New Task", new_project_task_path(@project) %>
+<br>
+<%= link_to "Name", :sort => "name asc"%>
+<%= link_to "Name reverse", :sort => "name desc"%>
+<%= link_to "Created date", :sort => "created_at asc"%>
+<%= link_to "Created date reverse", :sort => "created_at desc"%>
+<%= link_to "Deadline", :sort => "deadline_at desc"%>
+<%= link_to "Deadline reverse", :sort => "deadline_at asc"%>
+<br>
+<br>
 <table>
   <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Status</th>
-      <th>Deadline</th>
-      <th colspan="3"></th>
-    </tr>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Status</th>
+    <th>Deadline</th>
+    <th colspan="3"></th>
+  </tr>
   </thead>
 
   <tbody>
-    <% @tasks.each do |task| %>
-      <tr>
-        <td><%= task.name %></td>
-        <td><%= task.description %></td>
-        <td>
-          <% case task.status %>
-            <% when 'Just Started' %>
-              <td>Just Started</td>
-            <% when 'In progress' %>
-              <td>In Progress</td>
-            <% when 'Done' %>
-              <td>Completed</td>
-          <% end %>
-        </td>
-        <td><%= task.deadline_at %></td>
-        <td><%= link_to "Show", url_for([@project, task]) %></td>
-        <td><%= link_to "Edit", edit_project_task_path(@project, task) %></td>
-        <td><%= link_to "Destroy", url_for([@project, task]), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
+  <% @tasks.each do |task| %>
+    <tr>
+      <td><%= task.name %></td>
+      <td><%= task.description %></td>
+      <td>
+        <% case task.status %>
+        <% when 'unstarted' %>
+        <td>Not Started</td>
+      <% when 'started' %>
+        <td>In Progress</td>
+      <% when 'done' %>
+        <td>Completed</td>
+      <% end %>
+      </td>
+      <td><%= task.deadline_at %></td>
+      <td><%= link_to "Show", url_for([@project, task]) %></td>
+      <td><%= link_to "Edit", edit_project_task_path(@project, task) %></td>
+      <td><%= link_to "Destroy", url_for([@project, task]), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
   </tbody>
 </table>
 
-<%= paginate @tasks%>
-<%= link_to "Back to Project", project_path(@project) %>
-
-<section class="new-task">
-  <h2>Add a new task</h2>
-  <div class="form">
-    <%= render partial: 'tasks/form', locals: {project: @project} %>
-  </div>
-</section>
-
+<%= paginate @tasks %>
+<%= link_to "Back to Projects", projects_path %>

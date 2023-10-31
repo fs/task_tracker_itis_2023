@@ -1,13 +1,37 @@
+<%= form_with(model: [@project, @task]) do |form| %>
+  <% if @task.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@task.errors.count, "error") %> prohibited this task from being saved:</h2>
 
-<form action="<%= project_tasks_path(@project) %>" method="post">
+      <ul>
+        <% @task.errors.full_messages.each do |error| %>
+          <li><%= error %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 
-  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-
-  <div class="task-content">
-    <input type="text" name="task[name]" class="title-input">
-    <textarea name="task[description]" class="textarea-space"></textarea>
-    <input type="date" name="task[deadline_at]" class="date-input">
-    <button type="submit" value="Submit" class="submit-btn">Post</button>
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
   </div>
 
-</form>
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :status %>
+    <%= form.select :status, Task.status.values %>
+  </div>
+
+  <div class="field">
+    <%= form.label :deadline_at %>
+    <%= form.datetime_field :deadline_at %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

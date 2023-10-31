@@ -1,19 +1,21 @@
 class Task < ApplicationRecord
-  #enum :state {Just started:0, In Progress:1, Finished:2}
-  #validates :task_title, presence: true
-  #validates :status, inclusion: { in: %w[unstarted started done] }
-  belongs_to :project
+  extend Enumerize
 
-  validates :name, :description, :status, :deadline_at, :project_id, presence: true
+  STATUSES = %i[unstarted started finished].freeze
+  enumerize :status, in: STATUSES
+
+  belongs_to :project
+  has_many :comments, dependent: :destroy
+
+  validates :name, presence: true
+  validates :name, uniqueness: { scope: :project_id }
   validate :deadline_correct
-  validates :name, uniqueness: {scope: :project_id, message: "Must be unique within the project!"}
-  # validate :unique_name_within_project
 
   private
+
   def deadline_correct
     return if (created_at || Time.current) < deadline_at
 
     errors.add(:deadline_at, "must be after creation time")
   end
-
 end

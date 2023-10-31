@@ -1,43 +1,45 @@
 <h1><%= @project.name %></h1>
-<p><%= @project.description %> </p>
-<p><%= @project.id %></p>
-<p><%= link_to "Edit", edit_project_path(@project) %></p>
-<!--<p><%# button_to "Destroy", @project, method: :delete %></p>-->
-<p><%= link_to "Delete", @project, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %></p>
+
+<p><strong>Description:</strong> <%= @project.description %></p>
+
+<%= link_to "New Task", new_project_task_path(@project), class: "btn btn-primary" %>
 <%= link_to "Back", projects_path %>
 
+<h2>Tasks for <%= @project.name %></h2>
 
-<!-- TASKS SECTION -->
+<%= link_to "Name", :sort => "name asc" %>
+<%= link_to "Name reverse", project_path(@project, sort: "name desc") %>
+<%= link_to "Created date", project_path(@project, sort: "created_at asc") %>
+<%= link_to "Created date reverse", project_path(@project, sort: "created_at desc") %>
+<%= link_to "Deadline", project_path(@project, sort: "deadline_at asc") %>
+<%= link_to "Deadline reverse", project_path(@project, sort: "deadline_at desc") %>
+<br>
+<br>
+<table class="table">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Status</th>
+    <th>Deadline</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
 
-<br />
-<div class="Tasks-section">
-  <div class="Tasks-count"><h3><%= @project.tasks.count %> <strong> Tasks</strong></h3></div>
-
-  <br /><hr />
-  <section class="tasks-display">
-    <section class="done-tasks-display">
-      <h2>Done</h2>
-
-      <%= render @project.tasks.select { |task| task.status == 'Done'}.take(3) %>
-    </section>
-
-    <hr />
-    <section class="to-do-tasks-display">
-      <h2>To Do</h2>
-      <%= render @project.tasks.select { |task| task.status != 'Done'}.take(3) %>
-    </section>
-  </section>
-
-<hr />
-  <%= link_to "Show All Tasks", project_tasks_path(@project)%>
-
-  <section class="new-task">
-    <h2>Add a new task</h2>
-    <div class="form">
-      <%= render partial: 'tasks/form', locals: {project: @project} %>
-    </div>
-  </section>
-</div>
-
-
-
+  <tbody>
+  <% @project.tasks.each do |task| %>
+    <tr>
+      <td><%= task.name %></td>
+      <td><%= task.description %></td>
+      <td><%= task.status ? "Completed" : "Not Completed" %></td>
+      <td><%= task.deadline_at %></td>
+      <td>
+        <%= link_to "Show", project_task_path(@project, task), class: "btn btn-primary btn-sm" %>
+        <%= link_to "Edit", edit_project_task_path(@project, task), class: "btn btn-warning btn-sm" %>
+        <%= link_to "Destroy", project_task_path(@project, task), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-sm" %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<%= paginate @tasks %>
