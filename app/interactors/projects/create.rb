@@ -8,7 +8,7 @@ module Projects
              Projects::Creates::CreateOwner
 
     after do
-      ProjectMailer.new(project, user).project_created.deliver_later
+      ProjectMailer.project_created(project, user).deliver_later
       Projects::CreateDefaultTasksJob.perform_async(project.id)
     end
   end
