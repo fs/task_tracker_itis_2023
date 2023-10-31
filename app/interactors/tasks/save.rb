@@ -8,6 +8,7 @@ module Tasks
       context.task = task
 
       context.fail!(error: "Invalid data") unless task.save
+      context.notice = "Task successfully created!"
     end
 
     private

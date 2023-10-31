@@ -6,7 +6,7 @@ module Projects
 
     def call
       context.fail!(error: "Fail..") unless project.destroy
-      context.notice = "project successfully deleted"
+      context.notice = "Project successfully deleted"
     end
   end
 end

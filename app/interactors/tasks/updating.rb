@@ -6,7 +6,7 @@ module Tasks
 
     def call
       context.fail!(error: "Fail..") unless task.update(task_params)
-      context.notice = "task successfully update"
+      context.notice = "Task successfully updated"
     end
   end
 end

@@ -6,7 +6,7 @@ module Comments
 
     def call
       context.fail!(error: "Fail..") unless comment.destroy
-      context.notice = "comment successfully deleted"
+      context.notice = "Comment successfully deleted"
     end
   end
 end

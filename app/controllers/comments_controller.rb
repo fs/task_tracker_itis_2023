@@ -23,9 +23,9 @@ class CommentsController < ApplicationController
     @comment = update_comment
 
     if @comment.success?
-      redirect_to project_task_path(@task.project, @task), notice: "Comment updated successfully"
+      redirect_to project_task_path(@task.project, @task), notice: @comment.notice
     else
-      redirect_to project_task_path(@task.project, @task), alert: "Failed to update comment"
+      redirect_to project_task_path(@task.project, @task), alert: @comment.error
     end
   end
 

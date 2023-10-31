@@ -6,7 +6,7 @@ module Projects
 
     def call
       context.fail!(error: "Fail..") unless project.update(project_params)
-      context.notice = "project successfully update"
+      context.notice = "Project successfully updated"
     end
   end
 end

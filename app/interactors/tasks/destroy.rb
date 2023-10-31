@@ -6,7 +6,7 @@ module Tasks
 
     def call
       context.fail!(error: "Fail..") unless task.destroy
-      context.notice = "task successfully deleted"
+      context.notice = "Task successfully deleted"
     end
   end
 end

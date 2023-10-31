@@ -26,7 +26,7 @@ class TasksController < ApplicationController
     authorize! @task
 
     if create_task.success?
-      redirect_to project_tasks_path(@project), notice: "Task successfully created!"    
+      redirect_to project_tasks_path(@project), notice: "Task successfully created!"  
     else
       render :new, status: :unprocessable_entity
     end

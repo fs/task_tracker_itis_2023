@@ -6,7 +6,7 @@ module Comments
 
     def call
       context.fail!(error: "Fail..") unless comment.update(comment_params)
-      context.notice = "comment successfully update"
+      context.notice = "Comment successfully update"
     end
   end
 end
