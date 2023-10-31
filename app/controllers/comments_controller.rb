@@ -31,10 +31,11 @@ class CommentsController < ApplicationController
 
   def destroy
     authorize! @comment
-    if @comment.destroy
-      redirect_to project_task_path(@task.project, @task), notice: "Comment deleted successfully"
+    @comment = destroy_comment
+    if @comment.success?
+      redirect_to project_task_path(@task.project, @task), notice: @comment.notice
     else
-      redirect_to project_task_path(@task.project, @task), alert: "Failed to delete comment"
+      redirect_to project_task_path(@task.project, @task), alert: @comment.error
     end
   end
 
@@ -50,5 +51,13 @@ class CommentsController < ApplicationController
 
   def comment_params
     params.require(:comment).permit(:content)
+  end
+
+  def destroy_comment
+    @destroy_comment ||= ::Comments::Destroy.call(comment: @comment)
+  end
+
+  def create_comment
+    @create_comm ||= ::Comments::Create.call(task: @task, comment_params: comment_params)
   end
 end
