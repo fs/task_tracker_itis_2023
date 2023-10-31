@@ -7,6 +7,7 @@ class ProjectsController < ApplicationController
 
   def show
     @project = Project.find(params[:id])
+    authorize! @project, to: :show
   end
 
 
@@ -29,17 +30,40 @@ class ProjectsController < ApplicationController
 
 # -----------------------UPDATE------------------
   def update
-    if @project.update(project_params)
-      redirect_to projects_path, notice: "Gracefully Updated"
+    @project = Project.find(params[:id])
+    updated_attributes = project_params
+    result = UpdateProject.call(project: @project, updated_attributes: updated_attributes)
+
+    if result.success?
+      redirect_to projects_path, notice: result.message
     else
-      render :edit, status: :unprocessable_entity
+      redirect_to projects_path(@project), notice: result.message
     end
+    # if @project.update(project_params)
+    #   redirect_to projects_path, notice: "Gracefully Updated"
+    # else
+    #   render :edit, status: :unprocessable_entity
+    # end
   end
 
 # ----------------DELETE-----------------------
   def destroy
-    @project.destroy
-    redirect_to projects_path, notice: "Gracefully Deleted"
+    # @project.destroy
+    @project = Project.find(params[:id])
+    # @project.assignments.each do |assignment|
+    #   assignment.comments.destroy_all
+    # end
+    # @project.assignments.destroy_all
+    # @project.destroy
+    # redirect_to projects_path, notice: "Gracefully Deleted"
+
+    result = DeleteProject.call(project: @project)
+
+    if result.success?
+      redirect_to projects_path, notice: result.message
+    else
+      redirect_to projects_path(@project), notice: result.message
+    end
   end
 
   private

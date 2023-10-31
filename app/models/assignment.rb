@@ -1,7 +1,10 @@
 class Assignment < ApplicationRecord
+    extend Enumerize
+
+  enumerize :status, in: %i[Not_Started Started Finished], default: :Not_Started
+
   belongs_to :user
   belongs_to :project
-
   has_many :comments
 
   validate:deadline_not_earlier_than_created

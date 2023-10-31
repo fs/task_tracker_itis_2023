@@ -20,6 +20,7 @@ gem "jbuilder", "~> 2.7"
 gem 'kaminari'
 gem "pry"
 gem 'enumerize'
+gem 'interactor'
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 # Use Active Model has_secure_password
@@ -31,6 +32,7 @@ gem 'enumerize'
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", ">= 1.4.4", require: false
 gem 'devise', '~> 4.9', '>= 4.9.2'
+gem 'action_policy'
 
 group :development, :test do
   gem "byebug", platforms: %i[mri mingw x64_mingw]

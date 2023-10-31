@@ -10,7 +10,6 @@
 <%if user_signed_in?%>
 <h1>Project's list</h1>
 
-<%# <h2><%= link_to "New Project", new_project_path %>
 
   <table class = "table table-bordered table-hover">
      <thead class="thead-dark">
@@ -25,17 +24,16 @@
 
  <tbody>
   <% @projects.each do |project| %>
-  <%# <div class="record"> %>
+
     <tr>
     <td><%= project.id %></td>
-    <td><%= link_to project.name, project_path(project) %></td>
+    <td><%= link_to project.name, project_assignments_path(project) %></td>
     <td><%= project.description %> </td>
 
-    <%# <p><%= link_to "Edit", edit_project_path(project) %>
     <td><%= link_to "Edit Project", edit_project_path(project), class:"btn btn-dark"%></td>
     <td><%= button_to "Delete", project, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger"%></td>
     </tr>
-  <%# </div> %>
+  
 <% end %>
 
 <%= paginate @projects %>

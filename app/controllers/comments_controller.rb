@@ -12,24 +12,32 @@ class CommentsController < ApplicationController
 
   def edit
     @comment = Comment.find(params[:id])
-    # respond_to do |format|
-    #   format.html
-    #   format.js
-    # end
   end
 
   def create
-    @comment = current_user.comments.build(comment_params)
     @assignment = Assignment.find(params[:assignment_id])
+    @comment = current_user.comments.build(comment_params)
     @comment.assignment = @assignment
-    if @comment.save
-      flash[:notice] = "Comment gracefully posted"
-      redirect_to @comment.assignment
-    else
-      flash[:alert] = "Couldn't post the comment"
-      render :new
+
+    result = CreateComment.call(
+      assignment: @assignment,
+      user: current_user,
+      comment_params: comment_params
+    )
+    if result.success?
+      redirect_to assignment_path(@assignment), notice: result.message
+     else
+      redirect_to assignment_path(@assignment), notice: result.message
     end
+    # if @comment.save
+    #   flash[:notice] = "Comment gracefully posted"
+    #   redirect_to @comment.assignment
+    # else
+    #   flash[:alert] = "Couldn't post the comment"
+    #   render :new
+    # end
   end
+
 
   def index
     @comments = Comment.all
@@ -41,32 +49,44 @@ class CommentsController < ApplicationController
     # @assignment = Assignment.find(params[:assignment_id])
 
     @comment = Comment.find(params[:id])
-    # respond_to do |format|
+    comment_params = params.require(:comment).permit(:content)
 
-    if @comment.update(comment_params)
-       respond_to do |format|
-         format.html { redirect_to @comment.assignment }
-         format.js {render json: {content: @comment.content}}
-       end
-      # render json: { success: true, updated_comment: @comment.content }
+    result = UpdateComment.call(comment: @comment, comment_attributes: comment_params)
+
+    if result.success?
+      redirect_to @comment.assignment, notice: result.message
     else
-      # format.html{ render :edit}
-      # format.js
-      #  render json: {  success: false, errors: @comment.errors.full_message }
-      render :edit
+      redirect_to @comment.assignment, alert: result.message
     end
+    # if @comment.update(comment_params)
+    #    respond_to do |format|
+    #      format.html { redirect_to @comment.assignment }
+    #      format.js {render json: {content: @comment.content}}
+    #    end
+    # else
+    #   render :edit
+    # end
   end
 
 
 
   def destroy
-    @comment = Comment.find(params[:id])
-    @comment.destroy
+     @comment = Comment.find(params[:id])
 
-    respond_to do |format|
-      format.html { redirect_to comments_url, notice: "Comment gracefully destroyed." }
-      format.json { head :no_content }
-    end
+     result = DeleteComment.call(comment: @comment)
+
+     if result.success?
+      redirect_to @comment.assignment, notice: result.message
+     else
+      redirect_to @comment.assignment, notice: result.message
+     end
+
+    # @comment.destroy
+
+    # respond_to do |format|
+    #   format.html { redirect_to assignment_path(@comment.assignment), notice: "Comment gracefully destroyed." }
+    #   format.json { head :no_content }
+    # end
   end
 
 

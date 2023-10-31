@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   root 'projects#index'
 
   resources :projects do
-    resources :assignments
+    resources :assignments, only: [:index]
   end
 
   resources :assignments do

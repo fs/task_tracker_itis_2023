@@ -43,7 +43,8 @@
           </td>
         <td><%= assignment.description %></td>
         <td><%= assignment.deadline %></td>
-        <td><%= assignment.completion_status %></td>
+        <td><%= assignment.status %></td>
+        <%# <td><%= assignment.completion_status %>
       
         <td><%= link_to 'Delete', assignment, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger btn-sm"%></td>
       </tr>
