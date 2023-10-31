@@ -9,7 +9,17 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
+  <header>
+    <div>
+      <%if current_user%>
+        <%= link_to link_to_me, sessions_path%>
+        <%= button_to "Log out", logout_path, method: :delete %>
+      <%else%>
+        <%=link_to "Log in", new_sessions_path%>
+        <%=link_to "Sign up", new_user_path%>
+      <%end%>
+    </div>
+  </header>
   <body class="center">
     <% flash.each do |type, msg| %>
       <div class="flash-<%= type %>">
