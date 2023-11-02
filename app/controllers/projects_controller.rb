@@ -9,6 +9,7 @@ class ProjectsController < ApplicationController
 
   def show
     @tasks = @project.tasks.order(params[:sort]).page(params[:page]).per(3)
+    authorize! @project
   end
 
   def new
@@ -17,11 +18,14 @@ class ProjectsController < ApplicationController
     authorize! @project
   end
 
-  def edit; end
+  def edit; 
+    authorize! @project
+  end
 
   def create
     @project = Project.new(project_params)
     @project_membership = ProjectMembership.new(project_membership_params)
+    authorize! @project
 
     if @project.save && @project_membership.save
       redirect_to projects_path, notice: "Created Successful"
@@ -31,6 +35,7 @@ class ProjectsController < ApplicationController
   end
 
   def update
+    authorize! @project
     if @project.update(project_params)
       redirect_to projects_path, notice: "Update Successful"
     else
@@ -39,6 +44,7 @@ class ProjectsController < ApplicationController
   end
 
   def destroy
+    authorize! @project
     @project.destroy
     redirect_to projects_path, notice: "Project destroyed"
   end

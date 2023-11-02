@@ -6,7 +6,7 @@ class ProjectPolicy < ApplicationPolicy
   end
 
   def new?
-    true
+    create?
   end
 
   def create?
@@ -14,18 +14,28 @@ class ProjectPolicy < ApplicationPolicy
   end
 
   def destroy?
-    true
+    owner?
   end
 
   def edit?
-    new?
+    member?
   end
 
   def show?
-    true
+    member?
   end
 
   def update?
-    true
+    member?
+  end
+
+  private
+
+  def member?
+    ProjectMembership.find_by(project: record, user: user).present?
+  end
+
+  def owner?
+    #TODO owner of proj?
   end
 end

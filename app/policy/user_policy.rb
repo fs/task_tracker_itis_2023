@@ -1,17 +1,11 @@
 class UserPolicy < ApplicationPolicy
-  def index?
-    true
-  end
-  
+  authorize :user, allow_nil: true
+
   def new?
-    true
+    user.blank?
   end
 
   def create?
-    true
-  end
-
-  def show?
-    true
+    user.blank?
   end
 end

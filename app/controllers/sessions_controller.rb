@@ -1,12 +1,11 @@
 class SessionsController < ApplicationController
   before_action :authenticate_current_user!, only: %i[show destroy]
+  before_action -> {authorize! User, with: SessionPolicy}
 
   def show; end
 
   def new
     @user = User.new
-
-    authorize! @user
   end
 
   def create
@@ -21,8 +20,6 @@ class SessionsController < ApplicationController
       @user.errors.add :base, "Wrong email or password"
       render :new
     end
-
-    authorize! @user
   end
 
   def destroy
