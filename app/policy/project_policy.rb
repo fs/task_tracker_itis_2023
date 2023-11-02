@@ -18,24 +18,24 @@ class ProjectPolicy < ApplicationPolicy
   end
 
   def edit?
-    member?
+    project_membership.present?
   end
 
   def show?
-    member?
+    project_membership.present?
   end
 
   def update?
-    member?
+    project_membership.present?
   end
 
   private
 
-  def member?
-    ProjectMembership.find_by(project: record, user: user).present?
+  def project_membership
+    @project_membership ||= ProjectMembership.find_by(project: record, user: user)
   end
 
   def owner?
-    #TODO owner of proj?
+    project_membership&.owner?
   end
 end

@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
   before_action :find_task
   before_action :find_comment, only: %i[update destroy]
-  
+
   def edit
     @comment = Comment.find(params[:id])
     authorize! @comment

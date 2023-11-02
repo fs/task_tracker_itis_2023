@@ -18,7 +18,7 @@ class ProjectsController < ApplicationController
     authorize! @project
   end
 
-  def edit; 
+  def edit
     authorize! @project
   end
 

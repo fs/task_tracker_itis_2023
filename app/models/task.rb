@@ -5,7 +5,7 @@ class Task < ApplicationRecord
 
   validates :name, presence: true
   validates :name, uniqueness: { scope: :project_id }
-  enumerize :status, in: [:not_started, :started, :finished], default: :not_started
+  enumerize :status, in: %i[not_started started finished], default: :not_started
   validate :deadline_correct
 
   private
