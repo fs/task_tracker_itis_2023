@@ -1,15 +1,16 @@
 class SessionsController < ApplicationController
   before_action :authenticate_current_user!, only: %i[show destroy]
-
+  before_action -> { authorize! User, with: SessionPolicy }
   def show; end
 
   def new
     @user = User.new
+    authorize! @user, with: SessionPolicy
   end
 
   def create
     @user = User.find_by(email: user_params[:email])
-                &.authenticate(user_params[:password])
+              &.authenticate(user_params[:password])
 
     if @user
       session[:current_user_id] = @user.id

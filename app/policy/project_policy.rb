@@ -6,7 +6,7 @@ class ProjectPolicy < ApplicationPolicy
   end
 
   def new?
-    true
+    user.present?
   end
 
   def create?
@@ -14,7 +14,7 @@ class ProjectPolicy < ApplicationPolicy
   end
 
   def destroy?
-    true
+    user.present?
   end
 
   def edit?
