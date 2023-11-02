@@ -5,7 +5,9 @@ class ProjectsController < ApplicationController
     @projects = Project.order(params[:sort]).page(params[:page]).per(3)
   end
 
-  def show; end
+  def show
+    @projects = Project.all.order(params[:sort])
+  end
 
   def new
     @project = Project.new

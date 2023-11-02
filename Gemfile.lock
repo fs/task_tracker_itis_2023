@@ -123,6 +123,8 @@ GEM
     mini_portile2 (2.8.4)
     minitest (5.20.0)
     msgpack (1.7.2)
+    net-http (0.3.2)
+      uri
     net-imap (0.3.7)
       date
       net-protocol
@@ -141,7 +143,7 @@ GEM
       ast (~> 2.4.1)
       racc
     pg (1.5.4)
-    pry (0.14.2)
+    pry (0.13.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
     public_suffix (5.0.3)
@@ -253,6 +255,7 @@ GEM
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.5.0)
+    uri (0.10.0)
     web-console (4.2.1)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
@@ -285,8 +288,9 @@ DEPENDENCIES
   jbuilder (~> 2.7)
   kaminari
   listen (~> 3.3)
+  net-http
   pg (~> 1.1)
-  pry
+  pry (~> 0.13.1)
   puma (~> 5.0)
   rack-mini-profiler (~> 2.0)
   rails (~> 6.1.7)
@@ -302,6 +306,7 @@ DEPENDENCIES
   spring
   turbolinks (~> 5)
   tzinfo-data
+  uri (= 0.10.0)
   web-console (>= 4.1.0)
   webdrivers
   webpacker (~> 5.0)
