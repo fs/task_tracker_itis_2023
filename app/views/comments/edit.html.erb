@@ -1,0 +1,8 @@
+<h1>Comment edit<h1>
+
+<%= form_with(model: [@task.project, @task, @comment], local: true) do |form| %>
+  <%= form.text_area :content, placeholder: @comment.content %>
+  <%= form.submit "Save Comment" %>  
+<% end %>
+
+<%= link_to 'Back', project_task_path(@task.project, @task) %>
