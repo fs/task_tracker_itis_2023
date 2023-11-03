@@ -5,7 +5,7 @@ module Tasks
     delegate :project_id, to: :context
 
     def call
-      context.fail!(error: "Invalid data") unless Task.create!(task_params)
+      context.fail!(error: "Invalid data") unless Task.create(task_params)
     end
 
     private
