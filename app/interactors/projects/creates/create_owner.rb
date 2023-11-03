@@ -1,5 +1,5 @@
 module Projects
-  class Create
+  module Creates
     class CreateOwner
       include Interactor
 
