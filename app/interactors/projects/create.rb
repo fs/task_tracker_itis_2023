@@ -5,7 +5,7 @@ module Projects
     delegate :project, :user, to: :context
 
     organize Projects::Save,
-             Projects::Create::CreateOwner
+             Projects::Creates::CreateOwner
 
     after do
       ProjectMailer.project_created(project, user).deliver_later
