@@ -1,0 +1,6 @@
+<h1>Your project updated</h1>
+<% @project.attributes.each do |attr| %>
+  <ul>
+    <li><%= attr.join(': ') %></li>
+  </ul>
+<% end %>
