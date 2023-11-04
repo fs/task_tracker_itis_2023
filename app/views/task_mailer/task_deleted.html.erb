@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <style>
+      /* Add any CSS styles for the email here */
+  </style>
+</head>
+<body>
+<h1>A Task has been deleted from the project</h1>
+<p>
+  A new task has been deleted from the project <%= @project.name %>. Details below:
+</p>
+<h2>Task Details:</h2>
+<p>
+  Task Name: <%= @task_name %><br>
+  Description: <%= @task_description %>
+</p>
+</body>
+</html>
