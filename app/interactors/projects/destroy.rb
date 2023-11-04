@@ -2,10 +2,10 @@ module Projects
   class Destroy
     include Interactor
 
-    delegate :project, to: :context
+    delegate :project, :users, to: :context
 
     before do
-      context.users = project.users
+      context.users = User.where(id: project.users.pluck(:id))
     end
 
     def call
@@ -13,7 +13,7 @@ module Projects
     end
 
     after do
-      context.users.each do |user|
+      users.each do |user|
         ProjectMailer.project_destroyed(user).deliver_later
       end
     end
