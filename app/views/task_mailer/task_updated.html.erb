@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <style>
+      /* Add any CSS styles for the email here */
+  </style>
+</head>
+<body>
+<h1>A Task has been Updated</h1>
+<p>
+  A new task has been updated in the project <%= @project.name %>. Details below:
+</p>
+<h2>Task Details:</h2>
+<p>
+  Task Name: <%= @task.name %><br>
+  Description: <%= @task.description %><br>
+  Updated at: <%= @task.updated_at %><br>
+  Deadline: <%= @task.deadline_at %>
+</p>
+</body>
+</html>
