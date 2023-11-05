@@ -14,8 +14,8 @@ class Task < ApplicationRecord
   private
 
   def deadline_correct
-    return if (created_at || Time.current) < deadline_at
+    return if deadline_at&.present? && ((created_at || Time.current) < deadline_at)
 
-    errors.add(:deadline_at, "must be after creation time")
+    errors.add(:deadline_at, "must be after creation time") if deadline_at.present?
   end
 end
