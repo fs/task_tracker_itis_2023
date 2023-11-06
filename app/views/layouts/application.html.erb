@@ -10,7 +10,24 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
+  <header>
+    <% if current_user %>
+     <%= link_to "#{current_user.first_name} #{current_user.last_name || current_user.email}", sessions_path %>
+     <li>
+        <%= button_to 'Log out', logout_path, method: :delete, data: { confirm: 'Are you sure?' } %>
+      </li>
+    <% else %>
+      <%= link_to "Log in", login_path %>
+      <%= link_to "Sign up", register_path %>
+    <% end %>
+  </header>
+
   <body class="center">
+    <% flash.each do |type, msg| %>
+      <div class="flash-<%= type %>">
+        <p><%= msg %></p>
+      </div>
+    <% end %>
     <%= yield %>
   </body>
 </html>

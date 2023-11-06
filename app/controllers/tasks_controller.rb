@@ -15,7 +15,7 @@ class TasksController < ApplicationController
   def new
     @project = Project.find(params[:project_id])
     @task = @project.tasks.build
-    @task.created_at = Time.now
+    @task.created_at = Time.zone.now
     @task.deadline_at = 1.week.from_now
   end
 
@@ -24,30 +24,30 @@ class TasksController < ApplicationController
     @task = @project.tasks.find(params[:id])
   end
 
-  def update
-    if @task.update(task_params)
-      redirect_to project_tasks_path(@project, @task), notice: 'Updated Successful'
-    else
-      flash.now[:alert] = 'Something went wrong. Try again.'
-      render :edit, status: :unprocessable_entity
-    end
-  end
-
   def create
     @task = @project.tasks.build(task_params)
 
     @task.deadline_at = @task.created_at + 1.week if @task.deadline_at.nil?
 
     if @task.save
-      redirect_to project_tasks_path(@project, @task), notice: 'Created Successful'
+      redirect_to project_tasks_path(@project, @task), notice: "Created Successful"
     else
       render :new, status: :unprocessable_entity
     end
   end
 
+  def update
+    if @task.update(task_params)
+      redirect_to project_tasks_path(@project, @task), notice: "Updated Successful"
+    else
+      flash.now[:alert] = "Something went wrong. Try again."
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
   def destroy
     @task.destroy
-    redirect_to project_tasks_path(@project), notice: 'Task destroyed'
+    redirect_to project_tasks_path(@project), notice: "Task destroyed"
   end
 
   private
@@ -57,7 +57,7 @@ class TasksController < ApplicationController
   end
 
   def set_task
-    @task = @project.tasks.find_by!(id: params[:id])
+    @task = @project.tasks.find(params[:id])
   end
 
   def task_params

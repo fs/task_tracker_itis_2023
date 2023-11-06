@@ -1,5 +1,11 @@
-<p><%= @project.name %> </p>
-<p><%= @project.description %> </p>
+<div>
+<h1><%= @project.name %> </h1>
+<h2><%= @project.description %> </h2>
+</div>
+<div>
 <p><%= link_to "Tasks list", project_tasks_path(@project) %></p>
+</div>
 
+<div>
 <%= link_to "Back", projects_path %>
+</div>

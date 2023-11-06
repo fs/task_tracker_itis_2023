@@ -4,38 +4,38 @@ class ProjectsController < ApplicationController
   before_action :set_project, only: %i[show edit update destroy]
 
   def index
-    @projects = Project.all.order(params[:sort]).page(params[:page]).per(3)
+    @projects = Project.order(params[:sort]).page(params[:page]).per(3)
   end
 
   def show; end
-
-  def edit; end
-
-  def update
-    if @project.update(project_params)
-      redirect_to projects_path, notice: 'Update Successful'
-    else
-      render :edit, status: :unprocessable_entity
-    end
-  end
 
   def new
     @project = Project.new
   end
 
+  def edit; end
+
   def create
     @project = Project.new(project_params)
 
     if @project.save
-      redirect_to projects_path, notice: 'Created Successful'
+      redirect_to projects_path, notice: "Created Successful"
     else
       render :new, status: :unprocessable_entity
     end
   end
 
+  def update
+    if @project.update(project_params)
+      redirect_to projects_path, notice: "Update Successful"
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
   def destroy
     @project.destroy
-    redirect_to projects_path, notice: 'Project destroyed'
+    redirect_to projects_path, notice: "Project destroyed"
   end
 
   private

@@ -17,7 +17,7 @@
   <div class="record">
     <p><%= task.id %>. <%= link_to task.name, url_for([@project, task]) %></p>
     <p><%= link_to "Edit", edit_project_task_path(@project, task) %></p>
-    <p><%= button_to "Destroy", url_for([@project, task]), method: :delete %></p>
+    <p><%= button_to "Destroy", url_for([@project, task]), method: :delete, class: "button" %></p>
   </div>
 <% end %>
 
