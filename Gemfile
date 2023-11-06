@@ -36,6 +36,7 @@ gem "sidekiq"
 
 group :development, :test do
   gem "byebug", platforms: %i[mri mingw x64_mingw]
+  gem "rspec-rails", "~> 6.0.0"
   gem "rubocop", require: false
   gem "rubocop-i18n", require: false
   gem "rubocop-minitest", require: false
