@@ -8,11 +8,10 @@ class CommentsController < ApplicationController
   end
 
   def create
-    @comment = @task.comments.new(comment_params)
-    @comment.user = current_user
+    @comment = create_comment.comment
 
     authorize! @comment
-    if @comment.save
+    if create_comment.success?
       redirect_to project_task_path(@task.project, @task), notice: "Comment created successfully"
     else
       redirect_to project_task_path(@task.project, @task), alert: "Failed to create comment"
@@ -22,7 +21,7 @@ class CommentsController < ApplicationController
   def update
     authorize! @comment
 
-    if @comment.update(comment_params)
+    if update_comment.success?
       redirect_to project_task_path(@task.project, @task), notice: "Comment updated successfully"
     else
       redirect_to project_task_path(@task.project, @task), alert: "Failed to update comment"
@@ -31,7 +30,7 @@ class CommentsController < ApplicationController
 
   def destroy
     authorize! @comment
-    if @comment.destroy
+    if destroy_comment.success?
       redirect_to project_task_path(@task.project, @task), notice: "Comment deleted successfully"
     else
       redirect_to project_task_path(@task.project, @task), alert: "Failed to delete comment"
@@ -50,5 +49,17 @@ class CommentsController < ApplicationController
 
   def comment_params
     params.require(:comment).permit(:content)
+  end
+
+  def create_comment
+    @create_comment ||= ::Comments::Create.call(current_user: current_user, task: @task, comment_params: comment_params)
+  end
+
+  def update_comment 
+    @update_comment ||= ::Comments::Create.call(current_user: current_user, task: @task, comment_params: comment_params, comment: @comment)
+  end
+
+  def destroy_comment
+    ::Comments::Destroy.call(comment: @comment)
   end
 end
