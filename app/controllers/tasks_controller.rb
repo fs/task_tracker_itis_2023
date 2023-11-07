@@ -56,7 +56,7 @@ class TasksController < ApplicationController
   end
 
   def create_task
-    @create_task ||= ::Tasks::Create.call(task_params: task_params, project: @project, task: @task)
+    @create_task ||= ::Tasks::Create.call(task_params: task_params, project: @project)
   end
 
   def update_task

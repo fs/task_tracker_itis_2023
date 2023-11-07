@@ -2,13 +2,13 @@ module Tasks
   class Create
     include Interactor::Organizer
 
-    delegate :project, :task, to: :context
+    delegate :project, to: :context
 
-    organize Tasks::Creates::PrepareParams,
+    organize Tasks::Create::PrepareParams,
              Tasks::Save
 
     after do
-      TaskMailer.task_created(project, task).deliver_later
+      TaskMailer.task_created(project, context.task).deliver_later
     end
   end
 end
