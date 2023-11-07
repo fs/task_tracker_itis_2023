@@ -1,0 +1,8 @@
+<h1>
+  Your task in project <%= @project.name %> was updated
+</h1>
+<% @task.attributes.each do |attr| %>
+  <ul>
+    <li><%= attr.join(': ') %></li>
+  </ul>
+<% end %>
