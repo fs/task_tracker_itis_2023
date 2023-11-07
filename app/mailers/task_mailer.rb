@@ -19,11 +19,15 @@ class TaskMailer < ApplicationMailer
     @user = user
     @task = task
     @project = task.project
+
     mail(to: @user.email, subject: "A task in your project has been updated")
   end
 
-  def task_deleted(user)
+  def task_deleted(task_name, task_description, user)
     @user = user
+    @task_name = task_name
+    @task_description = task_description
+
     mail(to: @user.email, subject: "A task in your project has been deleted")
   end
 end

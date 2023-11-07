@@ -2,12 +2,12 @@ module Tasks
   class Update
     include Interactor::Organizer
 
+    delegate :task, to: :context
+
     organize Tasks::Save
 
     after do
-      task = context.task
-      project = task.project
-      users = project.users
+      users = task.project.users
 
       users.each do |user|
         TaskMailer.task_updated(user, task).deliver_later

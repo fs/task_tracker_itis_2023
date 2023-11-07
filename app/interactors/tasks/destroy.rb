@@ -2,12 +2,11 @@ module Tasks
   class Destroy
     include Interactor
 
-    delegate :task, to: :context
+    delegate :task, :project, :user, to: :context
 
     before do
-      context.task = task
-      context.project = task.project
-      context.users = User.where(id: task.project.users.pluck(:id))
+      @task_name = task.name
+      @task_description = task.description
     end
 
     def call
@@ -15,8 +14,9 @@ module Tasks
     end
 
     after do
-      context.users.each do |user|
-        TaskMailer.task_deleted(user).deliver_later
+      users = User.where(id: task.project.users.pluck(:id))
+      users.each do |user|
+        TaskMailer.task_deleted(@task_name, @task_description, user).deliver_later
       end
     end
   end

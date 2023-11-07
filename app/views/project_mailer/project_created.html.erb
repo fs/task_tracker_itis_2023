@@ -1,2 +1,6 @@
 <h1>New project created.</h1>
-<p>Congratulations! You have become the owner of a new project -- "<%= @project.name %>"!</p>
+<% @project.attributes.each do |attr| %>
+  <ul>
+    <li><%= attr.join(': ') %></li>
+  </ul>
+<% end %>
