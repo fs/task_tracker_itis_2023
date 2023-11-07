@@ -2,7 +2,7 @@ module Comments
   class Create
     include Interactor::Organizer
 
-    organize Comments::Create::PrepareParams,
+    organize Comments::Creates::PrepareParams,
              Comments::Save
   end
 end

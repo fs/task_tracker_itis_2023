@@ -1,5 +1,5 @@
 module Comments
-  class Create
+  module Creates
     class PrepareParams
       include Interactor
 
