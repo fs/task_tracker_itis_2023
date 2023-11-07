@@ -1,10 +1,16 @@
 class TaskMailer < ApplicationMailer
-  def task_created(task, project)
-    @task = task
+  def task_created_to_members(project, task)
     @project = project
-    @project_memberships = project.project_memberships.where(role: %w[owner member])
+    @task = task
 
-    send_emails("New Task Created", "New Task Created in", project)
+    mail(to: project.users.where(project_memberships: { role: :member }).pluck(:email))
+  end
+
+  def task_created_to_owner(project, task)
+    @project = project
+    @task = task
+
+    mail(to: project.users.where(project_memberships: { role: :owner }).pluck(:email))
   end
 
   def task_updated(task, project)
@@ -15,10 +21,9 @@ class TaskMailer < ApplicationMailer
     send_emails("Task Updated", "A task has been updated", project)
   end
 
-  def task_destroyed(task_name, task_description, project, user)
-    @task_name = task_name
-    @task_description = task_description
+  def task_destroyed(project, task, user)
     @project = project
+    @task = task
     @project_memberships = project.project_memberships
 
     if user_is_owner?(user)

@@ -1,0 +1,9 @@
+A new task has been created in a project in which you're the owner!
+
+
+Task Details:
+  Task Name: <%= @task.name %>
+  Project Name: <%= @project.name %>
+  Description: <%= @task.description %>
+  Deadline: <%= @task.deadline_at.strftime('%B %d, %Y') %>
+  Status: <%= @task.status.text %>

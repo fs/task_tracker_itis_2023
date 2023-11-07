@@ -1,6 +1,8 @@
-<h1>A new task has been created in the project <%= @project.name %>. Details below:</h1>
+<h1>A new task has been created in a project in which you're a member!</h1>
 <ul>
+  <li><strong>Project Name: <%= @project.name %></li>
   <li><strong>Task Name:</strong> <%= @task.name %></li>
   <li><strong>Description:</strong> <%= @task.description %></li>
   <li><strong>Deadline:</strong> <%= @task.deadline_at.strftime('%B %d, %Y') %></li>
+  <li><strong>Status:</strong> <%= @task.status.text %></li>
 </ul>
