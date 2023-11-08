@@ -41,8 +41,9 @@ class TasksController < ApplicationController
   end
 
   def destroy
-    destroy_task
-    redirect_to project_tasks_path(@project), notice: "Task destroyed"
+    if destroy_task.success?
+      redirect_to project_tasks_path(@project), notice: "Task destroyed"
+    end
   end
 
   private
@@ -64,7 +65,7 @@ class TasksController < ApplicationController
   end
 
   def destroy_task
-    ::Tasks::Destroy.call(task: @task, project: @project, current_user: current_user)
+    ::Tasks::Destroy.call(task: @task, user: current_user)
   end
 
   def task_params

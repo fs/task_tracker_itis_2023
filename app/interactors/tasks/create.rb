@@ -4,7 +4,7 @@ module Tasks
 
     delegate :project, to: :context
 
-    organize Tasks::Create::PrepareParams,
+    organize Tasks::Creates::PrepareParams,
              Tasks::Save
 
     after do

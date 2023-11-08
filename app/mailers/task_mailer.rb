@@ -3,7 +3,7 @@ class TaskMailer < ApplicationMailer
     @project_memberships = ProjectMembership.find_by(project_id: project.id)
 
     @project_memberships.each do |member|
-      if member.role == "owner"
+      if member.owner?
         owner_create(project, task, member)
       else
         membership_create(project, task, member)
@@ -15,53 +15,43 @@ class TaskMailer < ApplicationMailer
     @project = project
     @task = task
     @project_memberships = ProjectMembership.find_by(project_id: project.id)
-    
+
     @project_memberships.each do |member|
       mail(to: member.email)
     end
   end
 
-  def task_destroyed(project, task, current_user)
-    @project_memberships = ProjectMembership.find_by(project_id: @project.id)
+  def task_destroyed_to_initiator_owner(project, task, user)
+    @project = project
+    @task = task
+    mail(to: user.email)
+  end
+
+  def task_destroyed_to_owner(project, task)
+    @project = project
+    @task = task
+    @owner = ProjectMembership.find_by(project: project, role: ROLES.owner)
+    binding.pry
+    mail(to: @owner.email)
+  end
+
+  def task_destroyed_to_initiator_member(project, task, user)
+    @project = project
+    @task = task
+    mail(to: user.email)
+  end
+
+  def task_destroyed_to_members(project, task, user)
+    @project = project
+    @task = task
+    @project_memberships = ProjectMembership.find_by(project_id: project.id)
 
     @project_memberships.each do |member|
-      if member.user_id == current_user.id and member.role == "member"
-        task_member_destroyer(project, task, member)
-      elsif member.user_id == current_user.id and member.role == "owner"
-        task_owner_destroyer(project, task, member)
-      elsif member.user_id != current_user.id and member.role == "member"
-        task_member_destroyed(project, task, member)
-      elsif member.user_id != current_user.id and member.role == "owner"
-        task_owner_destroyed(project, task, member)
-      end
+      mail(to: member.email) unless member.id != user.id && !member.owner?
     end
   end
 
   private
-  
-  def task_member_destroyer(project, task, member)
-    @project = project
-    @task = task
-    mail(to: member.email)
-  end
-  
-  def task_owner_destroyer(project, task, member)
-    @project = project
-    @task = task
-    mail(to: member.email)
-  end
-
-  def task_member_destroyed(project, task, member)
-    @project = project
-    @task = task
-    mail(to: member.email)
-  end
-
-  def task_owner_destroyed(project, task, member)
-    @project = project
-    @task = task
-    mail(to: member.email)
-  end
 
   def task_owner_create(project, task, member)
     @project = project
