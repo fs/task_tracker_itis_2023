@@ -1,19 +1,26 @@
 class TasksController < ApplicationController
   before_action :set_project
   before_action :set_task, only: %i[show edit update destroy]
+  before_action :authorize_task, only: %i[destroy]
 
   def index
     @tasks = @project.tasks.order(params[:sort]).page(params[:page]).per(3)
+    authorize! @tasks
   end
 
-  def show; end
+  def show
+    authorize! @task
+  end
 
   def new
     @task = @project.tasks.build
     @task.deadline_at ||= 1.week.from_now
+    authorize! @task
   end
 
-  def edit; end
+  def edit
+    authorize! @task
+  end
 
   def create
     @task = @project.tasks.build(task_params)
@@ -23,6 +30,8 @@ class TasksController < ApplicationController
     else
       render :new, status: :unprocessable_entity
     end
+
+    authorize! @task
   end
 
   def update
@@ -31,6 +40,8 @@ class TasksController < ApplicationController
     else
       render :edit, status: :unprocessable_entity
     end
+    authorize! @task
+
   end
 
   def destroy
@@ -42,6 +53,10 @@ class TasksController < ApplicationController
 
   def set_project
     @project = Project.find_by(id: params[:project_id])
+  end
+
+  def authorize_task
+    authorize! @task
   end
 
   def set_task

@@ -17,4 +17,20 @@
 
 <p><strong>Deadline:</strong> <%= @task.deadline_at %></p>
 
+<h1>Comments</h1>
+
+<%= render 'comments/form' %>
+
+<% @task.comments.each do |comment| %>
+  <p><strong><%= comment.user.first_name%></strong></p>
+  <p>
+    <%= comment.content %>
+    <p>
+      <%= link_to "Edit", edit_project_task_comment_path(@task.project, @task, comment) %>
+      <%= link_to "Destroy", url_for([@task.project, @task, comment]), method: :delete, data: { confirm: 'Are you sure?' } %>
+    </p>
+  </p>
+<% end %>
+
+
 <%= link_to "Back to Tasks", project_tasks_path(@project) %>

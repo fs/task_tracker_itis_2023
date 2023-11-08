@@ -10,11 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_10_17_133743) do
+ActiveRecord::Schema.define(version: 2023_11_08_132212) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "plpgsql"
+
+  create_table "comments", force: :cascade do |t|
+    t.string "content"
+    t.bigint "task_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["task_id"], name: "index_comments_on_task_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
 
   create_table "project_memberships", force: :cascade do |t|
     t.bigint "project_id", null: false
@@ -37,7 +47,7 @@ ActiveRecord::Schema.define(version: 2023_10_17_133743) do
   create_table "tasks", force: :cascade do |t|
     t.string "name", null: false
     t.text "description"
-    t.string "status", null: false
+    t.string "status", default: "not started", null: false
     t.datetime "deadline_at"
     t.bigint "project_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -57,6 +67,8 @@ ActiveRecord::Schema.define(version: 2023_10_17_133743) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "comments", "tasks"
+  add_foreign_key "comments", "users"
   add_foreign_key "project_memberships", "projects"
   add_foreign_key "project_memberships", "users"
   add_foreign_key "tasks", "projects"

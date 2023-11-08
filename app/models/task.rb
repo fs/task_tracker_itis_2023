@@ -1,10 +1,16 @@
 class Task < ApplicationRecord
+  extend Enumerize
+
+  STATUSES = ["not started", "started", "finished"].freeze
   belongs_to :project
+  has_many :comments, dependent: :destroy
 
   validates :name, presence: true
   validates :name, uniqueness: { scope: :project_id }
-  validates :status, inclusion: { in: %w[unstarted started done] }
+  validates :status, inclusion: { in: ["not started", "started", "finished"] }
   validate :deadline_correct
+
+  enumerize :status, in: STATUSES, default: "not started"
 
   private
 

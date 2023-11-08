@@ -1,0 +1,13 @@
+<h1>Edit comment</h1>
+
+<%= form_with(model: [@task.project, @task, @comment]) do |form| %>
+
+  <div class="field">
+    <%= form.label :content %>
+    <%= form.text_field :content %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

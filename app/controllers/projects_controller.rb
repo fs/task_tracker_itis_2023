@@ -1,5 +1,6 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: %i[show edit update destroy]
+  before_action :authorize_project, only: %i[show destroy edit update]
 
   def index
     @projects = Project.order(params[:sort]).page(params[:page]).per(3)
@@ -21,6 +22,7 @@ class ProjectsController < ApplicationController
 
   def create
     @project = Project.new(project_params)
+    authorize! @project
     @project_membership = ProjectMembership.new(project_membership_params)
 
     if @project.save && @project_membership.save
@@ -47,6 +49,10 @@ class ProjectsController < ApplicationController
 
   def set_project
     @project = Project.find_by(id: params[:id])
+  end
+
+  def authorize_project
+    authorize! @project
   end
 
   def project_membership_params
