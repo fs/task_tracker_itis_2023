@@ -33,7 +33,6 @@ class TaskMailer < ApplicationMailer
     @project = project
     @task = task
     @owner = ProjectMembership.find_by(project: project, role: ROLES.owner)
-    binding.pry
     mail(to: @owner.email)
   end
 
