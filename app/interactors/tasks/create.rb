@@ -8,7 +8,8 @@ module Tasks
              Tasks::Save
 
     after do
-      TaskMailer.task_created(project, context.task).deliver_later
+      TaskMailer.task_created_to_owner(project, context.task).deliver_later
+      TaskMailer.task_created_to_members(project, context.task).deliver_later  
     end
   end
 end

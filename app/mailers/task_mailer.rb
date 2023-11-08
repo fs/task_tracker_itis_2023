@@ -1,14 +1,16 @@
 class TaskMailer < ApplicationMailer
-  def task_created(project, task)
-    @project_memberships = ProjectMembership.find_by(project_id: project.id)
+  def task_created_to_members(project, task)
+    @project = project
+    @task = task
 
-    @project_memberships.each do |member|
-      if member.owner?
-        owner_create(project, task, member)
-      else
-        membership_create(project, task, member)
-      end
-    end
+    mail(to: project.users.where(project_memberships: { role: :member }).pluck(:email))
+  end
+
+  def task_created_to_owner(project, task)
+    @project = project
+    @task = task
+
+    mail(to: project.users.where(project_memberships: { role: :owner }).pluck(:email))
   end
 
   def task_updated(project, task)
@@ -49,19 +51,5 @@ class TaskMailer < ApplicationMailer
     @project_memberships.each do |member|
       mail(to: member.email) unless member.id != user.id && !member.owner?
     end
-  end
-
-  private
-
-  def task_owner_create(project, task, member)
-    @project = project
-    @task = task
-    mail(to: member.email)
-  end
-
-  def task_member_create(project, task, member)
-    @project = project
-    @task = task
-    mail(to: member.email)
   end
 end
