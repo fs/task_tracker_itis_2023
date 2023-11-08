@@ -41,9 +41,9 @@ class TasksController < ApplicationController
   end
 
   def destroy
-    if destroy_task.success?
-      redirect_to project_tasks_path(@project), notice: "Task destroyed"
-    end
+    return unless destroy_task.success?
+
+    redirect_to project_tasks_path(@project), notice: "Task destroyed"
   end
 
   private
