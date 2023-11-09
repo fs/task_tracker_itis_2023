@@ -1,11 +1,8 @@
 module Tasks
   class Destroy
-    include Interactor
+    include Interactor::Organizer
 
-    delegate :task, to: :context
-
-    def call
-      task.destroy
-    end
+    organize Tasks::Destroys::DestroyRecord,
+             Tasks::Destroys::SendNotification
   end
 end
