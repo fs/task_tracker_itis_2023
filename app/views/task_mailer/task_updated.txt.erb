@@ -1,4 +1,4 @@
 Your task in project <%= @project.name %> was updated
-<% @task.attributes.each |attr| do %>
+<% @task.attributes.each do |attr| %>
   <%= attr.join(': ') %>
 <% end %>
