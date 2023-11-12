@@ -77,4 +77,5 @@ Rails.application.configure do # rubocop:disable Metrics/BlockLength
   config.action_mailer.delivery_method = :letter_opener
   config.action_mailer.perform_deliveries = true
   config.active_job.queue_adapter = :sidekiq
+  
 end
