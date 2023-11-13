@@ -2,11 +2,15 @@ module Api
   module V1
     class ProjectsController < Api::ApplicationController
       def index
-        @projects = Project.order(params[:sort])
+        @projects = Project.includes(:tasks)
+                           .order(params[:sort])
                            .page(params[:page])
                            .per(3)
 
-        render json: { projects: @projects }
+        serializable_projects = ActiveModelSerializers::SerializableResource.new(
+          @projects, each_serializer: ProjectSerializer
+        )
+        render json: { projects: serializable_projects }
       end
 
       def create
