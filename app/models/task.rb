@@ -1,5 +1,12 @@
 class Task < ApplicationRecord
+  extend Enumerize
+
+  STATUSES = %i[unstarted started finished].freeze
+  enumerize :status, in: STATUSES
+
   belongs_to :project
+
+  has_many :comments, dependent: :destroy
 
   validates :name, presence: true
   validates :name, uniqueness: { scope: :project_id }
