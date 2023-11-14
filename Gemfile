@@ -4,6 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby "2.7.4"
 
 gem "action_policy"
+gem "active_model_serializers"
 gem "enumerize"
 gem "interactor", "~> 3.0"
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
@@ -20,6 +21,7 @@ gem "webpacker", "~> 5.0"
 gem "turbolinks", "~> 5"
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem "jbuilder", "~> 2.7"
+gem "jwt"
 gem "kaminari"
 gem "pry"
 # Use Redis adapter to run Action Cable in production
@@ -36,6 +38,7 @@ gem "sidekiq"
 
 group :development, :test do
   gem "byebug", platforms: %i[mri mingw x64_mingw]
+  gem "dotenv-rails"
   gem "factory_bot_rails"
   gem "faker"
   gem "rspec-rails", "~> 6.0.0"

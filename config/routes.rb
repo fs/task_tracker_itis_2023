@@ -3,6 +3,12 @@ require "sidekiq/web"
 Rails.application.routes.draw do
   mount Sidekiq::Web => "/sidekiq"
 
+  namespace :api, defaults: { format: :json } do
+    namespace :v1 do
+      resources :projects, only: %i[index create]
+    end
+  end
+
   root "projects#index"
   get "login", to: "sessions#new", as: :login
   post "login", to: "sessions#create"
