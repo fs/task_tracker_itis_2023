@@ -1,11 +1,10 @@
 module Tasks
   class Destroy
-    include Interactor
+    include Interactor::Organizer
 
-    delegate :task, to: :context
+    delegate :project, :task, to: :context
 
-    def call
-      task.destroy
-    end
+    organize Tasks::Destroy::SendMessages,
+             Tasks::Destroy::DestroyTask
   end
 end

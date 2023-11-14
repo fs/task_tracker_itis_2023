@@ -64,7 +64,7 @@ class TasksController < ApplicationController
   end
 
   def destroy_task
-    ::Tasks::Destroy.call(task: @task, project: @project)
+    ::Tasks::Destroy.call(task: @task, project: @project, user: current_user)
   end
 
   def task_params
