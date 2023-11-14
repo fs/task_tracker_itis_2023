@@ -1,0 +1,4 @@
+"<%= @project.name %>" project's task updated
+<% @task.attributes.each do |attr|%>
+  <%= attr.join(': ') %>
+<% end %>
