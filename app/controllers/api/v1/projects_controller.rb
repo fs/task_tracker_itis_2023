@@ -12,11 +12,10 @@ module Api
         )
         render json: { projects: serializable_projects }
       end
-
       def create
         @project = create_project.project
         if create_project.success?
-          render json: { project: @project, message: "Project Created" }
+          render json: { project: @project, message: "Project Created using JSON" }
         else
           render json: { project: {}, errors: @project.errors }
         end
