@@ -11,7 +11,7 @@ module Api
         object.name.capitalize
       end
 
-      has_many :tasks
+      has_many :tasks, serializer: TaskSerializer
     end
   end
 end

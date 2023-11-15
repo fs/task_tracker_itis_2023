@@ -5,7 +5,9 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
-      resources :projects, only: %i[index create]
+      resources :projects, only: %i[index create destroy update edit] do
+        resources :tasks, only: %i[index create destroy update edit]
+      end
     end
   end
 
@@ -13,6 +15,7 @@ Rails.application.routes.draw do
   get "login", to: "sessions#new", as: :login
   post "login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy", as: :logout
+
 
   get "register", to: "users#new", as: :register
   post "register", to: "users#create"
