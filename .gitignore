@@ -38,3 +38,5 @@ yarn-debug.log*
 .idea/
 
 .env
+
+dump.rdb
