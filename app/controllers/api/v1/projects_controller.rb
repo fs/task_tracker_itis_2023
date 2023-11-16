@@ -5,8 +5,6 @@ module Api
       def index
         @projects = Project.includes(:tasks)
                            .order(params[:sort])
-                           .page(params[:page])
-                           .per(3)
 
         serializable_projects = ActiveModelSerializers::SerializableResource.new(
           @projects, each_serializer: ProjectSerializer
