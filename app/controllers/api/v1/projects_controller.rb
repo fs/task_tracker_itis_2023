@@ -1,7 +1,7 @@
 module Api
   module V1
     class ProjectsController < Api::ApplicationController
-      before_action :set_project, only: %i[ update destroy ]
+      before_action :set_project, only: %i[update destroy]
       def index
         @projects = Project.includes(:tasks)
                            .order(params[:sort])
@@ -46,12 +46,12 @@ module Api
       end
 
       def destroy_project
-        @destroy_project ||= 
+        @destroy_project ||=
           Projects::Destroy.call(project: @project)
       end
 
       def update_project
-        @update_project ||= 
+        @update_project ||=
           Projects::Update.call(project: @project, project_params: project_params)
       end
 
