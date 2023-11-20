@@ -21,22 +21,24 @@ class ProjectsController < ApplicationController
     @project = create_project.project
 
     if create_project.success?
-      redirect_to @project, notice: "Created Successful"
+      redirect_to projects_path, notice: "Created Successful"
     else
       render :new, status: :unprocessable_entity
     end
   end
 
   def update
-    if @project.update(project_params)
-      redirect_to projects_path, notice: "Update Successful"
+    @project = update_project.project
+
+    if update_project.success?
+      redirect_to @project, notice: "Update Successful"
     else
       render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
-    @project.destroy
+    destroy_project
     redirect_to projects_path, notice: "Project destroyed"
   end
 
@@ -53,5 +55,14 @@ class ProjectsController < ApplicationController
   def create_project
     @create_project ||= ::Projects::Create.call(project_params: project_params,
                                                 user: current_user)
+  end
+
+  def update_project
+    @update_project ||= ::Projects::Update.call(project_params: project_params,
+                                                project: @project)
+  end
+
+  def destroy_project
+    @destroy_project ||= ::Projects::Destroy.call(project: @project)
   end
 end
