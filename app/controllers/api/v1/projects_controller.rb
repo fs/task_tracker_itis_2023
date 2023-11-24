@@ -15,6 +15,15 @@ module Api
         render json: { projects: serializable_projects }
       end
 
+      def create
+        @project = create_project.project
+        if create_project.success?
+          render json: { project: @project, message: "Project Created" }
+        else
+          render json: { project: {}, errors: @project.errors }
+        end
+      end
+
       def update
         if update_project.success?
           render json: { project: @project, message: "Update Successful" }
@@ -25,17 +34,8 @@ module Api
 
       def destroy
         return unless destroy_project.success?
-        
-        render json: { message: "Project Destroyed" }
-      end
 
-      def create
-        @project = create_project.project
-        if create_project.success?
-          render json: { project: @project, message: "Project Created" }
-        else
-          render json: { project: {}, errors: @project.errors }
-        end
+        render json: { message: "Project Destroyed" }
       end
 
       private
