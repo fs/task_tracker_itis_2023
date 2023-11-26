@@ -7,7 +7,7 @@ describe Projects::Destroy do
     let!(:users) { create_list(:user, 3, projects: [project]) }
 
     it "destroys the project" do
-      expect { interactor.run }.to change(Project, :count).by(-1)
+      expect { interactor.run }.to change(Project, :count).from(1).to(0)
     end
 
     it "sends project destruction emails to all users" do
