@@ -12,5 +12,4 @@ module Authorization
     redirect_to root_path, alert: error.message
   end
 
-
 end

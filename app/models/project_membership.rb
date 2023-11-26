@@ -8,3 +8,4 @@ class ProjectMembership < ApplicationRecord
 
   enumerize :role, in: ROLES, predicates: true, scope: :shallow, default: :member
 end
+

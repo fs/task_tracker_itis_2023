@@ -11,10 +11,12 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema.define(version: 2023_11_26_151540) do
+ActiveRecord::Schema.define(version: 2023_10_17_133743) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "plpgsql"
+
 
   create_table "comments", force: :cascade do |t|
     t.string "content"
@@ -66,6 +68,7 @@ ActiveRecord::Schema.define(version: 2023_11_26_151540) do
     t.string "role", default: "member", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
   end
+
 
   add_foreign_key "comments", "tasks"
   add_foreign_key "comments", "users"
