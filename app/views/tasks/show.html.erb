@@ -17,4 +17,21 @@
 
 <p><strong>Deadline:</strong> <%= @task.deadline_at %></p>
 
+<h2>Comments</h2>
+<% @task.comment.each do |comment| %>
+  <div class="comment">
+    <em><%= comment.user.first_name || comment.user.email %>:</em>
+    <%= comment.content %>
+    <% if comment.user == current_user %>
+      <%= link_to "Edit", edit_project_task_comment_path(@task.project, @task, comment)%>
+      <%= link_to "Delete", project_task_comment_path(@task.project, @task, comment), method: :delete, data: { confirm: "Are you sure?" } %>
+    <% end %>
+  </div>
+<% end %>
+
+<h2>Add a Comment</h2>
+<%= form_with(model: [@project, @task, Comment.new], local: true) do |form| %>
+  <%= form.text_area :content, placeholder: "Enter your comment..." %>
+  <%= form.submit "Add Comment" %> 
+<% end %>
 <%= link_to "Back to Tasks", project_tasks_path(@project) %>
