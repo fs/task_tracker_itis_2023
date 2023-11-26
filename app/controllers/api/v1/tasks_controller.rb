@@ -16,8 +16,11 @@ module Api
 
       def create
         @task = create_task.task
+        serializable_task = ActiveModelSerializers::SerializableResource.new(
+          @task, serializer: TaskSerializer
+        )
         if create_task.success?
-          render json: { task: @task, message: "Task Created" }
+          render json: { task: serializable_task, message: "Task Created" }
         else
           render json: { task: {}, errors: @task.errors }
         end
@@ -25,16 +28,18 @@ module Api
 
       def update
         @task = update_task.task
+        serializable_task = ActiveModelSerializers::SerializableResource.new(
+          @task, serializer: TaskSerializer
+        )
         if update_task.success?
-          render json: { task: @task, message: "Task Updated" }
+          render json: { task: serializable_task, message: "Task Updated" }
         else
           render json: { task: {}, errors: @task.errors }
         end
       end
 
       def destroy
-        return unless destroy_task.success?
-
+        destroy_task
         render json: { task: {}, errors: @task.id, message: "Task Destroyed" }
       end
 
