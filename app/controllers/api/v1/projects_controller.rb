@@ -4,7 +4,6 @@ module Api
       before_action :set_project, only: %i[update destroy]
       def index
         @projects = Project.includes(:tasks)
-                           .order(params[:sort])
 
         serializable_projects = ActiveModelSerializers::SerializableResource.new(
           @projects, each_serializer: ProjectSerializer
@@ -44,13 +43,11 @@ module Api
       end
 
       def destroy_project
-        @destroy_project ||=
-          Projects::Destroy.call(project: @project)
+        Projects::Destroy.call(project: @project)
       end
 
       def update_project
-        @update_project ||=
-          Projects::Update.call(project: @project, project_params: project_params)
+        Projects::Update.call(project: @project, project_params: project_params)
       end
 
       def create_project
