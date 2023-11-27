@@ -4,6 +4,8 @@ module Api
       before_action :set_project, only: %i[update destroy]
       def index
         @projects = Project.includes(:tasks)
+                           .page(params[:page])
+                           .per(3)
 
         serializable_projects = ActiveModelSerializers::SerializableResource.new(
           @projects, each_serializer: ProjectSerializer
