@@ -34,4 +34,7 @@ jobs:
 
       - name: Run rubocop
         run: bin/rubocop
+
+      - name: Run tests
+        run: bin/rspec
 ...
