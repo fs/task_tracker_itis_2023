@@ -111,6 +111,11 @@ GEM
     ffi (1.15.5)
     globalid (1.2.1)
       activesupport (>= 6.1)
+    graphiql-rails (1.9.0)
+      railties
+      sprockets-rails
+    graphql (2.1.6)
+      racc (~> 1.4)
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
     interactor (3.1.2)
@@ -346,6 +351,8 @@ DEPENDENCIES
   enumerize
   factory_bot_rails
   faker
+  graphiql-rails
+  graphql
   interactor (~> 3.0)
   jbuilder (~> 2.7)
   jwt

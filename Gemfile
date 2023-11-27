@@ -7,6 +7,7 @@ gem "action_policy"
 gem "active_model_serializers"
 gem "enumerize"
 gem "interactor", "~> 3.0"
+gem "graphql"
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 6.1.7"
 # Use postgresql as the database for Active Record
@@ -61,6 +62,7 @@ group :development do
   gem "rack-mini-profiler", "~> 2.0"
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem "spring"
+  gem "graphiql-rails"
 end
 
 group :test do
