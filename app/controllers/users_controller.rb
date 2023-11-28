@@ -9,6 +9,7 @@ class UsersController < ApplicationController
     authorize! User
 
     if @user.save
+      session[:current_user_id] = @user.id
       redirect_to root_path, notice: "You've successfully signed up!"
     else
       render :new
