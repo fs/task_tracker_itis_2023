@@ -1,33 +1,12 @@
-<h1>Список задач</h1>
+<h1>Tasks list for project <%= @project.name %></h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Название</th>
-      <th>Описание</th>
-      <th>Состояние</th>
-      <th>Дедлайн</th>
-      <th>Проект</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<h2><%= link_to "New Task", new_project_task_path(project_id: @project.id) %></h2>
 
-  <tbody>
-    <% @tasks.each do |task| %>
-      <tr>
-        <td><%= task.name %></td>
-        <td><%= task.description %></td>
-        <td><%= task.state %></td>
-        <td><%= task.deadline %></td>
-        <td><%= task.project.name %></td>
-        <td><%= link_to 'Подробнее', url_for([@project, task]) %></td>
-        <td><%= link_to 'Редактировать', edit_project_task_path(@project, task) %></td>
-        <td><%= link_to "Удалить", url_for([@project, task]), method: :delete, data: { confirm: 'Вы согласны?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'Новая задача', new_project_task_path %>
+<% @tasks.each do |task| %>
+  <div class="record">
+    <p><%= task.id %>. <%= link_to task.name, url_for([@project, task]) %></p>
+    <p><%= link_to "Edit", edit_project_task_path(@project, task) %></p>
+    <p><%= button_to "Destroy", url_for([@project, task]), method: :delete %></p>
+  </div>
+<% end %>
+<%= link_to 'Back to projects list', projects_path %>
