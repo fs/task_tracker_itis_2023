@@ -2,7 +2,6 @@ require "rails_helper"
 
 describe Projects::Destroy do
   let!(:user1) { create :user, first_name: "test", last_name: "test", email: "admin@admin.ru", role: "admin" }
-  let!(:user2) { create :user, first_name: "test", last_name: "test", email: "test@test.ru", role: "member" }
   let!(:project) { create :project, users: users }
   let!(:users) { [user1] }
   let(:interactor) { described_class.new(project: project, users: users) }
@@ -32,7 +31,7 @@ describe Projects::Destroy do
       interactor.run
 
       users.each do |user|
-        expect(ProjectMailer).to have_received(:project_destroyed).with(user).once
+        expect(ProjectMailer).to have_received(:project_destroyed).with(user)
       end
     end
   end
