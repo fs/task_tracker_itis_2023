@@ -1,7 +1,7 @@
 module Resolvers
   class Task < Resolvers::Base
     argument :project_id, ID, required: true
-    argument :task_id, ID, required: true
+    argument :id, ID, required: true
 
     type Types::TaskType, null: true
 
