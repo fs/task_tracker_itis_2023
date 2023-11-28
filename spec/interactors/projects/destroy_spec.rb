@@ -3,9 +3,9 @@ require "rails_helper"
 describe Projects::Destroy do
   let!(:user1) { create :user, first_name: "test", last_name: "test", email: "admin@admin.ru", role: "admin" }
   let!(:user2) { create :user, first_name: "test", last_name: "test", email: "test@test.ru", role: "member" }
-  let!(:project) { create :project, users: [user1, user2] }
-  let!(:users) { [user1, user2] }
-  let(:interactor) { described_class.new(project: project) }
+  let!(:project) { create :project, users: users }
+  let!(:users) { [user1] }
+  let(:interactor) { described_class.new(project: project, users: users) }
 
 
   describe "#before" do
@@ -25,17 +25,14 @@ describe Projects::Destroy do
   describe "#after" do
     before do
       allow(interactor).to receive(:call)
-
-      users.each do
-        allow(ProjectMailer).to receive(:project_destroyed).and_call_original
-      end
+      allow(ProjectMailer).to receive(:project_destroyed).and_call_original
     end
 
     it "sends mail" do
       interactor.run
 
-      users.each do |_user|
-        expect(ProjectMailer).to receive(:project_destroyed).with(_user).and_return(double(deliver_later: true))
+      users.each do |user|
+        expect(ProjectMailer).to have_received(:project_destroyed).with(user).once
       end
     end
   end
