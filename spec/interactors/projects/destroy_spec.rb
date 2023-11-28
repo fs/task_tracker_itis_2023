@@ -34,7 +34,7 @@ describe Projects::Destroy do
     it "sends mail" do
       interactor.run
 
-      users.each do |_user|
+      users.each do |user|
         expect(ProjectMailer).to receive(:project_destroyed).with(_user).and_return(double(deliver_later: true))
       end
     end
