@@ -8,6 +8,14 @@ require:
 
 AllCops:
   NewCops: enable
+  Exclude:
+    - bin/**/*
+    - db/**/*
+    - vendor/**/*
+    - tmp/**/*
+    - app/controllers/graphql_controller.rb
+    - app/graphql/task_tracker_itis_schema.rb
+    - app/graphql/types/mutation_type.rb
 
 I18n/GetText/DecorateString:
   Enabled: false

@@ -10,8 +10,16 @@ Screenshots/screencasts of the pull request introduced functionality.
 
 List of steps to manually test introduced functionality:
 
-- Log in
-- Go to http://localhost:3000
+- Go to http://localhost:3000/graphiql
+- Make request using schema:
+```graphql
+  query {
+    me {
+      id
+      name
+    }
+  }
+```
 
 ### Deploy notes
 
