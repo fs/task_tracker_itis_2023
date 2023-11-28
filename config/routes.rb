@@ -8,9 +8,12 @@ Rails.application.routes.draw do
   post "register", to: "users#create"
 
   resources :projects do
-    resources :tasks
+    resources :tasks do
+      resources :comments, only: %i[create destroy update edit]
+    end
   end
 
+  resources :comments, only: [:update]
   resources :users, only: %i[new create]
   resource :sessions, only: %i[new create show]
 end

@@ -1,10 +1,9 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: %i[show edit update destroy]
-
+  before_action -> { authorize! Project }, only: %i[index new create]
+  before_action -> { authorize! @project }, only: %i[edit update destroy show]
   def index
     @projects = Project.order(params[:sort]).page(params[:page]).per(3)
-
-    authorize! @projects
   end
 
   def show
@@ -13,8 +12,6 @@ class ProjectsController < ApplicationController
 
   def new
     @project = Project.new
-
-    authorize! @project
   end
 
   def edit; end
@@ -22,7 +19,6 @@ class ProjectsController < ApplicationController
   def create
     @project = Project.new(project_params)
     @project_membership = ProjectMembership.new(project_membership_params)
-
     if @project.save && @project_membership.save
       redirect_to projects_path, notice: "Created Successful"
     else
