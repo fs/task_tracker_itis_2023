@@ -2,7 +2,7 @@ module Mutations
   class CreateProject < BaseMutation
     argument :input, Types::Inputs::CreateProjectInput, required: true
 
-    type Types::Payloads::CreateProjectPayload
+    type Types::Payloads::ProjectPayload
 
     def resolve(input:)
       result = Projects::Create.call(project_params: input.to_h, user: current_user)
