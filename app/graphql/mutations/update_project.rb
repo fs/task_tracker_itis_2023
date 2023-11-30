@@ -5,7 +5,12 @@ module Mutations
     type Types::Payloads::ProjectPayload
 
     def resolve(input:)
-      result = Projects::Update.call(project: ::Project.find_by(id: input.id), project_params: input.to_h.except(:id))
+      input_params = input.to_h
+
+      result = Projects::Update.call(
+        project: ::Project.find(input_params.delete(:id)),
+        project_params: input_params
+      )
 
       result.to_h.merge(errors: formatted_errors(result.project))
     end
