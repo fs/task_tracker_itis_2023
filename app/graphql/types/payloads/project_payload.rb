@@ -1,6 +1,6 @@
 module Types
   module Payloads
-    class CreateProjectPayload < Types::BaseObject
+    class ProjectPayload < Types::BaseObject
       field :project, ProjectType, null: true
       field :errors, [Types::UserError], null: true
     end
