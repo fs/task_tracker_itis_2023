@@ -2,10 +2,14 @@
 
 <%= link_to "New Task", new_project_task_path(@project) %>
 
-<span><%= link_to "Name", :sort => "name asc"%></span>
-<span><%= link_to "Name reverse", :sort => "name desc"%></span>
-<span><%= link_to "Description", :sort => "description asc" %></span>
-<span><%= link_to "Description reverse", :sort => "description desc" %></span>
+<%= link_to "Name", :sort => "name asc"%>
+<%= link_to "Name reverse", :sort => "name desc"%>
+<%= link_to "Create", :sort => "created _at asc" %>
+<%= link_to "Create reverse", :sort => "created_at desc" %>
+<%= link_to "Deadline", :sort => "deadline_at desc" %>
+<%= link_to "Deadline reverse", :sort => "deadline_at asc" %>
+
+
 
 <table>
   <thead>
@@ -14,11 +18,11 @@
       <th>Description</th>
       <th>Status</th>
       <th>Deadline</th>
-      <th colspan="3"></th>
+      <th colspan="6"></th>
     </tr>
   </thead>
 
-  <tbody>
+  <tbody> 
     <% @tasks.each do |task| %>
       <tr>
         <td><%= task.name %></td>
@@ -42,4 +46,7 @@
   </tbody>
 </table>
 
-<%= link_to "Back to Projects", projects_path %>
+<%= paginate @tasks %>
+
+<strong><p><%= link_to "Back to Project", project_path(@project) %></p></strong>
+<%= link_to "Back to all Projects", projects_path %>

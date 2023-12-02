@@ -6,7 +6,20 @@
 
 <h2>Tasks for <%= @project.name %></h2>
 
-<%= link_to "New Task", new_project_task_path(@project), class: "btn btn-primary" %>
+
+<h4><%= link_to "Project Tasks", project_tasks_path(@project), class: "btn btn-primary" %></h4>
+
+<h3><%= link_to "New Task", new_project_task_path(@project), class: "btn btn-primary" %></h3>
+
+
+<div style="text-align:left;">
+<%= link_to "Name", :sort => "name asc"%>
+<%= link_to "Name reverse", :sort => "name desc"%>
+<%= link_to "Create", :sort => "created_at asc" %>
+<%= link_to "Create reverse", :sort => "created_at desc" %>
+<%= link_to "Deadline", :sort => "deadline_at desc" %>
+<%= link_to "Deadline reverse", :sort => "deadline_at asc" %>
+</div>
 
 <table class="table">
   <thead>
@@ -19,8 +32,8 @@
     </tr>
   </thead>
 
-  <tbody>
-    <% @project.tasks.each do |task| %>
+  <tbody> 
+    <% @tasks.each do |task| %>   <%# Не понял где именно надо делать пагинацию и сортировку для тасков так что сделал и тут и в tasks/index.html.erb %> 
       <tr>
         <td><%= task.name %></td>
         <td><%= task.description %></td>
@@ -35,3 +48,7 @@
     <% end %>
   </tbody>
 </table>
+
+<%= paginate @tasks%>
+
+
