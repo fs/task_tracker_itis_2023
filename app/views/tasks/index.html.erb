@@ -2,6 +2,11 @@
 
 <%= link_to "New Task", new_project_task_path(@project) %>
 
+<span><%= link_to "Name", :sort => "name asc"%></span>
+<span><%= link_to "Name reverse", :sort => "name desc"%></span>
+<span><%= link_to "Description", :sort => "description asc" %></span>
+<span><%= link_to "Description reverse", :sort => "description desc" %></span>
+
 <table>
   <thead>
     <tr>
