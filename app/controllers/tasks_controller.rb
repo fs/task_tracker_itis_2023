@@ -3,7 +3,7 @@ class TasksController < ApplicationController
   before_action :set_task, only: %i[show edit update destroy]
 
   def index
-    @tasks = @project.tasks if @project
+    @tasks = @project.tasks
   end
 
   def show
@@ -11,7 +11,6 @@ class TasksController < ApplicationController
 
   def new
     @task = @project.tasks.build
-    @task.created_at = Time.now
     @task.deadline_at = 1.week.from_now
   end
 

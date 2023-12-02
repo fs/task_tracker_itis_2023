@@ -1,5 +1,5 @@
 class Task < ApplicationRecord
-  belongs_to :project
+  belongs_to :project, required: true
   validates :name, :deadline_at, :description, :project_id, presence: true
   validate :deadline_is_correct
 end 
