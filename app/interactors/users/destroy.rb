@@ -3,6 +3,6 @@ module Users
     include Interactor::Organizer
 
     organize Users::Destroys::DestroyRecord
-             # Users::Destroys::SendNotification
+    # Users::Destroys::SendNotification
   end
 end
