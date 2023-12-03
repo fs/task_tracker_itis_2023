@@ -10,7 +10,7 @@ module Mutations
       @project = Project.find(@task.project_id)
 
       result = ::Tasks::Destroy.call(task: @task, user: current_user).merge(@project)
-      result.to_h.merge(errors: formatted_errors(result.project))
+      result.to_h.merge(errors: formatted_errors(result.task))
     end
   end
 end

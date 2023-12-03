@@ -1,7 +1,8 @@
 module Types
   module Payloads
-    class ProjectPayload < Types::BaseObject
-      field :project, ProjectType, null: true
+
+    class CommentPayload < Types::BaseObject
+      field :comment, CommentType, null: true
       field :errors, [Types::UserError], null: true
     end
   end

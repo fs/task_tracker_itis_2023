@@ -10,7 +10,7 @@ module Mutations
       @project = Project.find(project_id)
       result = ::Tasks::Create.call(task_params: input.to_h, project: @project)
 
-      result.to_h.merge(errors: formatted_errors(result.project))
+      result.to_h.merge(errors: formatted_errors(result.task))
     end
   end
 end
