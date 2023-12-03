@@ -1,17 +1,18 @@
 module Mutations
   class DestroyUser < BaseMutation
-    argument :input, Types::Inputs::DestroyUserInput, required: true
+    argument :id, ID, required: true
 
-    type Types::UserType
+    type Types::Payloads::UserPayload
 
-    def resolve(input:)
-      input_params = input.to_h
+    def resolve(**options)
+      user = ::User.find(options[:id])
 
-      result = Users::Destroys::DestroyRecord.call(
-        user: ::User.find(input_params.delete(:id))
-      )
+      # Remove after implement
+      authorize!
 
-      result.user
+      result = Users::Destroys::DestroyRecord.call(user: user)
+
+      result.to_h.merge(errors: formatted_errors(result.user))
     end
   end
 end
