@@ -8,7 +8,6 @@ module Mutations
       @project = Project.find(input.id)
 
       result = ::Projects::Destroy.call(project: @project)
-
       result.to_h.merge(errors: formatted_errors(result.project))
     end
   end
