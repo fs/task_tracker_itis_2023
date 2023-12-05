@@ -3,7 +3,6 @@
 module Mutations
   class BaseMutation < GraphQL::Schema::Mutation
     include GraphqlErrors
-    include ActionPolicy::GraphQL::Behaviour
 
     argument_class Types::BaseArgument
     field_class Types::BaseField
@@ -11,12 +10,6 @@ module Mutations
 
     def current_user
       @context[:current_user]
-    end
-
-    def ready?(*)
-      return true if current_user
-
-      raise GraphQL::ExecutionError, "Invalid credentials"
     end
   end
 end
