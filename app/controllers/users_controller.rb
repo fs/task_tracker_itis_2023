@@ -1,11 +1,12 @@
 class UsersController < ApplicationController
   def new
     @user = User.new
+    authorize! User
   end
 
   def create
     @user = User.new(user_params)
-
+    authorize! User
     if @user.save
       redirect_to root_path, notice: "You've successfully signed up!"
     else

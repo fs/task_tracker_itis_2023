@@ -7,6 +7,7 @@ class User < ApplicationRecord
 
   has_many :project_memberships, dependent: :restrict_with_error
   has_many :projects, through: :project_memberships
+  has_many :comment
 
   validates :password, length: { minimum: 6 }
   validates :email, presence: true, uniqueness: true, format: { with: VALID_EMAIL_REGEX }
