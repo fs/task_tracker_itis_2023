@@ -5,7 +5,9 @@ class TasksController < ApplicationController
   before_action -> { authorize! @task }, only: %i[update show destroy]
 
   def index
+    @task = Task.new(project: @project)
     authorize! @task
+
     @tasks = @project.tasks.order(params[:sort]).page(params[:page]).per(3)
   end
 

@@ -1,26 +1,54 @@
-module Authentication
-  extend ActiveSupport::Concern
-  class UserNotAuthenticated < StandardError; end
+class CommentsController < ApplicationController
+  before_action :set_task
+  before_action :set_comment, only: %i[update destroy]
 
-  included do
-
-    rescue_from UserNotAuthenticated, with: :not_authenticated!
-
-    helper_method :current_user
+  def edit
+    @comment = Comment.find(params[:id])
+    authorize! @comment
   end
 
-  def current_user
-    @current_user ||= User.find_by(id: session[:current_user_id])
-  end
-  def authenticate_current_user!
-    return if session[:current_user_id] && current_user.present?
+  def create
+    @comment = @task.comments.new(comment_params)
+    @comment.user = current_user
 
-    raise UserNotAuthenticated, "No current_user_id in session"
+    authorize! @comment
+    if @comment.save
+      redirect_to project_task_path(@task.project, @task), notice: "Comment created successfully"
+    else
+      redirect_to project_task_path(@task.project, @task), alert: "Failed to create comment"
+    end
+  end
+
+  def update
+    authorize! @comment
+
+    if @comment.update(comment_params)
+      redirect_to project_task_path(@task.project, @task), notice: "Comment updated successfully"
+    else
+      redirect_to project_task_path(@task.project, @task), alert: "Failed to update comment"
+    end
+  end
+
+  def destroy
+    authorize! @comment
+    if @comment.destroy
+      redirect_to project_task_path(@task.project, @task), notice: "Comment deleted successfully"
+    else
+      redirect_to project_task_path(@task.project, @task), alert: "Failed to delete comment"
+    end
   end
 
   private
 
-  def not_authenticated!
-    redirect_to login_path, alert: "You are not logged in!"
+  def set_task
+    @task = Task.find(params[:task_id])
+  end
+
+  def set_comment
+    @comment = Comment.find(params[:id])
+  end
+
+  def comment_params
+    params.require(:comment).permit(:content)
   end
 end
