@@ -6,9 +6,7 @@ module Mutations
 
     def resolve(**options)
       user = ::User.find(options[:id])
-
-      # Remove after implement
-      authorize!
+      authorize! user, to: :destroy?
 
       result = Users::Destroys::DestroyRecord.call(user: user)
 

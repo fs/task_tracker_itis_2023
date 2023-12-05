@@ -8,4 +8,12 @@ class UserPolicy < ApplicationPolicy
   def create?
     user.blank?
   end
+
+  def destroy?
+    user.present? && user.admin?
+  end
+
+  def admin?
+    user.role == "admin" || user.role == "super_admin"
+  end
 end
