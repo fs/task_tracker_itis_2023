@@ -8,7 +8,7 @@ module Mutations
       user = ::User.find(options[:id])
       authorize! user, to: :destroy?
 
-      result = Users::Destroys::DestroyRecord.call(user: user)
+      result = Users::Destroy.call(user: user)
 
       result.to_h.merge(errors: formatted_errors(result.user))
     end
