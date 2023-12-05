@@ -6,9 +6,7 @@ module Mutations
 
     def resolve(input:)
       input_params = input.to_h
-      
-      binding.pry
-      
+
       result = Comments::Update.call(comment: Comment.find(input_params.delete(:id)), comment_params: input_params)
       result.to_h.merge(errors: formatted_errors(result.comment))
     end
