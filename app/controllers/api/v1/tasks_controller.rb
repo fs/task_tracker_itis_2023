@@ -26,8 +26,11 @@ module Api
 
       def update
         @task = update_task.task
+        serializable_task = ActiveModelSerializers::SerializableResource.new(
+          @task, serializer: TaskSerializer)
+
         if update_task.success?
-          render json: { task: @task, message: "Task has been Updated using JSON" }
+          render json: { task: serializable_task, message: "Task has been Updated using JSON" }
         else
           render json: { task: {}, errors: @task.errors }
         end
