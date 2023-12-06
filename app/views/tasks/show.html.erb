@@ -16,5 +16,18 @@
 </p>
 
 <p><strong>Deadline:</strong> <%= @task.deadline_at %></p>
+<p><strong>Comments:</strong>
+  <% @task.comments.each do |comment| %>
+  <div class="comment">
+    <strong><%= comment.user.first_name %>:</strong>
+    <%= comment.content %>
+    <% if comment.user == current_user %>
+      <%= link_to "Edit", edit_project_task_comment_path(@task.project, @task, comment)%>
+      <%= link_to "Delete", project_task_comment_path(@task.project, @task, comment), method: :delete, data: { confirm: "Are you sure?" } %>
+    <% end %>
+  </div>
+<% end %>
+<br>
+<%= render 'comments/form' %>
 
 <%= link_to "Back to Tasks", project_tasks_path(@project) %>
