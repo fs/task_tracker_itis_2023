@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
 
   def create
     @user = User.find_by(email: user_params[:email])
-                &.authenticate(user_params[:password])
+              &.authenticate(user_params[:password])
 
     if @user
       session[:current_user_id] = @user.id
@@ -19,6 +19,11 @@ class SessionsController < ApplicationController
       @user.errors.add :base, "Wrong email or password"
       render :new
     end
+  end
+
+  def destroy
+    session[:current_user_id] = nil
+    redirect_to root_path, notice: "You've been successfully logged out!"
   end
 
   private

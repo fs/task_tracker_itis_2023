@@ -11,11 +11,28 @@
   </head>
 
   <body class="center">
-    <% flash.each do |type, msg| %>
-      <div class="flash-<%= type %>">
-        <p><%= msg %></p>
-      </div>
+  <% flash.each do |type, msg| %>
+    <div class="flash-<%= type %>">
+      <p><%= msg %></p>
+    </div>
+  <% end %>
+
+  <div class="user-navigation">
+    <% if current_user.nil? %>
+      <%= button_to "Log in", new_sessions_path, method: :get%>
+      <%= button_to "Sign up", new_user_path, method: :get%>
+    <% else %>
+      <% if current_user.first_name.present? || current_user.last_name.present? %>
+        <%= "#{current_user.first_name} #{current_user.last_name}" %>
+      <% else %>
+        <%= current_user.email %>
+      <% end %>
+      |
+      <%= button_to "Log out", sessions_path, method: :delete%>
     <% end %>
-    <%= yield %>
+  </div>
+
+
+  <%= yield %>
   </body>
 </html>
