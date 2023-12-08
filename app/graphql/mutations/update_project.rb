@@ -1,5 +1,7 @@
 module Mutations
   class UpdateProject < BaseMutation
+    include AuthenticableGraphqlUser
+
     argument :input, Types::Inputs::UpdateProjectInput, required: true
 
     type Types::Payloads::ProjectPayload
