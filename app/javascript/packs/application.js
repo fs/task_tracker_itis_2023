@@ -10,6 +10,14 @@ import "channels"
 
 import "bootstrap"
 
+import MyFunc from 'components/script'
+
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
+
+window.addEventListener("load", (event) => {
+  Array.from(document.querySelectorAll('.js-projects')).forEach(($el) => {
+    new MyFunc($el);
+  });
+});
