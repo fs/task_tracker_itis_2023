@@ -1,4 +1,12 @@
+
+
+// Bootstrap
+@import 'bootstrap/scss/bootstrap';
+
 @import 'variables';
 @import 'reset';
+
+// Custom styles
 @import 'base';
 @import 'header';
+@import 'form';

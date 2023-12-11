@@ -8,11 +8,34 @@
 
 .sort-links {
   display: flex;
-  margin-left: auto;
-  margin-right: auto;
+  gap: 1rem;
+  justify-content: flex-end;
+  margin: 1rem 0;
+
+  font-size: .75rem;
 }
 
 .link {
   margin-left: auto;
   margin-right: auto;
+}
+
+.content {
+  width: 100%;
+  padding: 1rem 2rem;
+}
+
+.title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.table-actions {
+  display: flex;
+  justify-content: end;
+  flex-wrap: wrap;
+  gap: 1rem;
+  width: 100%;
 }
