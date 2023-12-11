@@ -1,11 +1,10 @@
 module Types
-  class UserType < Types::BaseObject
+  class CommentType < Types::BaseObject
     field :id, ID, null: false
-    field :first_name, String
-    field :last_name, String
-    field :email, String, null: false
+    field :content, String
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
-    field :role, UserRoleType, null: false
+    field :task, TaskType, null: false
+    field :user, UserType, null: false
   end
 end

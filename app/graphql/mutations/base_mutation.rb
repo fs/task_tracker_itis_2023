@@ -10,7 +10,7 @@ module Mutations
     object_class Types::BaseObject
 
     def current_user
-      @context[:current_user]
+      context[:current_user]
     end
 
     def ready?(*)

@@ -5,3 +5,4 @@ module Types
     value "SUPER_ADMIN", value: "super_admin", description: "Super admin"
   end
 end
+end
