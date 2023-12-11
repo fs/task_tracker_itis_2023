@@ -6,5 +6,6 @@ module Types
     field :update_project, mutation: Mutations::UpdateProject
     field :create_task, mutation: Mutations::CreateTask
     field :destroy_project, mutation: Mutations::DestroyProject
+    field :update_comment, mutation: Mutations::UpdateComment
   end
 end
