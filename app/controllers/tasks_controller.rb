@@ -25,7 +25,7 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = @project.tasks.build(task_params)
+    @task = create_task.task
     authorize! @task
 
     if @task.save
@@ -36,7 +36,8 @@ class TasksController < ApplicationController
   end
 
   def update
-    if @task.update(task_params)
+    @task = update_task.task
+    if update_task.success?
       redirect_to project_tasks_path(@project), notice: "Task updated successfully"
     else
       render :edit, status: :unprocessable_entity
@@ -44,7 +45,7 @@ class TasksController < ApplicationController
   end
 
   def destroy
-    @task.destroy
+    destroy_task
     redirect_to project_tasks_path(@project), notice: "Task destroyed"
   end
 
@@ -60,5 +61,19 @@ class TasksController < ApplicationController
 
   def task_params
     params.require(:task).permit(:name, :description, :status, :deadline_at)
+  end
+
+  def update_task
+    @update_task ||= ::Tasks::Update.call(task_params: task_params,
+                                          task: @task)
+  end
+
+  def create_task
+    @create_task ||= ::Tasks::Create.call(task_params: task_params,
+                                          project: @project)
+  end
+
+  def destroy_task
+    @destroy_task ||= ::Tasks::Destroy.call(task:@task)
   end
 end
