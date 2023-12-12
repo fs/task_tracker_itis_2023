@@ -1,0 +1,21 @@
+= form_with(model: @user, url: login_path, html: { class: "form" }) do |form|
+  - if @user.errors.any?
+    #error_explanation
+      h2
+        => pluralize(@user.errors.count, "error")
+        | prohibited this user from being saved:
+
+      ul.form__errors
+        - @user.errors.each do |error|
+          li = error.full_message
+
+  .form__field
+    = form.label :email
+    = form.text_field :email
+
+  .form__field
+    = form.label :password
+    = form.text_field :password, type: :password
+
+  .form__actions
+    = form.submit "Log in", class: "btn"
