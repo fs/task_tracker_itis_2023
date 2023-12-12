@@ -1,4 +1,4 @@
-h1
-  | Edit Task
+h1.title
+  span Edit Task
+  = link_to "Back to Tasks", project_tasks_path(@project), class: "link-secondary fs-5"
 = render 'form'
-= link_to "Back to Tasks", project_tasks_path(@project), class: "link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
