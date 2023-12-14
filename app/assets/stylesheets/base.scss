@@ -17,6 +17,20 @@
   color: $green;
 }
 
+.error-box {
+  border: 2px solid red;
+  padding: 10px; 
+}
+
+.error-header {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.error-body {
+  color: red;
+}
+
 .sort-links {
   display: flex;
   gap: 1rem;
