@@ -8,27 +8,6 @@
   
 }
 
-.error-box{
-  border: 2px solid red;
-  background: #fce4e4;
-  
-}
-
-.error-header{
-  font-size: xx-large;
-
-}
-
-.error-message{
-  font-size: x-large;
-  border: 1px solid #cc0033;
-  background: #fce4e4;
-  margin-bottom: 10px;
-  display: flex; /* Instead of inline-block */
-  width: 85%; /* Same as input width */
-  position: relative; /* Relative to parent */
-}
-
 .sort-links {
   display: flex;
   gap: 1rem;
@@ -89,4 +68,13 @@ a {
 .justify-content-center.d-flex{
   grid-gap:20px;
   font-size: 20px;
+}
+.pagination{
+  display: flex;
+  justify-content: center;
+}
+
+.pagination a{
+  flex: 1 1 auto;
+  margin: 0 5px;
 }
