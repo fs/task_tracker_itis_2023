@@ -1,13 +1,14 @@
 = form_with(model: project, html: { class: "form" }) do |form|
   - if project.errors.any?
     #error_explanation
-      h2
+    fieldset.error-box
+      h2.error-header
         => pluralize(project.errors.count, "error")
         | prohibited this project from being saved:
-
       ul
         - project.errors.each do |error|
-          li = error.full_message
+          li.error-body 
+            = error.full_message
 
   .form__field
     = form.label :name, class: "form-label"
