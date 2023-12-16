@@ -2,8 +2,31 @@
   color: $red;
 }
 
+
 .flash-notice {
   color: $green;
+  
+}
+
+.error-box{
+  border: 2px solid red;
+  background: #fce4e4;
+  
+}
+
+.error-header{
+  font-size: xx-large;
+
+}
+
+.error-message{
+  font-size: x-large;
+  border: 1px solid #cc0033;
+  background: #fce4e4;
+  margin-bottom: 10px;
+  display: flex; /* Instead of inline-block */
+  width: 85%; /* Same as input width */
+  position: relative; /* Relative to parent */
 }
 
 .sort-links {
@@ -11,8 +34,10 @@
   gap: 1rem;
   justify-content: flex-end;
   margin: 1rem 0;
-
-  font-size: .75rem;
+  font-size: 15px;
+}
+a {
+  text-decoration: none;
 }
 
 .link {
@@ -42,4 +67,26 @@
 
 .cursor-pointer {
   cursor: pointer;
+}
+
+.record {
+  border: 1px solid;
+  border-radius: 15px;
+  display: inline-block;
+  overflow: hidden; 
+  text-overflow: ellipsis;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  width: 30%;
+  
+}
+
+.record > p{
+  font-size: 30px;
+  
+}
+
+.justify-content-center.d-flex{
+  grid-gap:20px;
+  font-size: 20px;
 }

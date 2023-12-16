@@ -1,0 +1,26 @@
+= form_with(model: [@project, @task]) do |form|
+  
+  - if @task.errors.any?
+    #error_explanation
+    .error-box 
+      h2.error-header
+        = pluralize(@task.errors.count, "error")
+        |  prohibited this task from being saved:
+      ul
+        - @task.errors.full_messages.each do |error|
+          li.error-message
+            = error
+  .field
+    = form.label :name
+    = form.text_field :name
+  .field
+    = form.label :description
+    = form.text_area :description
+  .field
+    = form.label :status
+    = form.select :status, Task.status.values
+  .field
+    = form.label :deadline_at
+    = form.datetime_field :deadline_at
+  .actions
+    = form.submit

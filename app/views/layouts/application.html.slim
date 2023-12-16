@@ -10,6 +10,7 @@ html
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload', 'data-turbolinks-eval': 'false'
 
   body
+    
     - flash.each do |type, msg|
       div class='flash-#{type}'
         p = msg

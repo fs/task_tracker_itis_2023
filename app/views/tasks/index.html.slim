@@ -1,0 +1,41 @@
+h1.title
+  | Tasks for 
+  = @project.name
+  = link_to "NEW TASK", new_project_task_path(@project), class:"btn btn-primary"
+
+.sort-links
+  = link_to "Name", :sort => "name asc"
+  = link_to "Name reverse", :sort => "name desc"
+  = link_to "Created_at", :sort => "id asc"
+  = link_to "Created_at reverse", :sort => "id desc"
+  = link_to "Deadline", :sort => "deadline_at asc"
+  = link_to "deadline reverse", :sort => "deadline_at desc"
+  
+
+- @tasks.each_with_index do |task, index|
+  - case task.status
+    -when 'unstarted'
+      -status_class = 'text-danger'
+    -when 'started'
+      -status_class = 'text-warning'
+    -else
+      - status_class = 'text-success'
+  .record.card-body.text-center
+    p
+      = index+1
+      | . 
+      = task.name
+    p
+      =  "description: #{task.description}"
+    p class=status_class
+      = "status: #{task.status}"
+    p
+       = "deadline: #{task.deadline_at}"
+
+    .justify-content-center.d-flex
+      = link_to "Show", url_for([@project, task]), class: "btn btn-success stm-sm"
+      = link_to "Edit", edit_project_task_path(@project, task), class: "btn btn-warning btn-sm"
+      = link_to "Destroy", url_for([@project, task]), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-sm"
+p.link
+  = paginate @tasks
+= link_to "Back to Projects", projects_path, class: "btn btn-secondary btn-lg"
