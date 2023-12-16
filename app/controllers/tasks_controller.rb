@@ -7,7 +7,7 @@ class TasksController < ApplicationController
     @task = Task.new(project: @project)
     authorize! @task
 
-    @tasks = @project.tasks.order(params[:sort]).page(params[:page]).per(3)
+    @tasks = @project.tasks.order(params[:sort]).page(params[:page]).per(6)
   end
 
   def show; end
