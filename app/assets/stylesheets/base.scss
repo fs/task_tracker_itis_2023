@@ -8,6 +8,27 @@
   
 }
 
+.error-box{
+  border: 2px solid red;
+  background: #fce4e4;
+  
+}
+
+.error-header{
+  font-size: xx-large;
+
+}
+
+.error-message{
+  font-size: x-large;
+  border: 1px solid #cc0033;
+  background: #fce4e4;
+  margin-bottom: 10px;
+  display: flex;
+  width: 85%;
+  position: relative;
+}
+
 .sort-links {
   display: flex;
   gap: 1rem;
