@@ -9,7 +9,7 @@ class User < ApplicationRecord
   has_many :projects, through: :project_memberships
   has_many :comments
 
-  validates :password, length: { minimum: 6 }
+  validates :password, length: { minimum: 6 }, allow_blank: true
   validates :email, presence: true, uniqueness: true, format: { with: VALID_EMAIL_REGEX }
   validates :first_name, :last_name, presence: true
 
