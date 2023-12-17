@@ -60,11 +60,10 @@ class TasksController < ApplicationController
   end
 
   def update_task
-    ::Tasks::Update.call(task_params: task_params, task: @task)
-  end
-
+    ::Tasks::Update.call(project: @project, task_params: task_params, task: @task)
+    end
   def destroy_task
-    ::Tasks::Destroy.call(task: @task)
+    ::Tasks::Destroy.call(project: @project, task: @task)
   end
 
   def task_params
