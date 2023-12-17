@@ -12,11 +12,5 @@ module Mutations
     def current_user
       context[:current_user]
     end
-
-    def ready?(*)
-      return true if current_user
-
-      raise GraphQL::ExecutionError, "Invalid credentials"
-    end
   end
 end
