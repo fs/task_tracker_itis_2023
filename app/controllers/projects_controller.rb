@@ -28,7 +28,7 @@ class ProjectsController < ApplicationController
   end
 
   def update
-    if @project.update(project_params)
+    if update_project.success?
       redirect_to projects_path, notice: "Update Successful"
     else
       render :edit, status: :unprocessable_entity
@@ -36,7 +36,7 @@ class ProjectsController < ApplicationController
   end
 
   def destroy
-    @project.destroy
+    destroy_project
     redirect_to projects_path, notice: "Project destroyed"
   end
 
@@ -48,6 +48,14 @@ class ProjectsController < ApplicationController
 
   def project_params
     params.require(:project).permit(:name, :description)
+  end
+  def update_project
+    ::Projects::Update.call(project: @project,
+                            project_params: project_params)
+  end
+
+  def destroy_project
+    ::Projects::Destroy.call(project: @project)
   end
 
   def create_project
