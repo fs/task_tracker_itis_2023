@@ -1,6 +1,6 @@
 ---
 name: main
-on: 
+on:
   push:
     branches: [ "master" ]
   pull_request:
@@ -34,6 +34,12 @@ jobs:
 
       - name: Run rubocop
         run: bin/rubocop
+
+      - name: Run slim linter
+        run: bin/slim-lint app/views
+
+      - name: Run scss linter
+        run: bin/scss-lint app/assets/stylesheets
 
       - name: Run tests
         run: bin/rspec

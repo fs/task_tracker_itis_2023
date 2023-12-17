@@ -1,0 +1,47 @@
+.mb-3
+  = link_to "Back", projects_path
+
+h1.title
+  span = @project.name
+  = link_to "New Task", new_project_task_path(@project), class: "btn btn-primary"
+
+p
+  strong> Description:
+  = @project.description
+
+h2
+  ' Tasks for
+  = @project.name
+
+.sort-links
+  = link_to "Name", sort: "name asc"
+  = link_to "Name reverse", project_path(@project, sort: "name desc")
+  = link_to "Created date", project_path(@project, sort: "created_at asc")
+  = link_to "Created date reverse", project_path(@project, sort: "created_at desc")
+  = link_to "Deadline", project_path(@project, sort: "deadline_at asc")
+  = link_to "Deadline reverse", project_path(@project, sort: "deadline_at desc")
+
+table.table.table-striped.align-middle
+  thead
+    tr
+      th Name
+      th Description
+      th Status
+      th Deadline
+      th.text-end Actions
+
+  tbody
+    - @project.tasks.each do |task|
+      tr
+        td = task.name
+        td = task.description
+        td = task.status ? "Completed" : "Not Completed"
+        td = task.deadline_at
+        td
+          .table-actions
+            = link_to "Show", project_task_path(@project, task), class: "btn btn-primary btn-sm"
+            = link_to "Edit", edit_project_task_path(@project, task), class: "btn btn-warning btn-sm"
+            = link_to "Destroy", project_task_path(@project, task),
+              method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-sm"
+
+= paginate @tasks
