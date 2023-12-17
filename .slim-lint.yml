@@ -1,0 +1,36 @@
+linters:
+  LineLength:
+    max: 120
+
+  RedundantDiv:
+    enabled: false
+
+  RuboCop:
+    enabled: true
+    # These cops are incredibly noisy since the Ruby we extract from Slim
+    # templates isn't well-formatted, so we ignore them.
+    ignored_cops:
+      - Layout/ArgumentAlignment
+      - Layout/HashAlignment
+      - Layout/IndentationWidth
+      - Layout/LineLength
+      - Layout/TrailingEmptyLines
+      - Lint/BlockAlignment
+      - Lint/EndAlignment
+      - Lint/Void
+      - Metrics/BlockLength
+      - Style/AlignParameters
+      - Style/BlockNesting
+      - Style/FileName
+      - Style/FirstParameterIndentation
+      - Style/FrozenStringLiteralComment
+      - Style/IfUnlessModifier
+      - Style/IndentationConsistency
+      - Style/IndentationWidth
+      - Style/Next
+      - Style/TrailingBlankLines
+      - Style/TrailingWhitespace
+      - Style/WhileUntilModifier
+      - Style/NestedTernaryOperator
+      - Style/StringLiterals
+      - Style/QuotedSymbols
