@@ -1,7 +1,6 @@
 module Types
   module Inputs
     class UpdateTaskInput < Types::BaseInputObject
-      argument :project_id, ID, required: true
       argument :id, ID, required: true
       argument :name, String, required: true
       argument :description, String, required: false

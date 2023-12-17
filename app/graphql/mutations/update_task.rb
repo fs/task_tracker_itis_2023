@@ -5,10 +5,8 @@ module Mutations
     type Types::Payloads::TaskPayload
 
     def resolve(input:)
-      project = ::Project.find_by(id: input.to_h.delete(:project_id))
-
       result = ::Tasks::Update.call(
-        task: project.tasks.find_by(id: input.to_h.delete(:id)),
+        task: Task.find_by(id: input.to_h.delete(:id)),
         task_params: input.to_h, user: current_user
       )
 
