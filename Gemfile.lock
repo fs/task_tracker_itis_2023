@@ -3,6 +3,10 @@ GEM
   specs:
     action_policy (0.6.7)
       ruby-next-core (>= 0.14.0)
+    action_policy-graphql (0.5.3)
+      action_policy (>= 0.5.0)
+      graphql (>= 1.9.3)
+      ruby-next-core (>= 0.10.0)
     actioncable (6.1.7.6)
       actionpack (= 6.1.7.6)
       activesupport (= 6.1.7.6)
@@ -278,6 +282,11 @@ GEM
     ruby-next-core (0.15.3)
     ruby-progressbar (1.13.0)
     rubyzip (2.3.2)
+    sass (3.7.4)
+      sass-listen (~> 4.0.0)
+    sass-listen (4.0.0)
+      rb-fsevent (~> 0.9, >= 0.9.4)
+      rb-inotify (~> 0.9, >= 0.9.7)
     sass-rails (6.0.0)
       sassc-rails (~> 2.1, >= 2.1.1)
     sassc (2.4.0)
@@ -288,6 +297,8 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
+    scss_lint (0.60.0)
+      sass (~> 3.5, >= 3.5.5)
     selenium-webdriver (4.9.0)
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
@@ -298,6 +309,16 @@ GEM
       connection_pool (>= 2.3.0)
       rack (>= 2.2.4)
       redis-client (>= 0.14.0)
+    slim (5.2.0)
+      temple (~> 0.10.0)
+      tilt (>= 2.1.0)
+    slim-rails (3.6.3)
+      actionpack (>= 3.1)
+      railties (>= 3.1)
+      slim (>= 3.0, < 6.0, != 5.0.0)
+    slim_lint (0.24.0)
+      rubocop (>= 1.0, < 2.0)
+      slim (>= 3.0, < 6.0)
     spring (4.1.1)
     sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
@@ -306,6 +327,7 @@ GEM
       actionpack (>= 5.2)
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
+    temple (0.10.3)
     thor (1.2.2)
     tilt (2.3.0)
     timeout (0.4.0)
@@ -342,6 +364,7 @@ PLATFORMS
 
 DEPENDENCIES
   action_policy
+  action_policy-graphql
   active_model_serializers
   bcrypt (~> 3.1.7)
   bootsnap (>= 1.4.4)
@@ -373,8 +396,11 @@ DEPENDENCIES
   rubocop-rake
   rubocop-thread_safety
   sass-rails (>= 6)
+  scss_lint
   selenium-webdriver (>= 4.0.0.rc1)
   sidekiq
+  slim-rails
+  slim_lint
   spring
   turbolinks (~> 5)
   tzinfo-data

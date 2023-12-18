@@ -10,3 +10,4 @@ module Types
     field :role, UserRoleType, null: false
   end
 end
+

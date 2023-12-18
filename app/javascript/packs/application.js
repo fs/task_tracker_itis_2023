@@ -8,6 +8,16 @@ import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 
+import "bootstrap"
+
+import MyFunc from 'components/script'
+
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
+
+window.addEventListener("load", (event) => {
+  Array.from(document.querySelectorAll('.js-projects')).forEach(($el) => {
+    new MyFunc($el);
+  });
+});
