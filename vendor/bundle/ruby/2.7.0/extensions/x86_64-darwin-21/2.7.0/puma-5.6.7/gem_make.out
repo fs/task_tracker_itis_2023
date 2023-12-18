@@ -1,0 +1,32 @@
+current directory: /Users/dariyazhukova/Desktop/ruby/task_tracker_itis_2023/vendor/bundle/ruby/2.7.0/gems/puma-5.6.7/ext/puma_http11
+/Users/dariyazhukova/.rbenv/versions/2.7.4/bin/ruby extconf.rb
+checking for BIO_read() in -lcrypto... yes
+checking for SSL_CTX_new() in -lssl... yes
+checking for openssl/bio.h... yes
+checking for DTLS_method() in openssl/ssl.h... yes
+checking for TLS_server_method() in openssl/ssl.h... yes
+checking for SSL_CTX_set_min_proto_version(NULL, 0) in openssl/ssl.h... yes
+checking for X509_STORE_up_ref()... yes
+checking for SSL_CTX_set_ecdh_auto(NULL, 0) in openssl/ssl.h... yes
+checking for SSL_CTX_set_dh_auto(NULL, 0) in openssl/ssl.h... yes
+checking for SSL_get1_peer_certificate() in openssl/ssl.h... no
+checking for Random.bytes... yes
+creating Makefile
+
+current directory: /Users/dariyazhukova/Desktop/ruby/task_tracker_itis_2023/vendor/bundle/ruby/2.7.0/gems/puma-5.6.7/ext/puma_http11
+make DESTDIR\= sitearchdir\=./.gem.20231212-39506-1j7kt2x sitelibdir\=./.gem.20231212-39506-1j7kt2x clean
+
+current directory: /Users/dariyazhukova/Desktop/ruby/task_tracker_itis_2023/vendor/bundle/ruby/2.7.0/gems/puma-5.6.7/ext/puma_http11
+make DESTDIR\= sitearchdir\=./.gem.20231212-39506-1j7kt2x sitelibdir\=./.gem.20231212-39506-1j7kt2x
+compiling http11_parser.c
+compiling mini_ssl.c
+compiling puma_http11.c
+linking shared-object puma/puma_http11.bundle
+ld: warning: -undefined dynamic_lookup may not work with chained fixups
+
+current directory: /Users/dariyazhukova/Desktop/ruby/task_tracker_itis_2023/vendor/bundle/ruby/2.7.0/gems/puma-5.6.7/ext/puma_http11
+make DESTDIR\= sitearchdir\=./.gem.20231212-39506-1j7kt2x sitelibdir\=./.gem.20231212-39506-1j7kt2x install
+/usr/bin/install -c -m 0755 puma_http11.bundle ./.gem.20231212-39506-1j7kt2x/puma
+
+current directory: /Users/dariyazhukova/Desktop/ruby/task_tracker_itis_2023/vendor/bundle/ruby/2.7.0/gems/puma-5.6.7/ext/puma_http11
+make DESTDIR\= sitearchdir\=./.gem.20231212-39506-1j7kt2x sitelibdir\=./.gem.20231212-39506-1j7kt2x clean

@@ -1,0 +1,6 @@
+A new task has been updated in the project <%= @project.name %>. Details below:
+
+Task Name: <%= @task.name %>
+Description:</strong> <%= @task.description %>
+Updated at: <%= @task.updated_at %>
+Deadline:</strong> <%= @task.deadline_at.strftime('%B %d, %Y') %>
