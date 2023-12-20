@@ -5,9 +5,12 @@ module Mutations
     type Types::Payloads::TaskPayload
 
     def resolve(input:)
+      input_params = input.to_h
+
       result = Tasks::Create.call(
-        project: ::Project.find_by(id: input.to_h.delete(:project_id)),
-        task_params: input.to_h, user: current_user)
+        project: ::Project.find_by(id: input_params.delete(:project_id)),
+        task_params: input_params
+      )
 
       result.to_h.merge(errors: formatted_errors(result.task))
     end
