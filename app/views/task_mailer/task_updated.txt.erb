@@ -1,0 +1,4 @@
+Ваша таска task в проекте <%= @project.name %> обновлена
+<% @task.attributes.each |attr| do %>
+  <%= attr.join(': ') %>
+<% end %>
