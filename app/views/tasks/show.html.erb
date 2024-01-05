@@ -1,6 +1,7 @@
 <h1>Task Details</h1>
 
 <p><strong>Name:</strong> <%= @task.name %></p>
+
 <p><strong>Description:</strong> <%= @task.description %></p>
 
 <p>
@@ -10,11 +11,35 @@
         <td>Not Started</td>
     <% when 'started' %>
         <td>In Progress</td>
-    <% when 'done' %>
+    <% when 'finished' %>
         <td>Completed</td>
     <% end %>
 </p>
 
 <p><strong>Deadline:</strong> <%= @task.deadline_at %></p>
+
+<div class="comments-section">
+  <h3 class="section-title"><strong>Comments:</strong></h3>
+  <ul class="comment-list">
+    <% @task.comments.each do |comment| %>
+      <li class="comment">
+        <div class="comment-header">
+          <strong><%= comment.user.first_name %>:</strong>
+          <% if comment.user == current_user %>
+            <span class="comment-actions">
+              <%= link_to "Edit", edit_project_task_comment_path(@task.project, @task, comment)%>
+              <%= link_to "Delete", project_task_comment_path(@task.project, @task, comment), method: :delete, data: { confirm: "Are you sure?" } %>
+            </span>
+          <% end %>
+        </div>
+        <div class="comment-content">
+          <%= comment.content %>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+</div>
+
+<%= render 'comments/form'%>
 
 <%= link_to "Back to Tasks", project_tasks_path(@project) %>

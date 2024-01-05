@@ -1,6 +1,8 @@
 class SessionsController < ApplicationController
   before_action :authenticate_current_user!, only: %i[show destroy]
 
+  before_action -> { authorize! User, with: SessionPolicy }
+
   def show; end
 
   def new

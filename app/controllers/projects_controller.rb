@@ -1,6 +1,10 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: %i[show edit update destroy]
 
+  before_action -> { authorize! Project }, only: %i[index new create show]
+
+  before_action -> { authorize! @project }, only: %i[edit update destroy]
+
   def index
     @projects = Project.order(params[:sort]).page(params[:page]).per(3)
 
