@@ -1,43 +1,37 @@
 require "rails_helper"
 
-describe Projects::Update do
-  let(:user) { FactoryBot.create(:user) }
-  let(:project) { FactoryBot.create(:project, users: [user]) }
-  let(:interactor) { described_class.new(project: project, project_params: params) }
-
+describe Projects::Update do # rubocop:disable Metrics/BlockLength
   describe ".call" do
+    let(:interactor) { described_class.new(context) }
+    let!(:project) { create(:project) }
+    let!(:users) { create_list(:user, 1, projects: [project]) }
 
-    context "when params are valid" do
-      let(:params) do
-        {
-          name: "test name",
-          description: "test description"
-        }
-      end
+    context "when project update is successful" do
+      let(:context) { { project: project, project_params: { name: "New Name" } } }
+
       it "updates the project" do
-        expect { interactor.run }.to change { project.reload.name }.to(params[:name]).and change { project.reload.description }.to(params[:description])
+        interactor.run
+        expect(project.reload.name).to eq("New Name")
       end
 
-      it "sends the email" do
-        expect(ProjectMailer).to receive(:project_created).and_return(double(deliver_later: true)).with(project, user)
-      end
+      it "sends project update emails to all users" do
+        allow(ProjectMailer).to receive(:project_updated).and_call_original
+        interactor.run
 
-      context "when params are invalid" do
-        let(:params) do
-          {
-            description: "test description"
-          }
-        end
-
-        let(:expected_error_message) { "Invalid data" }
-
-        it "throws error" do
-          interactor.run
-
-          expect(interactor.context.error).to eq(expected_error_message)
+        users.each do |user|
+          expect(ProjectMailer).to have_received(:project_updated).with(project, user).once
         end
       end
+    end
 
+    context "when project update fails" do
+      let(:context) { { project: project, project_params: { name: "" } } }
+
+      it "fails the context with an error message" do
+        interactor.run
+        expect(interactor.context.failure?).to be true
+        expect(interactor.context.error).to eq("Invalid data")
+      end
     end
   end
 end
