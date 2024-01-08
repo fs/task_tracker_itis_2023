@@ -4,6 +4,8 @@ class SessionsController < ApplicationController
   def show; end
 
   def new
+    puts "---------------------------------------------------------------------------"
+    puts session
     @user = User.new
   end
 
@@ -19,6 +21,11 @@ class SessionsController < ApplicationController
       @user.errors.add :base, "Wrong email or password"
       render :new
     end
+  end
+
+  def destroy
+    session[:current_user_id] = nil
+    redirect_to root_path, notice: "Succesfully logged out"
   end
 
   private
