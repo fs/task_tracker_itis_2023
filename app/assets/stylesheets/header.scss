@@ -1,0 +1,10 @@
+.header {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  align-items: center;
+
+  padding: 2rem;
+  background: $header-bg;
+  border-bottom: 1px solid $grey;
+}

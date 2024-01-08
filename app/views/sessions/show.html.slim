@@ -1,0 +1,15 @@
+h1 Your profile info
+
+p
+  strong First Name:
+  span = current_user.first_name
+
+p
+  strong Last Name:
+  span = current_user.last_name
+
+p
+  strong Email:
+  span = current_user.email
+
+= link_to "Go to Projects", projects_path

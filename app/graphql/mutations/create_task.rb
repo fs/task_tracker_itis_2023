@@ -1,16 +1,13 @@
 module Mutations
+  class CreateProject < BaseMutation
+    argument :input, Types::Inputs::CreateProjectInput, required: true
 
-  class CreateTask < BaseMutation
-    argument :input, Types::Inputs::CreateTaskInput, required: true
-    argument :project_id, ID, required: true
+    type Types::Payloads::ProjectPayload
 
-    type Types::Payloads::TaskPayload
+    def resolve(input:)
+      result = Projects::Create.call(project_params: input.to_h, user: current_user)
 
-    def resolve(input:, project_id:)
-      project = Project.find(project_id)
-      result = ::Tasks::Create.call(task_params: input.to_h, project: project)
-
-      result.to_h.merge(errors: formatted_errors(result.task))
+      result.to_h.merge(errors: formatted_errors(result.project))
     end
   end
 end

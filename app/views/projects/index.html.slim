@@ -1,0 +1,37 @@
+.js-projects
+  h2.title
+    span Projects Page
+    = link_to "New Project", new_project_path, class: "btn btn-primary"
+
+  .sort-links
+    = link_to "Name", sort: "name asc"
+    = link_to "Name reverse", sort: "name desc"
+    = link_to "Description", sort: "description asc"
+    = link_to "Description reverse", sort: "description desc"
+
+  table.table.table-striped.align-middle
+    thead
+      tr
+        th
+          ' Name
+          span.cursor-pointer.js-sort-by-title-asc ↑
+          span.cursor-pointer.js-sort-by-title-desc.d-none ↓
+        th Description
+        th.text-end Actions
+    tbody.js-projects-list
+      - @projects.each do |project|
+        tr.js-item[data-id=project.id data-name="#{project.name}"]
+          td
+            => project.id
+            ' .
+            = link_to project.name, project_tasks_path(project)
+          td
+            = project.description
+
+          td
+            .table-actions
+              = link_to "Edit", edit_project_path(project), class: "btn btn-warning btn-sm"
+              = button_to "Destroy", project, method: :delete,
+                  data: { confirm: "Are you sure?" }, class: "btn btn-danger btn-sm"
+
+  = paginate @projects
