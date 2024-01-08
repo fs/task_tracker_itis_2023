@@ -1,5 +1,4 @@
 module Resolvers
-
   class Comment < Resolvers::Base
     argument :id, ID, required: true
     type Types::CommentType, null: true
