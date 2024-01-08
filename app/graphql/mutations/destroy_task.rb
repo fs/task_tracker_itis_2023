@@ -6,10 +6,10 @@ module Mutations
     type Types::Payloads::TaskPayload
 
     def resolve(input:)
-      @task = Task.find(input.id)
-      @project = Project.find(input.project_id)
+      task = Task.find(input.id)
+      project = Project.find(task.project_id)
 
-      result = ::Tasks::Destroy.call(task: @task, user: current_user)
+      result = ::Tasks::Destroy.call(task: task, user: current_user)
       result.to_h.merge(errors: formatted_errors(result.task))
     end
   end
