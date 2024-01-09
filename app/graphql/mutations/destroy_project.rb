@@ -1,16 +1,13 @@
 module Mutations
   class DestroyProject < BaseMutation
-    argument :input, Types::Inputs::DestroyProjectInput, required: true
+    argument :id, ID, required: true
 
     type Types::Payloads::ProjectPayload
 
-    def resolve(input:)
-      input_params = input.to_h
+    def resolve(id:)
+      project = Project.find(id)
 
-      result = Projects::Destroy.call(
-        project: Project.find(input_params.delete(:id))
-      )
-
+      result = ::Projects::Destroy.call(project: project)
       result.to_h.merge(errors: formatted_errors(result.project))
     end
   end
