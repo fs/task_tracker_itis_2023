@@ -5,6 +5,7 @@ module Mutations
     argument :input, Types::Inputs::UpdateProjectInput, required: true
 
     type Types::Payloads::ProjectPayload
+
     def resolve(input:)
       input_params = input.to_h
 
