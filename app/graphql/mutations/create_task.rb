@@ -2,7 +2,7 @@ module Mutations
   class CreateTask < BaseMutation
     argument :input, Types::Inputs::CreateTaskInput, required: true
 
-    type Types::Payloads::ProjectPayload
+    type Types::Payloads::TaskPayload
 
     def resolve(input:)
       input_params = input.to_h
