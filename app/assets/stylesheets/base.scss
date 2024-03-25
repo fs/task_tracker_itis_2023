@@ -1,4 +1,4 @@
-.flash-message {
+%flash-message {
   padding: 10px;
   border-radius: 5px;
   font-weight: bold;
@@ -8,18 +8,20 @@
 }
 
 .flash-alert {
-  @extend .flash-message;
+  @extend %flash-message;
+
   color: $red;
 }
 
 .flash-notice {
-  @extend .flash-message;
+  @extend %flash-message;
+
   color: $green;
 }
 
 .error-box {
-  border: 2px solid red;
-  padding: 10px; 
+  border: 2px solid $red;
+  padding: 10px;
 }
 
 .error-header {
@@ -28,7 +30,7 @@
 }
 
 .error-body {
-  color: red;
+  color: $red;
 }
 
 .sort-links {
