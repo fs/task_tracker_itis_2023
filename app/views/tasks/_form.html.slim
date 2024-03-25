@@ -1,24 +1,30 @@
-= form_with(model: [@project, @task], html: { class: "form" }) do |form|
+= form_with(model: [@project, @task]) do |form|
   - if @task.errors.any?
     #error_explanation
-      h2
+    fieldset.error-box
+      h2.error-header
         = pluralize(@task.errors.count, "error")
         |  prohibited this task from being saved:
       ul
         - @task.errors.full_messages.each do |error|
-          li
+          li.error-body
             = error
-  .form__field
-    = form.label :name, class: "form-label"
-    = form.text_field :name, class: "form-control"
-  .form__field
-    = form.label :description, class: "form-label"
-    = form.text_area :description, class: "form-control"
-  .form__field
-    = form.label :status, class: "form-label"
-    = form.select :status, Task.status.values, {}, class: "form-select"
-  .form__field
-    = form.label :deadline_at, class: "form-label"
-    = form.datetime_field :deadline_at, class: "form-control"
-  .form__actions
-    = form.submit "Save", class: "btn btn-primary"
+
+  .field
+    = form.label :name
+    = form.text_field :name
+
+  .field
+    = form.label :description
+    = form.text_area :description
+
+  .field
+    = form.label :status
+    = form.select :status, Task.status.values
+
+  .field
+    = form.label :deadline_at
+    = form.datetime_field :deadline_at
+
+  .actions
+    = form.submit

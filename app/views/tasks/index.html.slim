@@ -1,0 +1,55 @@
+h1
+  ' Tasks for project:
+  = @project.name
+
+.button-link
+  = link_to "NEW TASK", new_project_task_path(@project)
+
+.sort-links
+  p.link
+    = link_to "Name", sort: "name asc"
+  p
+
+  p.link
+    = link_to "Name reverse", sort: "name desc"
+  p
+
+  p.link
+    = link_to "Created", sort: "id asc"
+  p
+
+  p.link
+    = link_to "Created reverse", sort: "id desc"
+  p
+
+  p.link
+    = link_to "Deadline", sort: "deadline_at asc"
+  p
+
+  p.link
+    = link_to "deadline reverse", sort: "deadline_at desc"
+  p
+
+- @tasks.each_with_index do |task, index|
+  .record
+    p
+      = index + 1
+      | .
+      = task.name
+    p
+      = task.description
+    p
+      = task.status
+    p
+      = task.deadline_at
+
+    .edit-links
+      = link_to "Show", url_for([@project, task])
+      = link_to "Edit", edit_project_task_path(@project, task)
+      = link_to "Destroy", url_for([@project, task]), method: :delete, data: { confirm: 'Are you sure?' }
+
+p.link
+  = paginate @tasks
+
+.button-link
+  = link_to "Back to Projects", projects_path

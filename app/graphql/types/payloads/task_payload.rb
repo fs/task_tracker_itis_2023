@@ -1,7 +1,7 @@
 module Types
   module Payloads
-    class SignUpPayload < Types::BaseObject
-      field :user, UserType, null: false
+    class TaskPayload < Types::BaseObject
+      field :task, TaskType, null: true
       field :errors, [Types::UserError], null: true
     end
   end
