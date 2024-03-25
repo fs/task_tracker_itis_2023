@@ -13,14 +13,18 @@
   .field
     = form.label :name
     = form.text_field :name
+
   .field
     = form.label :description
     = form.text_area :description
+
   .field
     = form.label :status
     = form.select :status, Task.status.values
+
   .field
     = form.label :deadline_at
     = form.datetime_field :deadline_at
+
   .actions
     = form.submit
