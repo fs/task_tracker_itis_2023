@@ -42,11 +42,14 @@ h1
       = task.status
     p
       = task.deadline_at
-    .edit_links
+
+    .edit-links
       = link_to "Show", url_for([@project, task])
       = link_to "Edit", edit_project_task_path(@project, task)
       = link_to "Destroy", url_for([@project, task]), method: :delete, data: { confirm: 'Are you sure?' }
+
 p.link
   = paginate @tasks
+
 .button-link
   = link_to "Back to Projects", projects_path
